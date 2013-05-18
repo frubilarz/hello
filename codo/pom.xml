@@ -16,6 +16,7 @@
         <junit.version>4.11</junit.version>
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.7.2</slf4j.version>
+        <jakarta.regexp.version>1.4</jakarta.regexp.version>
         <commons.lang.version>2.6</commons.lang.version>
         <mysql.version>5.1.25</mysql.version>
     </properties>
@@ -105,6 +106,12 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${commons.lang.version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>jakarta-regexp</groupId>
+            <artifactId>jakarta-regexp</artifactId>
+            <version>${jakarta.regexp.version}</version>
         </dependency>
     
         <!-- dependencias de log4j -->

@@ -1,8 +1,3 @@
-SET NAMES 'utf8';
-
-CREATE DATABASE cododb CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-GRANT ALL ON cododb.* TO codo@localhost IDENTIFIED BY 'codo123';
-
 USE `cododb` ;
 
 -- -----------------------------------------------------
@@ -110,7 +105,7 @@ CREATE  TABLE IF NOT EXISTS `cododb`.`mantencion` (
 
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `cododb`.`venta` ;
-CREATE  TABLE IF NOT EXISTS `cododb`.`venta` (
+CREATE TABLE IF NOT EXISTS `cododb`.`venta` (
   `idventa` INT NOT NULL AUTO_INCREMENT ,
   `producto` VARCHAR(45) NULL ,
   `preciocompra` VARCHAR(45) NULL ,

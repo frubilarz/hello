@@ -225,7 +225,6 @@ public class ServicioDB implements Serializable {
         return empresas;
     }
 
-    
     public Empresa getEmpresaPorRut(String rut) {
         Empresa empresa = new Empresa();
         try {
@@ -267,7 +266,7 @@ public class ServicioDB implements Serializable {
         }
         return empresa;
     }
-    
+
     public Boleta getBoletaPorIdEmpresa(Integer id) {
         Boleta boleta = null;
         try {
@@ -318,47 +317,42 @@ public class ServicioDB implements Serializable {
                     conectar();
                 }
 
-                if (empresa != null) {
-                    boolean update = false;
-                    if (empresa.getIdempresa() != null) {
-                        if (empresa.getIdempresa() > 0) {
-                            update = true;
-                        }
+                boolean update = false;
+                if (empresa.getIdempresa() != null) {
+                    if (empresa.getIdempresa() > 0) {
+                        update = true;
                     }
+                }
 
-                    PreparedStatement st = null;
-                    String query = "";
-                    if (update) {
-                        query = "UPDATE empresa SET rut=?, nombre=?, direccion=?, contacto=?, boleta_idboleta=? WHERE idempresa = ?";
-                        st = conexion.prepareStatement(query);
-                        st.setString(1, empresa.getRut());
-                        st.setString(2, empresa.getNombre());
-                        st.setString(3, empresa.getDireccion());
-                        st.setString(4, empresa.getContacto());
-                        st.setInt(5, empresa.getBoletaId());
-                        st.setInt(6, empresa.getIdempresa());
-                    } else {
-                        query = "INSERT INTO empresa (rut, nombre, direccion, contacto, boleta_idboleta) VALUES (?, ?, ?, ?, ?)";
-                        st = conexion.prepareStatement(query);
-                        st.setString(1, empresa.getRut());
-                        st.setString(2, empresa.getNombre());
-                        st.setString(3, empresa.getDireccion());
-                        st.setString(4, empresa.getContacto());
-                        st.setInt(5, empresa.getBoletaId());
-                    }
-
-                    if (st != null) {
-                        logger.info(st.toString());
-                        st.execute();
-
-                        int updateCount = st.getUpdateCount();
-                        if (updateCount > 0) {
-                            resultado = true;
-                        }
-                    }
-
+                PreparedStatement st = null;
+                String query = "";
+                if (update) {
+                    query = "UPDATE empresa SET rut=?, nombre=?, direccion=?, contacto=?, boleta_idboleta=? WHERE idempresa = ?";
+                    st = conexion.prepareStatement(query);
+                    st.setString(1, empresa.getRut());
+                    st.setString(2, empresa.getNombre());
+                    st.setString(3, empresa.getDireccion());
+                    st.setString(4, empresa.getContacto());
+                    st.setInt(5, empresa.getBoletaId());
+                    st.setInt(6, empresa.getIdempresa());
                 } else {
-                    logger.info("ERROR: empresa nula");
+                    query = "INSERT INTO empresa (rut, nombre, direccion, contacto, boleta_idboleta) VALUES (?, ?, ?, ?, ?)";
+                    st = conexion.prepareStatement(query);
+                    st.setString(1, empresa.getRut());
+                    st.setString(2, empresa.getNombre());
+                    st.setString(3, empresa.getDireccion());
+                    st.setString(4, empresa.getContacto());
+                    st.setInt(5, empresa.getBoletaId());
+                }
+
+                if (st != null) {
+                    logger.info(st.toString());
+                    st.execute();
+
+                    int updateCount = st.getUpdateCount();
+                    if (updateCount > 0) {
+                        resultado = true;
+                    }
                 }
             } else {
                 logger.info("ERROR: empresa nula");
@@ -370,8 +364,7 @@ public class ServicioDB implements Serializable {
         }
         return resultado;
     }
-    
-    
+
     public boolean guardar(Boleta boleta) {
         boolean resultado = false;
         try {
@@ -381,43 +374,38 @@ public class ServicioDB implements Serializable {
                     conectar();
                 }
 
-                if (boleta != null) {
-                    boolean update = false;
-                    if (boleta.getIdempresa() != null) {
-                        if (boleta.getIdempresa() > 0) {
-                            update = true;
-                        }
+                boolean update = false;
+                if (boleta.getIdempresa() != null) {
+                    if (boleta.getIdempresa() > 0) {
+                        update = true;
                     }
+                }
 
-                    PreparedStatement st = null;
-                    String query = "";
-                    if (update) {
-                        query = "UPDATE boleta SET numero=?, fecha, idempresa = ? WHERE idboleta=?";
-                        st = conexion.prepareStatement(query);
-                        st.setString(1, boleta.getNumero());
-                        st.setString(2, boleta.getFecha());
-                        st.setInt(3, boleta.getIdempresa());
-                        st.setInt(4, boleta.getIdboleta());
-                    } else {
-                        query = "INSERT INTO boleta (numero, fecha, idempresa) VALUES (?, ?, ?)";
-                        st = conexion.prepareStatement(query);
-                        st.setString(1, boleta.getNumero());
-                        st.setString(2, boleta.getFecha());
-                        st.setInt(3, boleta.getIdempresa());
-                    }
-
-                    if (st != null) {
-                        logger.info(st.toString());
-                        st.execute();
-
-                        int updateCount = st.getUpdateCount();
-                        if (updateCount > 0) {
-                            resultado = true;
-                        }
-                    }
-
+                PreparedStatement st = null;
+                String query = "";
+                if (update) {
+                    query = "UPDATE boleta SET numero=?, fecha=?, idempresa = ? WHERE idboleta=?";
+                    st = conexion.prepareStatement(query);
+                    st.setString(1, boleta.getNumero());
+                    st.setString(2, boleta.getFecha());
+                    st.setInt(3, boleta.getIdempresa());
+                    st.setInt(4, boleta.getIdboleta());
                 } else {
-                    logger.info("ERROR: boleta nula");
+                    query = "INSERT INTO boleta (numero, fecha, idempresa) VALUES (?, ?, ?)";
+                    st = conexion.prepareStatement(query);
+                    st.setString(1, boleta.getNumero());
+                    st.setString(2, boleta.getFecha());
+                    st.setInt(3, boleta.getIdempresa());
+                }
+
+                if (st != null) {
+                    logger.info(st.toString());
+                    st.execute();
+
+                    int updateCount = st.getUpdateCount();
+                    if (updateCount > 0) {
+                        resultado = true;
+                    }
                 }
             } else {
                 logger.info("ERROR: boleta nula");
