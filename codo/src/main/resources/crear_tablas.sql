@@ -29,11 +29,13 @@ ENGINE = InnoDB;
 -- Table `cododb`.`boleta`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `cododb`.`boleta`
+-- -----------------------------------------------------
+-- Table `cododbas`.`boleta`
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `cododb`.`boleta` (
-  `idboleta` INT NOT NULL ,
-  `numero_factura` VARCHAR(255) NULL ,
-  `fecha` DATE NULL ,
-  `empresa_idempresa` INT NOT NULL ,
+  `idboleta` INT(11) NOT NULL ,
+  `fecha` DATE NULL DEFAULT NULL ,
+  `empresa_idempresa` INT(11) NOT NULL ,
   PRIMARY KEY (`idboleta`, `empresa_idempresa`) ,
   INDEX `fk_boleta_empresa` (`empresa_idempresa` ASC) ,
   CONSTRAINT `fk_boleta_empresa`
@@ -41,7 +43,9 @@ CREATE  TABLE IF NOT EXISTS `cododb`.`boleta` (
     REFERENCES `cododb`.`empresa` (`idempresa` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 -- -----------------------------------------------------
