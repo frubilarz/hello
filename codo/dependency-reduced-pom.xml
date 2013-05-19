@@ -35,7 +35,7 @@
             </manifest>
             <manifestEntries>
               <mode>development</mode>
-              <url>${pom.url}</url>
+              <url>${project.url}</url>
             </manifestEntries>
           </archive>
         </configuration>
@@ -61,13 +61,6 @@
       </plugin>
     </plugins>
   </build>
-  <repositories>
-    <repository>
-      <id>jpa20-persistence</id>
-      <name>Repository for library Persistence (JPA 2.0)</name>
-      <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
-    </repository>
-  </repositories>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -88,6 +81,7 @@
     <log4j.version>1.2.17</log4j.version>
     <jvm.version>1.6</jvm.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jakarta.regexp.version>1.4</jakarta.regexp.version>
     <mysql.version>5.1.25</mysql.version>
     <junit.version>4.11</junit.version>
   </properties>

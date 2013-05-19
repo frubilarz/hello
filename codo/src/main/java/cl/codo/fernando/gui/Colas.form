@@ -72,8 +72,9 @@
                                   <Component id="direccion_text" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="dia_text" min="-2" pref="48" max="-2" attributes="0"/>
+                                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="dia_text" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
@@ -81,12 +82,7 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="anio_text" min="-2" pref="48" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                              <Component id="anio_text" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -135,10 +131,10 @@
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="dia_text" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="anio_text" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="mes_text" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="dia_text" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="anio_text" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -187,10 +183,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBox1" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jComboBox1" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -244,22 +237,6 @@
     <Component class="javax.swing.JTextField" name="nombre_text">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombre_textActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="dia_text">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="DIA"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dia_textActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="anio_text">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ANIO"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anio_textActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
@@ -361,7 +338,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="MAntenci&#xf3;n"/>
+        <Property name="text" type="java.lang.String" value="Mantenci&#xf3;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
@@ -373,11 +350,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="direccion_text">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="DIAS"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="mes_text">
       <Properties>
@@ -414,8 +386,70 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
             <StringItem index="0" value="BCI"/>
-            <StringItem index="1" value="dos"/>
-            <StringItem index="2" value="tres"/>
+            <StringItem index="1" value="Yakora"/>
+            <StringItem index="2" value="LYM"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="dia_text">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="31">
+            <StringItem index="0" value="1"/>
+            <StringItem index="1" value="2"/>
+            <StringItem index="2" value="3"/>
+            <StringItem index="3" value="4"/>
+            <StringItem index="4" value="5"/>
+            <StringItem index="5" value="6"/>
+            <StringItem index="6" value="7"/>
+            <StringItem index="7" value="8"/>
+            <StringItem index="8" value="9"/>
+            <StringItem index="9" value="10"/>
+            <StringItem index="10" value="11"/>
+            <StringItem index="11" value="12"/>
+            <StringItem index="12" value="13"/>
+            <StringItem index="13" value="14"/>
+            <StringItem index="14" value="15"/>
+            <StringItem index="15" value="16"/>
+            <StringItem index="16" value="17"/>
+            <StringItem index="17" value="18"/>
+            <StringItem index="18" value="19"/>
+            <StringItem index="19" value="20"/>
+            <StringItem index="20" value="21"/>
+            <StringItem index="21" value="22"/>
+            <StringItem index="22" value="23"/>
+            <StringItem index="23" value="24"/>
+            <StringItem index="24" value="25"/>
+            <StringItem index="25" value="26"/>
+            <StringItem index="26" value="27"/>
+            <StringItem index="27" value="28"/>
+            <StringItem index="28" value="29"/>
+            <StringItem index="29" value="30"/>
+            <StringItem index="30" value="31"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="anio_text">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="12">
+            <StringItem index="0" value="2009"/>
+            <StringItem index="1" value="2010"/>
+            <StringItem index="2" value="2011"/>
+            <StringItem index="3" value="2012"/>
+            <StringItem index="4" value="2013"/>
+            <StringItem index="5" value="2014"/>
+            <StringItem index="6" value="2015"/>
+            <StringItem index="7" value="2016"/>
+            <StringItem index="8" value="2017"/>
+            <StringItem index="9" value="2018"/>
+            <StringItem index="10" value="2019"/>
+            <StringItem index="11" value="2020"/>
           </StringArray>
         </Property>
       </Properties>

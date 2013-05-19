@@ -126,8 +126,8 @@ public class Colas extends javax.swing.JFrame {
         Nletras(monto_text);
         Nletras(rut_text);
         Nletras(factura_text);
-        Nletras(dia_text);
-        Nletras(anio_text);
+        
+       
 
     }
 
@@ -148,8 +148,6 @@ public class Colas extends javax.swing.JFrame {
         factura_text = new javax.swing.JTextField();
         rut_text = new javax.swing.JTextField();
         nombre_text = new javax.swing.JTextField();
-        dia_text = new javax.swing.JTextField();
-        anio_text = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -167,11 +165,12 @@ public class Colas extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         direccion_text = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         mes_text = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
+        dia_text = new javax.swing.JComboBox();
+        anio_text = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,20 +187,6 @@ public class Colas extends javax.swing.JFrame {
         nombre_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre_textActionPerformed(evt);
-            }
-        });
-
-        dia_text.setText("DIA");
-        dia_text.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dia_textActionPerformed(evt);
-            }
-        });
-
-        anio_text.setText("ANIO");
-        anio_text.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anio_textActionPerformed(evt);
             }
         });
 
@@ -284,7 +269,7 @@ public class Colas extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("MAntención");
+        jButton6.setText("Mantención");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -293,15 +278,22 @@ public class Colas extends javax.swing.JFrame {
 
         jLabel12.setText("Dirección");
 
-        jLabel10.setText("DIAS");
-
         mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
 
         jLabel13.setText("-");
 
         jLabel14.setText("-");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BCI", "dos", "tres" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BCI", "Yakora", "LYM" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
+        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -348,8 +340,9 @@ public class Colas extends javax.swing.JFrame {
                                     .addComponent(direccion_text)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(dia_text, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(dia_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel13)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -357,11 +350,7 @@ public class Colas extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel14)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(anio_text, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel10)))
+                                                .addComponent(anio_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
@@ -394,10 +383,10 @@ public class Colas extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(dia_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(anio_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mes_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)))
+                            .addComponent(jLabel14)
+                            .addComponent(dia_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(anio_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel13)))
@@ -435,9 +424,7 @@ public class Colas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10)))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -476,10 +463,6 @@ public class Colas extends javax.swing.JFrame {
             }
         });
     }
-    private void dia_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dia_textActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dia_textActionPerformed
-
     private void nombre_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_textActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre_textActionPerformed
@@ -522,9 +505,9 @@ public class Colas extends javax.swing.JFrame {
         }
 
         nboleta = this.factura_text.getText();
-        dia = this.dia_text.getText();
+        dia = this.dia_text.getSelectedItem().toString();
         mes = this.mes_text.getSelectedItem().toString();
-        anio = this.anio_text.getText();
+        anio = this.anio_text.getSelectedItem().toString();
 
         cl.codo.fernando.modelo.Boleta boleta = new cl.codo.fernando.modelo.Boleta();
         String fecha = dia + "/" + mes + "/" + anio;
@@ -598,9 +581,7 @@ public class Colas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        this.anio_text.setText("ANIO");
-
-        this.dia_text.setText("DIA");
+        
         this.contacto_text.setText(" ");
         this.rut_text.setText("");
         this.verificador_text.setText("");
@@ -637,10 +618,6 @@ public class Colas extends javax.swing.JFrame {
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ItemStateChanged
-
-    private void anio_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anio_textActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_anio_textActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -700,6 +677,10 @@ public class Colas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -735,9 +716,9 @@ public class Colas extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField anio_text;
+    private javax.swing.JComboBox anio_text;
     private javax.swing.JTextField contacto_text;
-    private javax.swing.JTextField dia_text;
+    private javax.swing.JComboBox dia_text;
     private javax.swing.JTextField direccion_text;
     private javax.swing.JTextField factura_text;
     private javax.swing.JButton jButton1;
@@ -749,7 +730,6 @@ public class Colas extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

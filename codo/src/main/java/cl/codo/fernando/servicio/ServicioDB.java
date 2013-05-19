@@ -39,7 +39,7 @@ public class ServicioDB implements Serializable {
     boolean conectar() {
         this.conectado = false;
         try {
-            String url = "jdbc:mysql://192.168.0.153:3306/cododb?zeroDateTimeBehavior=convertToNull";
+            String url = "jdbc:mysql://127.0.0.1:3306/cododb?zeroDateTimeBehavior=convertToNull";
             Properties props = new Properties();
             props.setProperty("user", "codo");
             props.setProperty("password", "codo123");
