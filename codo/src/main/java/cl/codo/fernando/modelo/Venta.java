@@ -13,7 +13,7 @@ public class Venta extends BaseBean {
     private String cantidad = null;
     private String proveedor = null;
     private Integer idboleta = null;
-    private Integer boletaId = null;
+
 
     public Integer getIdventa() {
         return idventa;
@@ -71,13 +71,6 @@ public class Venta extends BaseBean {
         this.idboleta = idboleta;
     }
 
-    public Integer getBoletaId() {
-        return boletaId;
-    }
-
-    public void setBoletaId(Integer boletaId) {
-        this.boletaId = boletaId;
-    }
 
     @Override
     public int hashCode() {

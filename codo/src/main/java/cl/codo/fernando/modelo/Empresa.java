@@ -11,7 +11,7 @@ public class Empresa extends BaseBean {
     private String nombre = null;
     private String direccion = null;
     private String contacto = null;
-    private Integer boletaId = null;
+
 
     public Integer getIdempresa() {
         return idempresa;
@@ -53,13 +53,13 @@ public class Empresa extends BaseBean {
         this.contacto = contacto;
     }
 
-    public Integer getBoletaId() {
-        return boletaId;
-    }
-
-    public void setBoletaId(Integer boletaId) {
-        this.boletaId = boletaId;
-    }
+    /*    public Integer getBoletaId() {
+     * return boletaId;
+     * }
+     * 
+     * public void setBoletaId(Integer boletaId) {
+     * this.boletaId = boletaId;
+     * }*/
 
     @Override
     public int hashCode() {

@@ -7,7 +7,6 @@ package cl.codo.fernando.modelo;
 public class Boleta extends BaseBean {
 
     private Integer idboleta = null;
-    private String numero = null;
     private String fecha = null;
     private Integer idempresa = null;
 
@@ -17,14 +16,6 @@ public class Boleta extends BaseBean {
 
     public void setIdboleta(Integer idboleta) {
         this.idboleta = idboleta;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
     }
 
     public String getFecha() {

@@ -156,7 +156,6 @@ public class ServicioDB implements Serializable {
                     if (rs != null) {
                         if (rs.next()) {
                             empresa = new Empresa();
-                            empresa.setBoletaId(rs.getInt("boleta_idboleta"));
                             empresa.setContacto(rs.getString("contacto"));
                             empresa.setDireccion(rs.getString("direccion"));
                             empresa.setIdempresa(rs.getInt("idempresa"));
@@ -199,7 +198,6 @@ public class ServicioDB implements Serializable {
                     if (rs != null) {
                         if (rs.next()) {
                             Empresa empresa = new Empresa();
-                            empresa.setBoletaId(rs.getInt("boleta_idboleta"));
                             empresa.setContacto(rs.getString("contacto"));
                             empresa.setDireccion(rs.getString("direccion"));
                             empresa.setIdempresa(rs.getInt("idempresa"));
@@ -243,7 +241,7 @@ public class ServicioDB implements Serializable {
                     ResultSet rs = st.executeQuery();
                     if (rs != null) {
                         if (rs.next()) {
-                            empresa.setBoletaId(rs.getInt("boleta_idboleta"));
+                            
                             empresa.setContacto(rs.getString("contacto"));
                             empresa.setDireccion(rs.getString("direccion"));
                             empresa.setIdempresa(rs.getInt("idempresa"));
@@ -287,7 +285,7 @@ public class ServicioDB implements Serializable {
                         if (rs.next()) {
                             boleta = new Boleta();
                             boleta.setFecha(rs.getString("fecha"));
-                            boleta.setNumero(rs.getString("numero"));
+                            //boleta.setNumero(rs.getString("numero"));
                             boleta.setIdboleta(rs.getInt("idboleta"));
                             boleta.setIdempresa(rs.getInt("idempresa"));
                         } else {
@@ -327,22 +325,21 @@ public class ServicioDB implements Serializable {
                 PreparedStatement st = null;
                 String query = "";
                 if (update) {
-                    query = "UPDATE empresa SET rut=?, nombre=?, direccion=?, contacto=?, boleta_idboleta=? WHERE idempresa = ?";
+                    query = "UPDATE empresa SET rut=?, nombre=?, direccion=?, contacto=? WHERE idempresa = ?";
                     st = conexion.prepareStatement(query);
                     st.setString(1, empresa.getRut());
                     st.setString(2, empresa.getNombre());
                     st.setString(3, empresa.getDireccion());
                     st.setString(4, empresa.getContacto());
-                    st.setInt(5, empresa.getBoletaId());
-                    st.setInt(6, empresa.getIdempresa());
+                    st.setInt(5, empresa.getIdempresa());
                 } else {
-                    query = "INSERT INTO empresa (rut, nombre, direccion, contacto, boleta_idboleta) VALUES (?, ?, ?, ?, ?)";
+                    query = "INSERT INTO empresa (rut, nombre, direccion, contacto) VALUES (?, ?, ?, ?)";
                     st = conexion.prepareStatement(query);
                     st.setString(1, empresa.getRut());
                     st.setString(2, empresa.getNombre());
                     st.setString(3, empresa.getDireccion());
                     st.setString(4, empresa.getContacto());
-                    st.setInt(5, empresa.getBoletaId());
+
                 }
 
                 if (st != null) {
@@ -384,16 +381,16 @@ public class ServicioDB implements Serializable {
                 PreparedStatement st = null;
                 String query = "";
                 if (update) {
-                    query = "UPDATE boleta SET numero=?, fecha=?, idempresa = ? WHERE idboleta=?";
+                    query = "UPDATE boleta SET , fecha=?, idempresa = ? WHERE idboleta=?";
                     st = conexion.prepareStatement(query);
-                    st.setString(1, boleta.getNumero());
+                   // st.setString(1, boleta.getNumero());
                     st.setString(2, boleta.getFecha());
                     st.setInt(3, boleta.getIdempresa());
                     st.setInt(4, boleta.getIdboleta());
                 } else {
                     query = "INSERT INTO boleta (numero, fecha, idempresa) VALUES (?, ?, ?)";
                     st = conexion.prepareStatement(query);
-                    st.setString(1, boleta.getNumero());
+                    //st.setString(1, boleta.getNumero());
                     st.setString(2, boleta.getFecha());
                     st.setInt(3, boleta.getIdempresa());
                 }

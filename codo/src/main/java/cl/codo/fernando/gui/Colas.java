@@ -471,9 +471,9 @@ public class Colas extends javax.swing.JFrame {
         ServicioDB servicio = new ServicioDB();
 
         String rut = "", verificacion = "", nombre = "", direccion = "", contacto = "";
-        String nboleta = "", dia = "", mes = "", anio = "", monto = "", factoring = "";
+        String  dia = "", mes = "", anio = "", monto = "", factoring = "";
         String estado = "0";
-        Integer pregunta = 0;
+        Integer pregunta = 0,nboleta = 0;
 
         String mensaje = "";
         rut = this.rut_text.getText();
@@ -499,12 +499,13 @@ public class Colas extends javax.swing.JFrame {
             nuevaEmpresa.setDireccion(direccion);
             nuevaEmpresa.setContacto(contacto);
             // @WARNING A este nivel debería estar el ID seteado, no creo que funcione.
-            nuevaEmpresa.setBoletaId(null);
+
 
             servicio.guardar(empresa);
         }
 
-        nboleta = this.factura_text.getText();
+        nboleta = Integer.parseInt(this.factura_text.getText());
+        
         dia = this.dia_text.getSelectedItem().toString();
         mes = this.mes_text.getSelectedItem().toString();
         anio = this.anio_text.getSelectedItem().toString();
@@ -513,7 +514,7 @@ public class Colas extends javax.swing.JFrame {
         String fecha = dia + "/" + mes + "/" + anio;
         boleta.setFecha(fecha);
         boleta.setIdempresa(pregunta);
-        boleta.setNumero(nboleta);
+        boleta.setIdboleta(nboleta);
         servicio.guardar(boleta);
 
         monto = this.monto_text.getText();

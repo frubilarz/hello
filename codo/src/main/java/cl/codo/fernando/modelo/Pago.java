@@ -8,12 +8,20 @@ public class Pago extends BaseBean {
 
     private Integer idPago = null;
     private String fechaVencimiento = null;
-    private String factoring = null;
     private String monto = null;
     private String estado = null;
     private Integer idboleta = null;
-    private Integer boletaId = null;
+    private Integer idfactoring = null;
 
+    public Integer getIdfactoring() {
+        return idfactoring;
+    }
+
+    public void setIdfactoring(Integer idfactoring) {
+        this.idfactoring = idfactoring;
+    }
+
+    
     public Integer getIdPago() {
         return idPago;
     }
@@ -30,13 +38,6 @@ public class Pago extends BaseBean {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public String getFactoring() {
-        return factoring;
-    }
-
-    public void setFactoring(String factoring) {
-        this.factoring = factoring;
-    }
 
     public String getMonto() {
         return monto;
@@ -62,11 +63,5 @@ public class Pago extends BaseBean {
         this.idboleta = idboleta;
     }
 
-    public Integer getBoletaId() {
-        return boletaId;
-    }
 
-    public void setBoletaId(Integer boletaId) {
-        this.boletaId = boletaId;
-    }
 }

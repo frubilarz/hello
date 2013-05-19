@@ -13,7 +13,7 @@ public class Mantencion extends BaseBean {
     private String detalle = null;
     private String comentario = null;
     private Integer idboleta = null;
-    private Integer boletaId = null;
+
 
     public Integer getIdmantencion() {
         return idmantencion;
@@ -71,13 +71,7 @@ public class Mantencion extends BaseBean {
         this.idboleta = idboleta;
     }
 
-    public Integer getBoletaId() {
-        return boletaId;
-    }
 
-    public void setBoletaId(Integer boletaId) {
-        this.boletaId = boletaId;
-    }
 
     @Override
     public int hashCode() {

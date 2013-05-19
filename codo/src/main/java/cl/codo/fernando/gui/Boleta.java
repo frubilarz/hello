@@ -216,7 +216,7 @@ public class Boleta extends javax.swing.JFrame {
                 fila[0] = empresa.getRut();
                 if (boleta != null) {
                     fila[1] = boleta.getFecha();
-                    fila[2] = boleta.getNumero();
+                    fila[2] = boleta.getIdboleta();
                 } else {
                     fila[1] = "";
                     fila[2] = "";
