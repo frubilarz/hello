@@ -339,7 +339,6 @@ public class ServicioDB implements Serializable {
                     st.setString(2, empresa.getNombre());
                     st.setString(3, empresa.getDireccion());
                     st.setString(4, empresa.getContacto());
-
                 }
 
                 if (st != null) {

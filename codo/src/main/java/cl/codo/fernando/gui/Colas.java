@@ -18,6 +18,123 @@ public class Colas extends javax.swing.JFrame {
         return resultado;
     }
 
+    int factor(String fac)
+{
+	if("BCI".equals(fac))
+            return 1;
+	if("Yakora".equals(fac))
+            return 2;
+	if("LYM".equals(fac))
+            return 3;
+        return 0;
+}
+String sumardia(String anio, String dia,int mm , int dias)
+{
+	String fecha=null;
+	int dia1=0;
+	int anio1=0;
+	dia1=Integer.parseInt(dia);
+	anio1=Integer.parseInt(anio);
+	if (dias==30)
+	{
+		if(mm<12)
+		{
+			mm++;
+		}else{
+			anio1++;
+			mm=1;
+                    }
+		fecha = anio + String.valueOf(mm)+String.valueOf(dia1);
+		return fecha;
+	}
+	if (dias==60)
+	{
+		if(mm<11)
+		{
+			mm=mm+2;
+		}
+		else
+		{
+			if(mm==11)
+			{
+				anio1++;
+				mm=1;
+			}
+			if(mm==12)
+			{
+				anio1++;
+				mm=2;
+			}
+		}
+		fecha = anio + String.valueOf(mm)+String.valueOf(dia1);
+		return fecha;
+	}
+	if (dias==90)
+	{
+		if(mm<10)
+		{
+			mm+=3;
+		}
+		else
+		{
+			if(mm==10)
+			{
+				mm=1;
+				anio1++;
+			}
+			if(mm==11)
+			{
+				mm=2;
+				anio1++;
+			}
+			if(mm==12)
+			{
+				mm=3;
+				anio1++;
+			}
+		}
+		
+		fecha = anio + String.valueOf(mm)+String.valueOf(dia1);
+		return fecha;
+	}
+	if(dias==120)
+	{
+		if(mm<9)
+		{
+			mm+=3;
+		}
+		else
+		{
+			if(mm==9)
+			{
+				anio1++;
+				mm=1;
+			}
+			if(mm==10)
+			{
+				anio1++;
+				mm=2;
+			}
+			if(mm==11)
+			{
+				anio1++;
+				mm=3;
+			}
+			if(mm==12)
+			{
+				anio1++;
+				mm=4;
+			}
+		}
+		fecha = anio + String.valueOf(mm)+String.valueOf(dia1);
+		return fecha;
+	}
+			
+			
+			
+	return fecha;		
+}
+                
     int tiene(int aux) {
         if (aux == 30) {
             return 1;
@@ -148,27 +265,27 @@ public class Colas extends javax.swing.JFrame {
         factura_text = new javax.swing.JTextField();
         rut_text = new javax.swing.JTextField();
         nombre_text = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        guardar_boton = new javax.swing.JButton();
+        limpiar_boton = new javax.swing.JButton();
+        cancelar_boton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         contacto_text = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         verificador_text = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        consulta = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         monto_text = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        dias_pago = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        venta_boton = new javax.swing.JButton();
+        mantencion_boton = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         direccion_text = new javax.swing.JTextField();
         mes_text = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        factorin_text = new javax.swing.JComboBox();
         dia_text = new javax.swing.JComboBox();
         anio_text = new javax.swing.JComboBox();
 
@@ -190,24 +307,24 @@ public class Colas extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        guardar_boton.setText("Guardar");
+        guardar_boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                guardar_botonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Limpiar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        limpiar_boton.setText("Limpiar");
+        limpiar_boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                limpiar_botonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        cancelar_boton.setText("Cancelar");
+        cancelar_boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                cancelar_botonActionPerformed(evt);
             }
         });
 
@@ -227,20 +344,20 @@ public class Colas extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Consultar");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        consulta.setText("Consultar");
+        consulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                consultaMouseClicked(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        consulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                consultaActionPerformed(evt);
             }
         });
-        jButton4.addKeyListener(new java.awt.event.KeyAdapter() {
+        consulta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton4KeyPressed(evt);
+                consultaKeyPressed(evt);
             }
         });
 
@@ -248,31 +365,31 @@ public class Colas extends javax.swing.JFrame {
 
         jLabel2.setText("Dias");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Al contado", "30", "45", "60", "90", "120" }));
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+        dias_pago.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Al contado", "30", "45", "60", "90", "120" }));
+        dias_pago.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
+                dias_pagoItemStateChanged(evt);
             }
         });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        dias_pago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                dias_pagoActionPerformed(evt);
             }
         });
 
         jLabel8.setText("Detalles");
 
-        jButton5.setText("venta");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        venta_boton.setText("venta");
+        venta_boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                venta_botonActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Mantención");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        mantencion_boton.setText("Mantención");
+        mantencion_boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                mantencion_botonActionPerformed(evt);
             }
         });
 
@@ -284,10 +401,10 @@ public class Colas extends javax.swing.JFrame {
 
         jLabel14.setText("-");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BCI", "Yakora", "LYM" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        factorin_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BCI", "Yakora", "LYM" }));
+        factorin_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                factorin_textActionPerformed(evt);
             }
         });
 
@@ -319,9 +436,9 @@ public class Colas extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(venta_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(mantencion_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(3, 3, 3)
@@ -329,7 +446,7 @@ public class Colas extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(verificador_text, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(26, 26, 26)
-                                        .addComponent(jButton4)))
+                                        .addComponent(consulta)))
                                 .addGap(0, 142, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,7 +457,7 @@ public class Colas extends javax.swing.JFrame {
                                     .addComponent(direccion_text)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(dias_pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(dia_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -357,11 +474,11 @@ public class Colas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(guardar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(limpiar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cancelar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -369,7 +486,7 @@ public class Colas extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel6))
                                 .addGap(37, 37, 37)
-                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(factorin_text, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12)
@@ -400,7 +517,7 @@ public class Colas extends javax.swing.JFrame {
                     .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(verificador_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -416,7 +533,7 @@ public class Colas extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(factorin_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
@@ -424,18 +541,18 @@ public class Colas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dias_pago, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(venta_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mantencion_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cancelar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guardar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(limpiar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -467,15 +584,16 @@ public class Colas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre_textActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void guardar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_botonActionPerformed
         ServicioDB servicio = new ServicioDB();
 
-        String rut = "", verificacion = "", nombre = "", direccion = "", contacto = "";
-        String  dia = "", mes = "", anio = "", monto = "", factoring = "";
+        String rut = null, verificacion = null, nombre = null, direccion = null, contacto = null;
+        String  dia = null, mes = null, anio = null, monto = null, factoring = null;
         String estado = "0";
         Integer pregunta = 0,nboleta = 0;
+        int mm=0;
 
-        String mensaje = "";
+        //String mensaje = "";
         rut = this.rut_text.getText();
         verificacion = this.verificador_text.getText();
         nombre = this.nombre_text.getText();
@@ -499,88 +617,53 @@ public class Colas extends javax.swing.JFrame {
             nuevaEmpresa.setDireccion(direccion);
             nuevaEmpresa.setContacto(contacto);
             // @WARNING A este nivel debería estar el ID seteado, no creo que funcione.
-
-
             servicio.guardar(empresa);
         }
-
+       
         nboleta = Integer.parseInt(this.factura_text.getText());
         
         dia = this.dia_text.getSelectedItem().toString();
         mes = this.mes_text.getSelectedItem().toString();
         anio = this.anio_text.getSelectedItem().toString();
-
+        mm=fecha(mes);
+        
         cl.codo.fernando.modelo.Boleta boleta = new cl.codo.fernando.modelo.Boleta();
-        String fecha = dia + "/" + mes + "/" + anio;
+        String fecha = dia + "/" + mm + "/" + anio;
         boleta.setFecha(fecha);
         boleta.setIdempresa(pregunta);
         boleta.setIdboleta(nboleta);
         servicio.guardar(boleta);
 
         monto = this.monto_text.getText();
-        factoring = this.jComboBox2.getSelectedItem().toString();
-        String aux = this.jComboBox1.getSelectedItem().toString();
+        factoring = this.factorin_text.getSelectedItem().toString();
+        int fact = factor(factoring);
+        String aux = this.dias_pago.getSelectedItem().toString();
+        int aux2=0;
+        if(!"contado".equals(aux))
+        {
+            aux2 = Integer.parseInt(aux);
+        }
+        String fechafin= sumardia(anio,dia,mm,aux2);
+         cl.codo.fernando.modelo.Pago pago =new  cl.codo.fernando.modelo.Pago();
+         pago.setFechaVencimiento(fechafin);
+         pago.setIdboleta(nboleta);
+         float monto1= Float.parseFloat(monto);
+         pago.setMonto(monto1);
+         pago.setEstado(estado);
+         pago.setIdfactoring(fact);
 
+        
         // En este punto me aburrí XD pero deberías cachar la idea
-        /*
-         if (aux == "Al contado") {
-         aux = "0";
-         }
-         int auxx = Integer.parseInt(aux);
-         sSQL = "INSERT INTO pago(fecha_vencimiento,mes,anio,factoring, monto,estado,idboleta) "
-         + "values (?,?,?,?, ?,?,?)";
-         mensaje = "Los datos se han Insertado de Manera Satisfactoria...";
-         try {
-         conexionmysql con3 = new conexionmysql();
-         Connection cnnn;
-         cnnn = (Connection) con3.Conectar();
-         String mysql0;
-         mysql0 = "SELECT * FROM boleta "
-         + "WHERE numeroboleta = '" + nboleta + " '";
-         try {
-         Statement st = cnnn.createStatement();
-         ResultSet rs = st.executeQuery(mysql0);
-         if (rs.next()) {
-         pregunta = rs.getInt("idboleta");
-         nboleta = rs.getString("numeroboleta");
-         dia = rs.getString("dia");
-         mes = rs.getString("mes");
-         anio = rs.getString("anio");
-         int conc;
-         conc = rs.getInt("idempresa");
-         }
-         } catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, ex);
-         }
+        
 
-         int aux1;
-         aux1 = reseto(auxx, tiene(auxx));
-         mes = fechas(aux1);
-
-         PreparedStatement pst = cn.prepareStatement(sSQL);
-         pst.setString(1, dia);
-         pst.setString(2, mes);
-         pst.setString(3, anio);
-         pst.setString(4, factoring);
-         pst.setString(5, monto);
-         pst.setString(6, estado);
-         pst.setInt(7, pregunta);
-         int n = pst.executeUpdate();
-
-
-         } catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, ex);
-         }
-         */
-
-        JOptionPane.showMessageDialog(null, mensaje);
+       
         Principal form = new Principal();
         form.setVisible(true);
         form.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_guardar_botonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void limpiar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiar_botonActionPerformed
 
         
         this.contacto_text.setText(" ");
@@ -593,7 +676,7 @@ public class Colas extends javax.swing.JFrame {
         this.factura_text.setText("");
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_limpiar_botonActionPerformed
 
     private void contacto_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contacto_textActionPerformed
         // TODO add your handling code here:
@@ -603,32 +686,32 @@ public class Colas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_verificador_textActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void cancelar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar_botonActionPerformed
 
         Principal form = new Principal();
         form.setVisible(true);
         form.setLocationRelativeTo(null);
         this.dispose();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_cancelar_botonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void dias_pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dias_pagoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_dias_pagoActionPerformed
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+    private void dias_pagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_dias_pagoItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    }//GEN-LAST:event_dias_pagoItemStateChanged
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void consultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_consultaActionPerformed
 
-    private void jButton4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton4KeyPressed
+    private void consultaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_consultaKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4KeyPressed
+    }//GEN-LAST:event_consultaKeyPressed
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    private void consultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaMouseClicked
 
         ServicioDB servicio = new ServicioDB();
 
@@ -638,17 +721,17 @@ public class Colas extends javax.swing.JFrame {
         rut = this.rut_text.getText();
         verificacion = this.verificador_text.getText();
         Empresa empresa = servicio.getEmpresaPorRut(rut);
-
-        if (empresa == null) {
-            JOptionPane.showMessageDialog(null, "cliente nuevo");
+        
+        if (empresa == null) { // si no tiene nada implica que no ingreso rut para la consulta
+            JOptionPane.showMessageDialog(null, "cliente nuevo"); // si no tiene nada es cliente nuevo
         } else {
             pregunta = empresa.getIdempresa();
             rut = empresa.getRut();
-            verificacion = "";
+           // verificacion = "";
             nombre = empresa.getNombre();
             direccion = empresa.getDireccion();
             contacto = empresa.getContacto();
-
+               
             this.nombre_text.setText(nombre);
             this.direccion_text.setText(direccion);
             this.contacto_text.setText(contacto);
@@ -658,29 +741,29 @@ public class Colas extends javax.swing.JFrame {
 
         this.nombre_text.setToolTipText(nombre);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4MouseClicked
+    }//GEN-LAST:event_consultaMouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void mantencion_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantencion_botonActionPerformed
 
         Mantencion form = new Mantencion();
         form.setVisible(true);
         form.setLocationRelativeTo(null);
         this.dispose();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_mantencion_botonActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void venta_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venta_botonActionPerformed
 
         Venta form = new Venta();
         form.setVisible(true);
         form.setLocationRelativeTo(null);
         //this.dispose();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_venta_botonActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void factorin_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factorin_textActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_factorin_textActionPerformed
 
     /**
      * @param args the command line arguments
@@ -718,18 +801,15 @@ public class Colas extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox anio_text;
+    private javax.swing.JButton cancelar_boton;
+    private javax.swing.JButton consulta;
     private javax.swing.JTextField contacto_text;
     private javax.swing.JComboBox dia_text;
+    private javax.swing.JComboBox dias_pago;
     private javax.swing.JTextField direccion_text;
+    private javax.swing.JComboBox factorin_text;
     private javax.swing.JTextField factura_text;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JButton guardar_boton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -743,10 +823,13 @@ public class Colas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton limpiar_boton;
+    private javax.swing.JButton mantencion_boton;
     private javax.swing.JComboBox mes_text;
     private javax.swing.JTextField monto_text;
     private javax.swing.JTextField nombre_text;
     private javax.swing.JTextField rut_text;
+    private javax.swing.JButton venta_boton;
     private javax.swing.JTextField verificador_text;
     // End of variables declaration//GEN-END:variables
 

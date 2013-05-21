@@ -8,7 +8,7 @@ public class Pago extends BaseBean {
 
     private Integer idPago = null;
     private String fechaVencimiento = null;
-    private String monto = null;
+    private Float monto = null;
     private String estado = null;
     private Integer idboleta = null;
     private Integer idfactoring = null;
@@ -38,14 +38,16 @@ public class Pago extends BaseBean {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-
-    public String getMonto() {
+    public Float getMonto() {
         return monto;
     }
 
-    public void setMonto(String monto) {
+    public void setMonto(Float monto) {
         this.monto = monto;
     }
+
+
+
 
     public String getEstado() {
         return estado;
