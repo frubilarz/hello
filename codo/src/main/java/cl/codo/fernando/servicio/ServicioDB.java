@@ -382,16 +382,14 @@ public class ServicioDB implements Serializable {
                 if (update) {
                     query = "UPDATE boleta SET , fecha=?, idempresa = ? WHERE idboleta=?";
                     st = conexion.prepareStatement(query);
-                   // st.setString(1, boleta.getNumero());
-                    st.setString(2, boleta.getFecha());
-                    st.setInt(3, boleta.getIdempresa());
-                    st.setInt(4, boleta.getIdboleta());
+                    st.setString(1, boleta.getFecha());
+                    st.setInt(2, boleta.getIdempresa());
+                    st.setInt(3, boleta.getIdboleta());
                 } else {
-                    query = "INSERT INTO boleta (numero, fecha, idempresa) VALUES (?, ?, ?)";
+                    query = "INSERT INTO boleta (fecha, idempresa) VALUES ( ?, ?)";
                     st = conexion.prepareStatement(query);
-                    //st.setString(1, boleta.getNumero());
-                    st.setString(2, boleta.getFecha());
-                    st.setInt(3, boleta.getIdempresa());
+                    st.setString(1, boleta.getFecha());
+                    st.setInt(2, boleta.getIdempresa());
                 }
 
                 if (st != null) {

@@ -58,4 +58,8 @@ public class Boleta extends BaseBean {
     public String toString() {
         return "cl.codo.fernando.modelo.Boleta[ idboleta=" + idboleta + " ]";
     }
+
+    public String getNumero() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

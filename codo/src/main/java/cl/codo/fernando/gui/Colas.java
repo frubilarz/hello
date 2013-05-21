@@ -600,8 +600,10 @@ String sumardia(String anio, String dia,int mm , int dias)
         direccion = this.direccion_text.getText();
         contacto = this.contacto_text.getText();
 
+     
         Empresa empresa = servicio.getEmpresaPorRut(rut);
         if (empresa != null) {
+           
             pregunta = empresa.getIdempresa();
             rut = empresa.getRut();
             verificacion = "";
@@ -611,17 +613,19 @@ String sumardia(String anio, String dia,int mm , int dias)
         }
 
         if (pregunta == null) {
-            Empresa nuevaEmpresa = new Empresa();
+            Empresa nuevaEmpresa = new Empresa();     
             nuevaEmpresa.setIdempresa(null);
-            nuevaEmpresa.setNombre(nombre);
-            nuevaEmpresa.setDireccion(direccion);
-            nuevaEmpresa.setContacto(contacto);
+            nuevaEmpresa.setRut(this.rut_text.getText());
+            nuevaEmpresa.setNombre(this.nombre_text.getText());
+            nuevaEmpresa.setDireccion(this.direccion_text.getText());
+            nuevaEmpresa.setContacto(this.contacto_text.getText());
             // @WARNING A este nivel debería estar el ID seteado, no creo que funcione.
-            servicio.guardar(empresa);
+            servicio.guardar(nuevaEmpresa);
         }
-       
-        nboleta = Integer.parseInt(this.factura_text.getText());
+        Empresa empresa1 = servicio.getEmpresaPorRut(this.rut_text.getText());
+        pregunta = empresa1.getIdempresa();
         
+        nboleta = Integer.parseInt(this.factura_text.getText());
         dia = this.dia_text.getSelectedItem().toString();
         mes = this.mes_text.getSelectedItem().toString();
         anio = this.anio_text.getSelectedItem().toString();
@@ -727,7 +731,6 @@ String sumardia(String anio, String dia,int mm , int dias)
         } else {
             pregunta = empresa.getIdempresa();
             rut = empresa.getRut();
-           // verificacion = "";
             nombre = empresa.getNombre();
             direccion = empresa.getDireccion();
             contacto = empresa.getContacto();

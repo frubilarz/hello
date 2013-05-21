@@ -12,7 +12,6 @@ public class Empresa extends BaseBean {
     private String direccion = null;
     private String contacto = null;
 
-
     public Integer getIdempresa() {
         return idempresa;
     }
@@ -52,6 +51,8 @@ public class Empresa extends BaseBean {
     public void setContacto(String contacto) {
         this.contacto = contacto;
     }
+
+
 
     /*    public Integer getBoletaId() {
      * return boletaId;
