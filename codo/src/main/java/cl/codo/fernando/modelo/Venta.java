@@ -7,11 +7,11 @@ package cl.codo.fernando.modelo;
 public class Venta extends BaseBean {
 
     private Integer idventa = null;
-    private String producto = null;
-    private String preciocompra = null;
-    private String precioventa = null;
     private String cantidad = null;
     private String proveedor = null;
+    private Float preciocompra = null;
+    private Float precioventa = null;
+    private String producto = null;
     private Integer idboleta = null;
 
 
@@ -31,21 +31,23 @@ public class Venta extends BaseBean {
         this.producto = producto;
     }
 
-    public String getPreciocompra() {
+    public Float getPreciocompra() {
         return preciocompra;
     }
 
-    public void setPreciocompra(String preciocompra) {
+    public void setPreciocompra(Float preciocompra) {
         this.preciocompra = preciocompra;
     }
 
-    public String getPrecioventa() {
+    public Float getPrecioventa() {
         return precioventa;
     }
 
-    public void setPrecioventa(String precioventa) {
+    public void setPrecioventa(Float precioventa) {
         this.precioventa = precioventa;
     }
+
+  
 
     public String getCantidad() {
         return cantidad;

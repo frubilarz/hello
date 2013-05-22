@@ -10,6 +10,7 @@ public class Boleta extends BaseBean {
     private String fecha = null;
     private Integer idempresa = null;
 
+
     public Integer getIdboleta() {
         return idboleta;
     }
@@ -60,6 +61,10 @@ public class Boleta extends BaseBean {
     }
 
     public String getNumero() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setIdempresa(String string) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -1,6 +1,8 @@
 package cl.codo.fernando.gui;
 
 
+import cl.codo.fernando.modelo.Empresa;
+import cl.codo.fernando.servicio.ServicioDB;
 import javax.swing.JOptionPane;
 
 /*
@@ -53,7 +55,7 @@ public class Guardado extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jLabel21 = new javax.swing.JLabel();
         fecha_text = new javax.swing.JTextField();
-        busqueda_text = new javax.swing.JTextField();
+        factura_text = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel15 = new javax.swing.JLabel();
@@ -209,7 +211,7 @@ public class Guardado extends javax.swing.JFrame {
                         .addGap(148, 148, 148)
                         .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(busqueda_text, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(factura_text, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -223,7 +225,7 @@ public class Guardado extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(busqueda_text, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(factura_text, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -312,6 +314,14 @@ public class Guardado extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        ServicioDB servicio = new ServicioDB();
+        String rut=null;
+        String factura = this.factura_text.getText();
+        int fac= Integer.parseInt(factura);
+        Boleta boleta = new Boleta();
+
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -372,7 +382,7 @@ public class Guardado extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField busqueda_text;
+    private javax.swing.JTextField factura_text;
     private javax.swing.JTextField fecha_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;

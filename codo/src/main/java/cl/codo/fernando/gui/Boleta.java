@@ -290,4 +290,8 @@ public class Boleta extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tabla1;
     // End of variables declaration//GEN-END:variables
+
+    void setIdboleta(int fac) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

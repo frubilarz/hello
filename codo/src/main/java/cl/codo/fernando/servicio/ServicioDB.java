@@ -97,7 +97,48 @@ public class ServicioDB implements Serializable {
             logger.info("ERROR: conexión aún activa");
         }
     }
+public Boleta getBoletaporid(Integer id) {
+        Boleta boleta = null;
+        try {
+            if (id != null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
 
+                PreparedStatement st = null;
+                String query = "SELECT * FROM boleta WHERE idboleta=?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    st.setInt(1, id);
+
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        if (rs.next()) {
+                            boleta = new Boleta();
+                            boleta.setFecha(rs.getString("fecha"));
+                            boleta.setIdempresa(rs.getString("idempresa"));
+                            boleta.setIdboleta(rs.getInt("idboleta"));
+                            boleta.setIdempresa(rs.getInt("idempresa"));
+
+                        } else {
+                            logger.info("No existe usuario: " + id);
+                        }
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: Rut vacío");
+            }
+        } catch (Exception e) {
+            boleta = null;
+            logger.error(e.toString());
+            logger.debug("Error al obtener usuario", e);
+        }
+        return boleta;
+    }
+    
     public Usuario getUsuario(Integer rut) {
         Usuario usuario = null;
         try {
@@ -223,7 +264,7 @@ public class ServicioDB implements Serializable {
         return empresas;
     }
 
-    public Empresa getEmpresaPorRut(String rut) {
+public Empresa getEmpresaPorRut(String rut) {
         Empresa empresa = new Empresa();
         try {
             if (!StringUtils.isEmpty(rut)) {
@@ -306,6 +347,7 @@ public class ServicioDB implements Serializable {
         return boleta;
     }
 
+    
     public boolean guardar(Empresa empresa) {
         boolean resultado = false;
         try {
