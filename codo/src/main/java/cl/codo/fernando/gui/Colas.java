@@ -619,7 +619,6 @@ String sumardia(String anio, String dia,int mm , int dias)
             nuevaEmpresa.setNombre(this.nombre_text.getText());
             nuevaEmpresa.setDireccion(this.direccion_text.getText());
             nuevaEmpresa.setContacto(this.contacto_text.getText());
-            // @WARNING A este nivel debería estar el ID seteado, no creo que funcione.
             servicio.guardar(nuevaEmpresa);
         }
         Empresa empresa1 = servicio.getEmpresaPorRut(this.rut_text.getText());
@@ -648,6 +647,7 @@ String sumardia(String anio, String dia,int mm , int dias)
             aux2 = Integer.parseInt(aux);
         }
         String fechafin= sumardia(anio,dia,mm,aux2);
+        
          cl.codo.fernando.modelo.Pago pago =new  cl.codo.fernando.modelo.Pago();
          pago.setFechaVencimiento(fechafin);
          pago.setIdboleta(nboleta);
@@ -655,7 +655,8 @@ String sumardia(String anio, String dia,int mm , int dias)
          pago.setMonto(monto1);
          pago.setEstado(estado);
          pago.setIdfactoring(fact);
-
+         servicio.guardar(pago);
+        
         
         // En este punto me aburrí XD pero deberías cachar la idea
         

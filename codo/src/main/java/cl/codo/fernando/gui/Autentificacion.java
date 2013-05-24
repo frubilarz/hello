@@ -30,11 +30,11 @@ public class Autentificacion extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        rut_text = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        clave = new javax.swing.JPasswordField();
+        aceptar_boton = new javax.swing.JButton();
+        cancelar_boton = new javax.swing.JButton();
+        clave_text = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,46 +42,46 @@ public class Autentificacion extends javax.swing.JFrame {
 
         jLabel2.setText("RUT");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        rut_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                rut_textActionPerformed(evt);
             }
         });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        rut_text.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                rut_textKeyTyped(evt);
             }
         });
 
         jLabel3.setText("CONTRASEÑA");
 
-        jButton1.setText("Aceptar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        aceptar_boton.setText("Aceptar");
+        aceptar_boton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                aceptar_botonMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        aceptar_boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                aceptar_botonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelar_boton.setText("cancelar");
+        cancelar_boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelar_botonActionPerformed(evt);
             }
         });
 
-        clave.addActionListener(new java.awt.event.ActionListener() {
+        clave_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                claveActionPerformed(evt);
+                clave_textActionPerformed(evt);
             }
         });
-        clave.addKeyListener(new java.awt.event.KeyAdapter() {
+        clave_text.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                claveKeyPressed(evt);
+                clave_textKeyPressed(evt);
             }
         });
 
@@ -101,13 +101,13 @@ public class Autentificacion extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(clave)
-                                    .addComponent(jTextField1)))))
+                                    .addComponent(clave_text)
+                                    .addComponent(rut_text)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(185, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(aceptar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cancelar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -118,45 +118,45 @@ public class Autentificacion extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(clave_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cancelar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aceptar_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void rut_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rut_textActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_rut_textActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cancelar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar_botonActionPerformed
 
         System.exit(0); // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cancelar_botonActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void aceptar_botonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aceptar_botonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_aceptar_botonMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void aceptar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptar_botonActionPerformed
 
         try {
             //chekar si el usuario escrbio el nombre de usuario y pw
 
-            if (jTextField1.getText().length() > 0 && clave.getText().length() > 0) {
+            if (rut_text.getText().length() > 0 && clave_text.getText().length() > 0) {
                 // Si el usuario si fue validado correctamente
                 char[] password;
-                password = this.clave.getPassword();
+                password = this.clave_text.getPassword();
                 String palabra = new String(password);
-                if (validarUsuario(jTextField1.getText(), palabra)) //enviar datos a validar
+                if (validarUsuario(rut_text.getText(), palabra)) //enviar datos a validar
                 {
                     // Codigo para mostrar la ventana principal
                     Principal form = new Principal();
@@ -167,11 +167,11 @@ public class Autentificacion extends javax.swing.JFrame {
 
                 } else {
                     JOptionPane.showMessageDialog(null, "El nombre de usuario y/o contrasenia no son validos.");
-                    JOptionPane.showMessageDialog(null, jTextField1.getText() + " " + clave.getText());
-                    jTextField1.setText("");    //limpiar campos
-                    clave.setText("");
+                    JOptionPane.showMessageDialog(null, rut_text.getText() + " " + clave_text.getText());
+                    rut_text.setText("");    //limpiar campos
+                    clave_text.setText("");
 
-                    jTextField1.requestFocusInWindow();
+                    rut_text.requestFocusInWindow();
                 }
 
             } else {
@@ -185,26 +185,26 @@ public class Autentificacion extends javax.swing.JFrame {
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_aceptar_botonActionPerformed
 
-    private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
-    }//GEN-LAST:event_claveActionPerformed
+    private void clave_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clave_textActionPerformed
+    }//GEN-LAST:event_clave_textActionPerformed
 
-    private void claveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_claveKeyPressed
+    private void clave_textKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clave_textKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_claveKeyPressed
+    }//GEN-LAST:event_clave_textKeyPressed
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void rut_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rut_textKeyTyped
 
         //validar que solo sean numeros y no mas de 8
         char car = evt.getKeyChar();
-        if (jTextField1.getText().length() >= 8) {
+        if (rut_text.getText().length() >= 8) {
             evt.consume();
         }
         if ((car < '0' || car > '9')) {
             evt.consume();
         }
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_rut_textKeyTyped
 
     boolean validarUsuario(String elUsr, String elPw) throws IOException {
         boolean resultado = false;
@@ -261,13 +261,13 @@ public class Autentificacion extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField clave;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton aceptar_boton;
+    private javax.swing.JButton cancelar_boton;
+    private javax.swing.JPasswordField clave_text;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField rut_text;
     // End of variables declaration//GEN-END:variables
 
     private void exit() {

@@ -39,7 +39,7 @@ CREATE  TABLE IF NOT EXISTS `cododb`.`empresa` (
 
   `direccion` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
 
-  `contactor` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
+  `contacto` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
 
   PRIMARY KEY (`idempresa`) )
 

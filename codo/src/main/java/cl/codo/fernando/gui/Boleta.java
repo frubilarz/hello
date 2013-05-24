@@ -193,9 +193,9 @@ public class Boleta extends javax.swing.JFrame {
 
         DefaultTableModel modelo = new DefaultTableModel();
         JTable tabla = new JTable(modelo);
+         modelo.addColumn("nombre");
         modelo.addColumn("fecha emicion");
         modelo.addColumn("n° factura");
-        modelo.addColumn("nombre");
         modelo.addColumn("contacto");
         modelo.addColumn("direccion");
         modelo.addColumn("factoring");

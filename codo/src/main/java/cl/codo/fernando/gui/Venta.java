@@ -1,6 +1,7 @@
 package cl.codo.fernando.gui;
 
 
+import cl.codo.fernando.servicio.ServicioDB;
 import javax.swing.JOptionPane;
 
 /*
@@ -110,7 +111,8 @@ public class Venta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            
+
+            ServicioDB servicio=new ServicioDB();
             JOptionPane.showMessageDialog(rootPane, "Guardado");
             Colas form = new Colas();
             form.setVisible(true);

@@ -2,7 +2,10 @@ package cl.codo.fernando.servicio;
 
 import cl.codo.fernando.modelo.Boleta;
 import cl.codo.fernando.modelo.Empresa;
+import cl.codo.fernando.modelo.Mantencion;
+import cl.codo.fernando.modelo.Pago;
 import cl.codo.fernando.modelo.Usuario;
+import cl.codo.fernando.modelo.Venta;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -138,7 +141,8 @@ public Boleta getBoletaporid(Integer id) {
         }
         return boleta;
     }
-    
+
+
     public Usuario getUsuario(Integer rut) {
         Usuario usuario = null;
         try {
@@ -306,6 +310,41 @@ public Empresa getEmpresaPorRut(String rut) {
         return empresa;
     }
 
+ public Usuario getUsuario() {
+        Usuario usuario = null;
+        try {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                PreparedStatement st = null;
+                String query = "SELECT * FROM usuario";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    //st.setInt(1, rut);
+
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        if (rs.next()) {
+                            usuario = new Usuario();
+                            usuario.setRut(rs.getInt("rut"));
+                            usuario.setClave(rs.getString("clave"));
+                        } else {
+                            logger.info("No existe usuario: ");
+                        }
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: Rut vacío");
+            }
+        } catch (Exception e) {
+            usuario = null;
+            logger.error(e.toString());
+            logger.debug("Error al obtener usuario", e);
+        }
+        return usuario;
+    }
     public Boleta getBoletaPorIdEmpresa(Integer id) {
         Boleta boleta = null;
         try {
@@ -401,6 +440,192 @@ public Empresa getEmpresaPorRut(String rut) {
             logger.debug("Error al guardar empresa", e);
         }
         return resultado;
+    }  
+    
+       public boolean guardar(Pago pago) {
+        boolean resultado = false;
+        try {
+            if (pago != null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                boolean update = false;
+                if ( pago.getIdPago()!= null) {
+                    if (pago.getIdPago() > 0) {
+                        update = true;
+                    }
+                }
+
+                PreparedStatement st = null;
+                String query = "";
+
+                    query = "INSERT INTO pago (fechavencimiento,monto,estado,idbolta,idfactoring) VALUES (?, ?,?,?,?)";
+                    st = conexion.prepareStatement(query);
+                    st.setString(1, pago.getFechaVencimiento());
+                    st.setFloat(2, pago.getMonto());
+                    st.setString(3, pago.getEstado());
+                    st.setInt(4, pago.getIdboleta());
+                    st.setInt(5, pago.getIdfactoring());
+
+                if (st != null) {
+                    logger.info(st.toString());
+                    st.execute();
+
+                    int updateCount = st.getUpdateCount();
+                    if (updateCount > 0) {
+                        resultado = true;
+                    }
+                }
+            } else {
+                logger.info("ERROR: usuaio nulo");
+            }
+        } catch (Exception e) {
+            resultado = false;
+            logger.error(e.toString());
+            logger.debug("Error al guardar usuario", e);
+        }
+        return resultado;
+    }
+       public boolean guardar(Mantencion mantencion) {
+        boolean resultado = false;
+        try {
+            if (mantencion != null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                boolean update = false;
+                if ( mantencion!= null) {
+                    if (mantencion.getIdmantencion()> 0) {
+                        update = true;
+                    }
+                }
+
+                PreparedStatement st = null;
+                String query = "";
+
+                    query = "INSERT INTO mantencion (fechainicio,fechafin,lugarl,detalle,comentario,idboleta) VALUES (?, ?,?,?,?,?)";
+                    st = conexion.prepareStatement(query);
+                    st.setString(1, mantencion.getFechainicio());
+                    st.setString(2, mantencion.getFechafin());
+                    st.setString(3, mantencion.getLugar());
+                    st.setString(4, mantencion.getDetalle());
+                    st.setString(5, mantencion.getComentario());
+                    st.setInt(6, mantencion.getIdboleta());
+
+                if (st != null) {
+                    logger.info(st.toString());
+                    st.execute();
+
+                    int updateCount = st.getUpdateCount();
+                    if (updateCount > 0) {
+                        resultado = true;
+                    }
+                }
+            } else {
+                logger.info("ERROR: usuaio nulo");
+            }
+        } catch (Exception e) {
+            resultado = false;
+            logger.error(e.toString());
+            logger.debug("Error al guardar usuario", e);
+        }
+        return resultado;
+    }
+       public boolean guardar(Venta venta) {
+        boolean resultado = false;
+        try {
+            if (venta != null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                boolean update = false;
+                if ( venta!= null) {
+                    if (venta.getIdventa() > 0) {
+                        update = true;
+                    }
+                }
+
+                PreparedStatement st = null;
+                String query = "";
+
+                    query = "INSERT INTO venta (cantidad,proveedor,preciocompra,precioventa,producto,idboleta) VALUES (?, ?,?,?,?,?)";
+                    st = conexion.prepareStatement(query);
+                    st.setString(1, venta.getCantidad());
+                    st.setString(2, venta.getProveedor());
+                    st.setFloat(3, venta.getPreciocompra());
+                    st.setFloat(4,venta.getPrecioventa());
+                    st.setString(5, venta.getProducto());
+                    st.setInt(5, venta.getIdboleta());
+
+                if (st != null) {
+                    logger.info(st.toString());
+                    st.execute();
+
+                    int updateCount = st.getUpdateCount();
+                    if (updateCount > 0) {
+                        resultado = true;
+                    }
+                }
+            } else {
+                logger.info("ERROR: usuaio nulo");
+            }
+        } catch (Exception e) {
+            resultado = false;
+            logger.error(e.toString());
+            logger.debug("Error al guardar usuario", e);
+        }
+        return resultado;
+    }
+
+    
+    public boolean guardar(Usuario usuario) {
+        boolean resultado = false;
+        try {
+            if (usuario != null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                boolean update = false;
+                if (usuario.getRut() != null) {
+                    if (usuario.getRut() > 0) {
+                        update = true;
+                    }
+                }
+
+                PreparedStatement st = null;
+                String query = "";
+
+                    query = "INSERT INTO usuario (rut, clave) VALUES (?, ?)";
+                    st = conexion.prepareStatement(query);
+                    st.setInt(1, usuario.getRut());
+                    st.setString(2, usuario.getClave());
+
+                if (st != null) {
+                    logger.info(st.toString());
+                    st.execute();
+
+                    int updateCount = st.getUpdateCount();
+                    if (updateCount > 0) {
+                        resultado = true;
+                    }
+                }
+            } else {
+                logger.info("ERROR: usuaio nulo");
+            }
+        } catch (Exception e) {
+            resultado = false;
+            logger.error(e.toString());
+            logger.debug("Error al guardar usuario", e);
+        }
+        return resultado;
     }
 
     public boolean guardar(Boleta boleta) {
@@ -428,10 +653,11 @@ public Empresa getEmpresaPorRut(String rut) {
                     st.setInt(2, boleta.getIdempresa());
                     st.setInt(3, boleta.getIdboleta());
                 } else {
-                    query = "INSERT INTO boleta (fecha, idempresa) VALUES ( ?, ?)";
+                    query = "INSERT INTO boleta (idboleta,fecha, idempresa) VALUES ( ?,?, ?)";
                     st = conexion.prepareStatement(query);
-                    st.setString(1, boleta.getFecha());
-                    st.setInt(2, boleta.getIdempresa());
+                    st.setInt(1, boleta.getIdboleta());
+                    st.setString(2, boleta.getFecha());
+                    st.setInt(3, boleta.getIdempresa());
                 }
 
                 if (st != null) {
@@ -454,3 +680,4 @@ public Empresa getEmpresaPorRut(String rut) {
         return resultado;
     }
 }
+
