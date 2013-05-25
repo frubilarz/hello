@@ -467,8 +467,7 @@ public Empresa getEmpresaPorRut(String rut) {
                     query = "INSERT INTO pago (fechavencimiento,monto,estado,idboleta,idfactoring) VALUES (?, ?,?,?,?)";
                     st = conexion.prepareStatement(query);
                     java.sql.Date fe =new java.sql.Date(pago.getFechaVencimiento().getTime());
-                    java.sql.Date few=new java.sql.Date(2009, 2, 2);
-                    st.setDate(1,few);
+                    st.setDate(1,fe);
                     st.setFloat(2, pago.getMonto());
                     st.setString(3, pago.getEstado());
                     st.setInt(4, pago.getIdboleta());
@@ -484,12 +483,12 @@ public Empresa getEmpresaPorRut(String rut) {
                     }
                 }
             } else {
-                logger.info("ERROR: usuaio nulo");
+                logger.info("ERROR: pago nulo");
             }
         } catch (Exception e) {
             resultado = false;
             logger.error(e.toString());
-            logger.debug("Error al guardar usuario", e);
+            logger.debug("Error al guardar pago", e);
         }
         return resultado;
     }

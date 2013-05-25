@@ -541,7 +541,7 @@ public class Colas extends javax.swing.JFrame {
         int fact = factor(factoring);
         String aux = this.dias_pago.getSelectedItem().toString();
         Integer aux2=0;
-        if(!"al contado".equals(aux))
+        if(!"Al contado".equals(aux))
         {
             aux2 = Integer.parseInt(aux);
         }
@@ -557,6 +557,7 @@ public class Colas extends javax.swing.JFrame {
          pago.setMonto(monto1);
          pago.setEstado(estado);
          pago.setIdfactoring(fact);
+         if(pago==null)
          servicio.guardar(pago);
         
         
