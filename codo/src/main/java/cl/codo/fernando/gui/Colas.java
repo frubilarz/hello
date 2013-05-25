@@ -2,8 +2,10 @@ package cl.codo.fernando.gui;
 
 import cl.codo.fernando.modelo.Empresa;
 import cl.codo.fernando.servicio.ServicioDB;
+import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -28,112 +30,7 @@ public class Colas extends javax.swing.JFrame {
             return 3;
         return 0;
 }
-String sumardia(String anio, String dia,int mm , int dias)
-{
-	String fecha=null;
-	int dia1=0;
-	int anio1=0;
-	dia1=Integer.parseInt(dia);
-	anio1=Integer.parseInt(anio);
-	if (dias==30)
-	{
-		if(mm<12)
-		{
-			mm++;
-		}else{
-			anio1++;
-			mm=1;
-                    }
-		fecha = anio + String.valueOf(mm)+String.valueOf(dia1);
-		return fecha;
-	}
-	if (dias==60)
-	{
-		if(mm<11)
-		{
-			mm=mm+2;
-		}
-		else
-		{
-			if(mm==11)
-			{
-				anio1++;
-				mm=1;
-			}
-			if(mm==12)
-			{
-				anio1++;
-				mm=2;
-			}
-		}
-		fecha = anio + String.valueOf(mm)+String.valueOf(dia1);
-		return fecha;
-	}
-	if (dias==90)
-	{
-		if(mm<10)
-		{
-			mm+=3;
-		}
-		else
-		{
-			if(mm==10)
-			{
-				mm=1;
-				anio1++;
-			}
-			if(mm==11)
-			{
-				mm=2;
-				anio1++;
-			}
-			if(mm==12)
-			{
-				mm=3;
-				anio1++;
-			}
-		}
-		
-		fecha = anio + String.valueOf(mm)+String.valueOf(dia1);
-		return fecha;
-	}
-	if(dias==120)
-	{
-		if(mm<9)
-		{
-			mm+=3;
-		}
-		else
-		{
-			if(mm==9)
-			{
-				anio1++;
-				mm=1;
-			}
-			if(mm==10)
-			{
-				anio1++;
-				mm=2;
-			}
-			if(mm==11)
-			{
-				anio1++;
-				mm=3;
-			}
-			if(mm==12)
-			{
-				anio1++;
-				mm=4;
-			}
-		}
-		fecha = anio + String.valueOf(mm)+String.valueOf(dia1);
-		return fecha;
-	}
-			
-			
-			
-	return fecha;		
-}
+
                 
     int tiene(int aux) {
         if (aux == 30) {
@@ -195,44 +92,44 @@ String sumardia(String anio, String dia,int mm , int dias)
 
     }
 
-    int fecha(String mes) {
+    String fecha(String mes) {
         if ("enero".equals(mes)) {
-            return 1;
+            return "1";
         }
         if ("febrero".equals(mes)) {
-            return 2;
+            return "2";
         }
         if ("marzo".equals(mes)) {
-            return 3;
+            return "3";
         }
         if ("abril".equals(mes)) {
-            return 4;
+            return "4";
         }
         if ("mayo".equals(mes)) {
-            return 5;
+            return "5";
         }
         if ("junio".equals(mes)) {
-            return 6;
+            return "6";
         }
         if ("julio".equals(mes)) {
-            return 7;
+            return "7";
         }
         if ("agosto".equals(mes)) {
-            return 8;
+            return "8";
         }
         if ("octubre".equals(mes)) {
-            return 10;
+            return "10";
         }
         if ("spetiembre".equals(mes)) {
-            return 9;
+            return "9";
         }
         if ("noviembre".equals(mes)) {
-            return 11;
+            return "11";
         }
         if ("diciembre".equals(mes)) {
-            return 12;
+            return "12";
         }
-        return 0;
+        return "0";
     }
 
     public Colas() {
@@ -588,10 +485,10 @@ String sumardia(String anio, String dia,int mm , int dias)
         ServicioDB servicio = new ServicioDB();
 
         String rut = null, verificacion = null, nombre = null, direccion = null, contacto = null;
-        String  dia = null, mes = null, anio = null, monto = null, factoring = null;
+        String   mes = null, monto = null, factoring = null;
         String estado = "0";
         Integer pregunta = 0,nboleta = 0;
-        int mm=0;
+        String mm=null;
 
         //String mensaje = "";
         rut = this.rut_text.getText();
@@ -625,14 +522,16 @@ String sumardia(String anio, String dia,int mm , int dias)
         pregunta = empresa1.getIdempresa();
         
         nboleta = Integer.parseInt(this.factura_text.getText());
-        dia = this.dia_text.getSelectedItem().toString();
+        String dia = this.dia_text.getSelectedItem().toString();
         mes = this.mes_text.getSelectedItem().toString();
-        anio = this.anio_text.getSelectedItem().toString();
+        String anio = this.anio_text.getSelectedItem().toString();
         mm=fecha(mes);
-        
         cl.codo.fernando.modelo.Boleta boleta = new cl.codo.fernando.modelo.Boleta();
         String fecha = dia + "/" + mm + "/" + anio;
-        boleta.setFecha(fecha);
+        boleta.setFecha(FechaUtils.getFecha(Integer.parseInt(anio), Integer.parseInt(mm)-1,Integer.parseInt(dia)));
+        boleta.setDia(Integer.parseInt(dia));
+        boleta.setAnio(Integer.parseInt(anio));
+        boleta.setMes(Integer.parseInt(mm)-1);
         boleta.setIdempresa(pregunta);
         boleta.setIdboleta(nboleta);
         servicio.guardar(boleta);
@@ -641,17 +540,20 @@ String sumardia(String anio, String dia,int mm , int dias)
         factoring = this.factorin_text.getSelectedItem().toString();
         int fact = factor(factoring);
         String aux = this.dias_pago.getSelectedItem().toString();
-        int aux2=0;
-        if(!"contado".equals(aux))
+        Integer aux2=0;
+        if(!"al contado".equals(aux))
         {
             aux2 = Integer.parseInt(aux);
         }
-        String fechafin= sumardia(anio,dia,mm,aux2);
-        
+        Date fec ;
+        fec=FechaUtils.getFecha(Integer.parseInt(anio), Integer.parseInt(mm)-1,Integer.parseInt(dia));
+
+        fec=FechaUtils.sumarDia(fec, aux2);
+  
          cl.codo.fernando.modelo.Pago pago =new  cl.codo.fernando.modelo.Pago();
-         pago.setFechaVencimiento(fechafin);
+         pago.setFechaVencimiento(fec);
          pago.setIdboleta(nboleta);
-         float monto1= Float.parseFloat(monto);
+         Float monto1= Float.parseFloat(monto);
          pago.setMonto(monto1);
          pago.setEstado(estado);
          pago.setIdfactoring(fact);

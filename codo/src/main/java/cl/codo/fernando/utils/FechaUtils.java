@@ -27,7 +27,13 @@ public abstract class FechaUtils implements Serializable {
         }
         return fechaStr;
     }
-
+    public static Date sumarDia(Date fecha, int dias)
+    {
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(fecha); 
+        cal.add(Calendar.DATE, dias);
+        return cal.getTime();
+    }
     public static java.sql.Date getFechaSql(Date fecha) {
         java.sql.Date fechaSql = null;
         try {

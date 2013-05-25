@@ -6,8 +6,10 @@ import cl.codo.fernando.modelo.Mantencion;
 import cl.codo.fernando.modelo.Pago;
 import cl.codo.fernando.modelo.Usuario;
 import cl.codo.fernando.modelo.Venta;
+import cl.codo.fernando.utils.FechaUtils;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.Properties;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.swing.JOptionPane;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,7 +122,7 @@ public Boleta getBoletaporid(Integer id) {
                     if (rs != null) {
                         if (rs.next()) {
                             boleta = new Boleta();
-                            boleta.setFecha(rs.getString("fecha"));
+                            boleta.setFecha(rs.getDate("fecha"));
                             boleta.setIdempresa(rs.getString("idempresa"));
                             boleta.setIdboleta(rs.getInt("idboleta"));
                             boleta.setIdempresa(rs.getInt("idempresa"));
@@ -364,7 +367,7 @@ public Empresa getEmpresaPorRut(String rut) {
                     if (rs != null) {
                         if (rs.next()) {
                             boleta = new Boleta();
-                            boleta.setFecha(rs.getString("fecha"));
+                            boleta.setFecha(rs.getDate("fecha"));
                             //boleta.setNumero(rs.getString("numero"));
                             boleta.setIdboleta(rs.getInt("idboleta"));
                             boleta.setIdempresa(rs.getInt("idempresa"));
@@ -452,7 +455,7 @@ public Empresa getEmpresaPorRut(String rut) {
                 }
 
                 boolean update = false;
-                if ( pago.getIdPago()!= null) {
+                if ( pago != null) {
                     if (pago.getIdPago() > 0) {
                         update = true;
                     }
@@ -461,9 +464,11 @@ public Empresa getEmpresaPorRut(String rut) {
                 PreparedStatement st = null;
                 String query = "";
 
-                    query = "INSERT INTO pago (fechavencimiento,monto,estado,idbolta,idfactoring) VALUES (?, ?,?,?,?)";
+                    query = "INSERT INTO pago (fechavencimiento,monto,estado,idboleta,idfactoring) VALUES (?, ?,?,?,?)";
                     st = conexion.prepareStatement(query);
-                    st.setString(1, pago.getFechaVencimiento());
+                    java.sql.Date fe =new java.sql.Date(pago.getFechaVencimiento().getTime());
+                    java.sql.Date few=new java.sql.Date(2009, 2, 2);
+                    st.setDate(1,few);
                     st.setFloat(2, pago.getMonto());
                     st.setString(3, pago.getEstado());
                     st.setInt(4, pago.getIdboleta());
@@ -573,12 +578,12 @@ public Empresa getEmpresaPorRut(String rut) {
                     }
                 }
             } else {
-                logger.info("ERROR: usuaio nulo");
+                logger.info("ERROR: venta nulo");
             }
         } catch (Exception e) {
             resultado = false;
             logger.error(e.toString());
-            logger.debug("Error al guardar usuario", e);
+            logger.debug("Error al guardar venta", e);
         }
         return resultado;
     }
@@ -638,9 +643,9 @@ public Empresa getEmpresaPorRut(String rut) {
                 }
 
                 boolean update = false;
-                if (boleta.getIdempresa() != null) {
-                    if (boleta.getIdempresa() > 0) {
-                        update = true;
+                if (boleta != null) {
+                    if (boleta.getIdboleta()> 0) {
+                        update = false;
                     }
                 }
 
@@ -649,15 +654,18 @@ public Empresa getEmpresaPorRut(String rut) {
                 if (update) {
                     query = "UPDATE boleta SET , fecha=?, idempresa = ? WHERE idboleta=?";
                     st = conexion.prepareStatement(query);
-                    st.setString(1, boleta.getFecha());
+                    java.sql.Date fe =new java.sql.Date(boleta.getFecha().getTime());
+                    st.setDate(1, fe);
                     st.setInt(2, boleta.getIdempresa());
                     st.setInt(3, boleta.getIdboleta());
                 } else {
                     query = "INSERT INTO boleta (idboleta,fecha, idempresa) VALUES ( ?,?, ?)";
                     st = conexion.prepareStatement(query);
                     st.setInt(1, boleta.getIdboleta());
-                    st.setString(2, boleta.getFecha());
+                    java.sql.Date fe =new java.sql.Date(boleta.getFecha().getTime());
+                    st.setDate(2, fe );
                     st.setInt(3, boleta.getIdempresa());
+                    
                 }
 
                 if (st != null) {

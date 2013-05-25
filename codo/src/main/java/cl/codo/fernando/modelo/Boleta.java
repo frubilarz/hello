@@ -1,5 +1,8 @@
 package cl.codo.fernando.modelo;
 
+import java.util.Date;
+
+
 /**
  *
  * @author Sebastián Salazar Molina <ssalazar@orangepeople.cl>
@@ -7,8 +10,19 @@ package cl.codo.fernando.modelo;
 public class Boleta extends BaseBean {
 
     private Integer idboleta = null;
-    private String fecha = null;
+    private Integer dia = null;
+    private Integer mes=null;
+    private Integer anio=null;
     private Integer idempresa = null;
+    private Date fecha =null;
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
 
     public Integer getIdboleta() {
@@ -19,13 +33,38 @@ public class Boleta extends BaseBean {
         this.idboleta = idboleta;
     }
 
-    public String getFecha() {
-        return fecha;
+    public Boleta() {
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+
+    public Integer getMes() {
+        return mes;
     }
+
+    public void setMes(Integer mes) {
+        this.mes = mes;
+    }
+
+    public Integer getDia() {
+        return dia;
+    }
+
+    public void setDia(Integer dia) {
+        this.dia = dia;
+    }
+
+    public Integer getAnio() {
+        return anio;
+    }
+
+    public void setAnio(Integer anio) {
+        this.anio = anio;
+    }
+
+
+
+
+
 
     public Integer getIdempresa() {
         return idempresa;

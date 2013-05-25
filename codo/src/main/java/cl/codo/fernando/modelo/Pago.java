@@ -1,5 +1,7 @@
 package cl.codo.fernando.modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author Sebastián Salazar Molina <ssalazar@orangepeople.cl>
@@ -7,7 +9,7 @@ package cl.codo.fernando.modelo;
 public class Pago extends BaseBean {
 
     private Integer idPago = null;
-    private String fechaVencimiento = null;
+    private Date fechaVencimiento = null;
     private Float monto = null;
     private String estado = null;
     private Integer idboleta = null;
@@ -30,13 +32,14 @@ public class Pago extends BaseBean {
         this.idPago = idPago;
     }
 
-    public String getFechaVencimiento() {
+    public Date getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(String fechaVencimiento) {
+    public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
+
 
     public Float getMonto() {
         return monto;
