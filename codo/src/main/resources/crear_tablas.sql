@@ -9,7 +9,7 @@ USE `cododb` ;
 
 DROP TABLE IF EXISTS `cododb`.`boleta` ;
 
-CREATE  TABLE IF NOT EXISTS `cododb`.`boleta` (
+CREATE TABLE IF NOT EXISTS `cododb`.`boleta` (
   `idboleta` INT(11) NOT NULL AUTO_INCREMENT,
   `fecha` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
   `idempresa` INT(11) NULL DEFAULT NULL ,
@@ -30,8 +30,8 @@ COLLATE = utf8_spanish_ci;
 
 DROP TABLE IF EXISTS `cododb`.`empresa` ;
 
-CREATE  TABLE IF NOT EXISTS `cododb`.`empresa` (
-  `idempresa` INT(11) NOT NULL  AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `cododb`.`empresa` (
+  `idempresa` INT(11) NOT NULL AUTO_INCREMENT,
 
   `rut` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
 
@@ -63,9 +63,9 @@ DROP TABLE IF EXISTS `cododb`.`factoring` ;
 
 
 
-CREATE  TABLE IF NOT EXISTS `cododb`.`factoring` (
+CREATE TABLE IF NOT EXISTS `cododb`.`factoring` (
 
-  `idfactoring` INT(11) NOT NULL  AUTO_INCREMENT,
+  `idfactoring` INT(11) NOT NULL AUTO_INCREMENT,
 
   `nombre` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
 
@@ -91,9 +91,9 @@ DROP TABLE IF EXISTS `cododb`.`mantencion` ;
 
 
 
-CREATE  TABLE IF NOT EXISTS `cododb`.`mantencion` (
+CREATE TABLE IF NOT EXISTS `cododb`.`mantencion` (
 
-  `idmantencion` INT(11) NOT NULL  AUTO_INCREMENT,
+  `idmantencion` INT(11) NOT NULL AUTO_INCREMENT,
 
   `fechainicio` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
 
@@ -129,9 +129,9 @@ DROP TABLE IF EXISTS `cododb`.`pago` ;
 
 
 
-CREATE  TABLE IF NOT EXISTS `cododb`.`pago` (
+CREATE TABLE IF NOT EXISTS `cododb`.`pago` (
 
-  `idpago` INT(11) NOT NULL  AUTO_INCREMENT,
+  `idpago` INT(11) NOT NULL AUTO_INCREMENT,
 
   `fechavencimiento` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
 
@@ -165,7 +165,7 @@ DROP TABLE IF EXISTS `cododb`.`usuario` ;
 
 
 
-CREATE  TABLE IF NOT EXISTS `cododb`.`usuario` (
+CREATE TABLE IF NOT EXISTS `cododb`.`usuario` (
 
   `rut` INT(11) NOT NULL ,
 
@@ -193,9 +193,9 @@ DROP TABLE IF EXISTS `cododb`.`venta` ;
 
 
 
-CREATE  TABLE IF NOT EXISTS `cododb`.`venta` (
+CREATE TABLE IF NOT EXISTS `cododb`.`venta` (
 
-  `idventa` INT(11) NOT NULL  AUTO_INCREMENT,
+  `idventa` INT(11) NOT NULL AUTO_INCREMENT,
 
   `cantidad` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL ,
 
