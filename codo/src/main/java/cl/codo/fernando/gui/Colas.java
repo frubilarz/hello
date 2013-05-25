@@ -136,9 +136,7 @@ public class Colas extends javax.swing.JFrame {
         initComponents();
         Sletras(nombre_text);
         Sletras(direccion_text);
-        Nletras(contacto_text);
         Nletras(monto_text);
-        Nletras(rut_text);
         Nletras(factura_text);
         
        
@@ -167,8 +165,6 @@ public class Colas extends javax.swing.JFrame {
         cancelar_boton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         contacto_text = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        verificador_text = new javax.swing.JTextField();
         consulta = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         monto_text = new javax.swing.JTextField();
@@ -197,6 +193,12 @@ public class Colas extends javax.swing.JFrame {
         jLabel6.setText("Fecha De emicion");
 
         jLabel7.setText("Factoring ");
+
+        rut_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                rut_textKeyTyped(evt);
+            }
+        });
 
         nombre_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,12 +234,9 @@ public class Colas extends javax.swing.JFrame {
                 contacto_textActionPerformed(evt);
             }
         });
-
-        jLabel9.setText("-");
-
-        verificador_text.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verificador_textActionPerformed(evt);
+        contacto_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contacto_textKeyTyped(evt);
             }
         });
 
@@ -292,6 +291,20 @@ public class Colas extends javax.swing.JFrame {
 
         jLabel12.setText("Dirección");
 
+        direccion_text.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                direccion_textMouseClicked(evt);
+            }
+        });
+        direccion_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                direccion_textKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                direccion_textKeyPressed(evt);
+            }
+        });
+
         mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
 
         jLabel13.setText("-");
@@ -337,12 +350,8 @@ public class Colas extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(mantencion_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(verificador_text, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
+                                        .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
                                         .addComponent(consulta)))
                                 .addGap(0, 142, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -412,8 +421,6 @@ public class Colas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(verificador_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -492,7 +499,6 @@ public class Colas extends javax.swing.JFrame {
 
         //String mensaje = "";
         rut = this.rut_text.getText();
-        verificacion = this.verificador_text.getText();
         nombre = this.nombre_text.getText();
         direccion = this.direccion_text.getText();
         contacto = this.contacto_text.getText();
@@ -557,7 +563,6 @@ public class Colas extends javax.swing.JFrame {
          pago.setMonto(monto1);
          pago.setEstado(estado);
          pago.setIdfactoring(fact);
-         if(pago==null)
          servicio.guardar(pago);
         
         
@@ -576,7 +581,6 @@ public class Colas extends javax.swing.JFrame {
         
         this.contacto_text.setText(" ");
         this.rut_text.setText("");
-        this.verificador_text.setText("");
         this.nombre_text.setText("");
 
         this.monto_text.setText("");
@@ -589,10 +593,6 @@ public class Colas extends javax.swing.JFrame {
     private void contacto_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contacto_textActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_contacto_textActionPerformed
-
-    private void verificador_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificador_textActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_verificador_textActionPerformed
 
     private void cancelar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar_botonActionPerformed
 
@@ -612,26 +612,18 @@ public class Colas extends javax.swing.JFrame {
     }//GEN-LAST:event_dias_pagoItemStateChanged
 
     private void consultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_consultaActionPerformed
 
-    private void consultaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_consultaKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_consultaKeyPressed
-
-    private void consultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaMouseClicked
-
+        
         ServicioDB servicio = new ServicioDB();
 
         String rut = "", verificacion = "", nombre = "", direccion = "", contacto = "";
         int pregunta = 0;
 
         rut = this.rut_text.getText();
-        verificacion = this.verificador_text.getText();
         Empresa empresa = servicio.getEmpresaPorRut(rut);
         
         if (empresa == null) { // si no tiene nada implica que no ingreso rut para la consulta
-            JOptionPane.showMessageDialog(null, "cliente nuevo"); // si no tiene nada es cliente nuevo
+            JOptionPane.showMessageDialog(null, "Cliente nuevo"); // si no tiene nada es cliente nuevo
         } else {
             pregunta = empresa.getIdempresa();
             rut = empresa.getRut();
@@ -646,7 +638,15 @@ public class Colas extends javax.swing.JFrame {
 
 
 
-        this.nombre_text.setToolTipText(nombre);
+        this.nombre_text.setToolTipText(nombre);// TODO add your handling code here:
+    }//GEN-LAST:event_consultaActionPerformed
+
+    private void consultaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_consultaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaKeyPressed
+
+    private void consultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaMouseClicked
+
         // TODO add your handling code here:
     }//GEN-LAST:event_consultaMouseClicked
 
@@ -671,6 +671,33 @@ public class Colas extends javax.swing.JFrame {
     private void factorin_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factorin_textActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_factorin_textActionPerformed
+
+    private void direccion_textMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_direccion_textMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_direccion_textMouseClicked
+
+    private void direccion_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_direccion_textKeyTyped
+                // TODO add your handling code here:
+    }//GEN-LAST:event_direccion_textKeyTyped
+
+    private void contacto_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contacto_textKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contacto_textKeyTyped
+
+    private void direccion_textKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_direccion_textKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_direccion_textKeyPressed
+
+    private void rut_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rut_textKeyTyped
+//validar que solo sean numeros y no mas de 8
+        char car = evt.getKeyChar();
+        if (rut_text.getText().length() >= 8) {
+            evt.consume();
+        }
+        if ((car < '0' || car > '9')) {
+            evt.consume();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_rut_textKeyTyped
 
     /**
      * @param args the command line arguments
@@ -729,7 +756,6 @@ public class Colas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JButton limpiar_boton;
     private javax.swing.JButton mantencion_boton;
     private javax.swing.JComboBox mes_text;
@@ -737,7 +763,6 @@ public class Colas extends javax.swing.JFrame {
     private javax.swing.JTextField nombre_text;
     private javax.swing.JTextField rut_text;
     private javax.swing.JButton venta_boton;
-    private javax.swing.JTextField verificador_text;
     // End of variables declaration//GEN-END:variables
 
     private int resto(String aux, int help) {

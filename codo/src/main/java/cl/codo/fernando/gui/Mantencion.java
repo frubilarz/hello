@@ -1,6 +1,9 @@
 package cl.codo.fernando.gui;
 
 
+import cl.codo.fernando.modelo.Empresa;
+import cl.codo.fernando.servicio.ServicioDB;
+import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -22,10 +25,46 @@ public class Mantencion extends javax.swing.JFrame {
      */
     public Mantencion() {
         initComponents();
-        Nletras(dia_i);
-        Nletras(dia_f);
-        Nletras(anio_i);
-        Nletras(anio_f);
+
+    }
+ String fecha(String mes) {
+        if ("enero".equals(mes)) {
+            return "1";
+        }
+        if ("febrero".equals(mes)) {
+            return "2";
+        }
+        if ("marzo".equals(mes)) {
+            return "3";
+        }
+        if ("abril".equals(mes)) {
+            return "4";
+        }
+        if ("mayo".equals(mes)) {
+            return "5";
+        }
+        if ("junio".equals(mes)) {
+            return "6";
+        }
+        if ("julio".equals(mes)) {
+            return "7";
+        }
+        if ("agosto".equals(mes)) {
+            return "8";
+        }
+        if ("octubre".equals(mes)) {
+            return "10";
+        }
+        if ("spetiembre".equals(mes)) {
+            return "9";
+        }
+        if ("noviembre".equals(mes)) {
+            return "11";
+        }
+        if ("diciembre".equals(mes)) {
+            return "12";
+        }
+        return "0";
     }
 
     /**
@@ -38,14 +77,10 @@ public class Mantencion extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        dia_i = new javax.swing.JTextField();
-        anio_i = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        aceptar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        anio_f = new javax.swing.JTextField();
-        dia_f = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         lugar = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -59,24 +94,16 @@ public class Mantencion extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        factura = new javax.swing.JTextField();
+        dia_text = new javax.swing.JComboBox();
+        anio_text = new javax.swing.JComboBox();
+        dia_text1 = new javax.swing.JComboBox();
+        anio_text1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Fecha Inicio");
-
-        dia_i.setText("DIA");
-        dia_i.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dia_iActionPerformed(evt);
-            }
-        });
-
-        anio_i.setText("ANIO");
-        anio_i.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anio_iActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Mantencion");
 
@@ -87,28 +114,14 @@ public class Mantencion extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Aceptar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        aceptar.setText("Aceptar");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                aceptarActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Fecha Termino");
-
-        anio_f.setText("ANIO");
-        anio_f.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anio_fActionPerformed(evt);
-            }
-        });
-
-        dia_f.setText("DIA");
-        dia_f.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dia_fActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Lugar");
 
@@ -132,6 +145,21 @@ public class Mantencion extends javax.swing.JFrame {
 
         jLabel10.setText("-");
 
+        jLabel11.setText("Factura");
+
+        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
+
+        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        anio_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
+        anio_text1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anio_text1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,13 +181,32 @@ public class Mantencion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2)
+                                .addComponent(aceptar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(dia_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(mes_text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lugar)
+                            .addComponent(detalle)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11)
+                        .addGap(67, 67, 67)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(factura, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(anio_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(dia_i, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dia_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -167,21 +214,8 @@ public class Mantencion extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(anio_i, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(dia_f, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(mes_text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(anio_f, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 160, Short.MAX_VALUE))
-                            .addComponent(lugar)
-                            .addComponent(detalle)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))))
+                                        .addComponent(anio_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -192,19 +226,24 @@ public class Mantencion extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dia_i, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(anio_i, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mes_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(dia_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(anio_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(mes_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dia_f, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(anio_f, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(mes_text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(dia_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anio_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(factura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -217,10 +256,10 @@ public class Mantencion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(aceptar))
                 .addContainerGap())
         );
 
@@ -245,41 +284,42 @@ public class Mantencion extends javax.swing.JFrame {
         });
     }
     
-    private void dia_iActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dia_iActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dia_iActionPerformed
-
-    private void anio_iActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anio_iActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_anio_iActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
              JOptionPane.showMessageDialog(rootPane, "NO A GUARDADO NADA");
-            Colas form = new Colas();
-            form.setVisible(true);
-            form.setLocationRelativeTo(null);
             this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
 
+            ServicioDB servicio= new ServicioDB();
+            Integer dia1=Integer.parseInt(this.dia_text.getSelectedItem().toString());
+            Integer dia2=Integer.parseInt(this.dia_text1.getSelectedItem().toString());
+            Integer mes1= Integer.parseInt(fecha(this.mes_text1.getSelectedItem().toString()));
+            Integer mes2= Integer.parseInt(fecha(this.mes_text2.getSelectedItem().toString()));
+            Integer anio1=Integer.parseInt(this.anio_text.getSelectedItem().toString());
+            Integer anio2=Integer.parseInt(this.anio_text1.getSelectedItem().toString());
+            String factura1 =this.factura.getText();
+            String lugar1 = this.lugar.getText();
+            String comentario1 = this.comentario.getText();
+            String detalle1 = this.detalle.getText();
+            cl.codo.fernando.modelo.Mantencion mantencion = new cl.codo.fernando.modelo.Mantencion();
+            mantencion.setComentario(comentario1);
+            mantencion.setDetalle(detalle1);
+            mantencion.setLugar(lugar1);
+            mantencion.setFechainicio(FechaUtils.getFecha(anio1, (mes1)-1,dia1));
+            mantencion.setFechafin(FechaUtils.getFecha(anio2, (mes2)-1,dia2));
+            mantencion.setIdboleta(Integer.parseInt(factura1));
+            servicio.guardar(mantencion);
             JOptionPane.showMessageDialog(rootPane, "Guardado");
-            Colas form = new Colas();
-            form.setVisible(true);
-            form.setLocationRelativeTo(null);
             this.dispose();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_aceptarActionPerformed
 
-    private void anio_fActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anio_fActionPerformed
+    private void anio_text1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anio_text1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_anio_fActionPerformed
-
-    private void dia_fActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dia_fActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dia_fActionPerformed
+    }//GEN-LAST:event_anio_text1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,16 +356,18 @@ public class Mantencion extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField anio_f;
-    private javax.swing.JTextField anio_i;
+    private javax.swing.JButton aceptar;
+    private javax.swing.JComboBox anio_text;
+    private javax.swing.JComboBox anio_text1;
     private javax.swing.JTextArea comentario;
     private javax.swing.JTextField detalle;
-    private javax.swing.JTextField dia_f;
-    private javax.swing.JTextField dia_i;
+    private javax.swing.JComboBox dia_text;
+    private javax.swing.JComboBox dia_text1;
+    private javax.swing.JTextField factura;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

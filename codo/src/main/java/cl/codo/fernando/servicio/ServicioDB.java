@@ -271,8 +271,12 @@ public Boleta getBoletaporid(Integer id) {
         return empresas;
     }
 
+    
+    
+    
 public Empresa getEmpresaPorRut(String rut) {
         Empresa empresa = new Empresa();
+        empresa=null;
         try {
             if (!StringUtils.isEmpty(rut)) {
                 // Conectamos si no está conectado
@@ -312,6 +316,7 @@ public Empresa getEmpresaPorRut(String rut) {
         }
         return empresa;
     }
+
 
  public Usuario getUsuario() {
         Usuario usuario = null;
@@ -388,6 +393,50 @@ public Empresa getEmpresaPorRut(String rut) {
         }
         return boleta;
     }
+public boolean guardar(Mantencion mantencion) {
+ logger.error("PISCO");
+    boolean resultado = false;
+ try {
+     logger.error("PICO");
+     if (mantencion != null) {
+         // Conectamos si no está conectado
+         if (!isConectado()) {
+             conectar();
+
+         }
+
+         PreparedStatement st = null;
+         String query = "";
+         query = "INSERT INTO mantencion (fechainicio,fechafinl,lugarl,detalle,comentario,idbotella)"
+                 + " VALUES (?,?,?,?,?,?)";
+         st = conexion.prepareStatement(query);
+
+         java.sql.Date fe =new java.sql.Date(mantencion.getFechainicio().getTime());
+         st.setDate(1,fe);
+         java.sql.Date few = new java.sql.Date(mantencion.getFechafin().getTime());
+         st.setDate(2,few);
+         st.setString(3, mantencion.getLugar());
+         st.setString(4, mantencion.getDetalle());
+         st.setString(5, mantencion.getComentario());
+         st.setInt(6, mantencion.getIdboleta());
+         if (st != null) {
+             logger.info(st.toString());
+             st.execute();
+             int updateCount = st.getUpdateCount();
+             if (updateCount > 0) {
+                 resultado = true;
+             }
+         }
+     } else {
+         logger.info("ERROR: mala mantencion");
+     }
+ } catch (Exception e) {
+     resultado = false;
+     logger.error(e.toString());
+     logger.debug("Error al guardar mantencion", e);
+ }
+ return resultado;
+}
 
     
     public boolean guardar(Empresa empresa) {
@@ -452,31 +501,23 @@ public Empresa getEmpresaPorRut(String rut) {
                 // Conectamos si no está conectado
                 if (!isConectado()) {
                     conectar();
-                }
-
-                boolean update = false;
-                if ( pago != null) {
-                    if (pago.getIdPago() > 0) {
-                        update = true;
-                    }
+                    
                 }
 
                 PreparedStatement st = null;
                 String query = "";
-
-                    query = "INSERT INTO pago (fechavencimiento,monto,estado,idboleta,idfactoring) VALUES (?, ?,?,?,?)";
-                    st = conexion.prepareStatement(query);
-                    java.sql.Date fe =new java.sql.Date(pago.getFechaVencimiento().getTime());
-                    st.setDate(1,fe);
-                    st.setFloat(2, pago.getMonto());
-                    st.setString(3, pago.getEstado());
-                    st.setInt(4, pago.getIdboleta());
-                    st.setInt(5, pago.getIdfactoring());
-
+                query = "INSERT INTO pago (fechavencimiento,monto,estado,idboleta,idfactoring) VALUES (?, ?,?,?,?)";
+                st = conexion.prepareStatement(query);
+                
+                java.sql.Date fe =new java.sql.Date(pago.getFechaVencimiento().getTime());
+                st.setDate(1,fe);
+                st.setFloat(2, pago.getMonto());
+                st.setString(3, pago.getEstado());
+                st.setInt(4, pago.getIdboleta());
+                st.setInt(5, pago.getIdfactoring());
                 if (st != null) {
                     logger.info(st.toString());
                     st.execute();
-
                     int updateCount = st.getUpdateCount();
                     if (updateCount > 0) {
                         resultado = true;
@@ -492,53 +533,7 @@ public Empresa getEmpresaPorRut(String rut) {
         }
         return resultado;
     }
-       public boolean guardar(Mantencion mantencion) {
-        boolean resultado = false;
-        try {
-            if (mantencion != null) {
-                // Conectamos si no está conectado
-                if (!isConectado()) {
-                    conectar();
-                }
 
-                boolean update = false;
-                if ( mantencion!= null) {
-                    if (mantencion.getIdmantencion()> 0) {
-                        update = true;
-                    }
-                }
-
-                PreparedStatement st = null;
-                String query = "";
-
-                    query = "INSERT INTO mantencion (fechainicio,fechafin,lugarl,detalle,comentario,idboleta) VALUES (?, ?,?,?,?,?)";
-                    st = conexion.prepareStatement(query);
-                    st.setString(1, mantencion.getFechainicio());
-                    st.setString(2, mantencion.getFechafin());
-                    st.setString(3, mantencion.getLugar());
-                    st.setString(4, mantencion.getDetalle());
-                    st.setString(5, mantencion.getComentario());
-                    st.setInt(6, mantencion.getIdboleta());
-
-                if (st != null) {
-                    logger.info(st.toString());
-                    st.execute();
-
-                    int updateCount = st.getUpdateCount();
-                    if (updateCount > 0) {
-                        resultado = true;
-                    }
-                }
-            } else {
-                logger.info("ERROR: usuaio nulo");
-            }
-        } catch (Exception e) {
-            resultado = false;
-            logger.error(e.toString());
-            logger.debug("Error al guardar usuario", e);
-        }
-        return resultado;
-    }
        public boolean guardar(Venta venta) {
         boolean resultado = false;
         try {

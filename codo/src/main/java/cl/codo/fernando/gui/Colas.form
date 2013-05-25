@@ -52,12 +52,8 @@
                                       <Component id="mantencion_boton" min="-2" pref="132" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="rut_text" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" min="-2" pref="12" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="verificador_text" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                      <Component id="rut_text" min="-2" pref="241" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="consulta" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -151,8 +147,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="rut_text" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="verificador_text" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="consulta" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -233,6 +227,9 @@
     <Component class="javax.swing.JTextField" name="factura_text">
     </Component>
     <Component class="javax.swing.JTextField" name="rut_text">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="rut_textKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nombre_text">
       <Events>
@@ -271,16 +268,7 @@
     <Component class="javax.swing.JTextField" name="contacto_text">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="contacto_textActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="-"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="verificador_text">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verificador_textActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="contacto_textKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="consulta">
@@ -350,6 +338,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="direccion_text">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="direccion_textMouseClicked"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="direccion_textKeyTyped"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="direccion_textKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="mes_text">
       <Properties>

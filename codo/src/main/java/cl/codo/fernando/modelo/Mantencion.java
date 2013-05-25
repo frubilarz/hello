@@ -1,5 +1,7 @@
 package cl.codo.fernando.modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author Sebastián Salazar Molina <ssalazar@orangepeople.cl>
@@ -7,8 +9,8 @@ package cl.codo.fernando.modelo;
 public class Mantencion extends BaseBean {
 
     private Integer idmantencion = null;
-    private String fechainicio = null;
-    private String fechafin = null;
+    private Date fechainicio = null;
+    private Date fechafin = null;
     private String lugar = null;
     private String detalle = null;
     private String comentario = null;
@@ -23,22 +25,23 @@ public class Mantencion extends BaseBean {
         this.idmantencion = idmantencion;
     }
 
-    public String getFechainicio() {
+    public Date getFechainicio() {
         return fechainicio;
     }
 
-    public void setFechainicio(String fechainicio) {
+    public void setFechainicio(Date fechainicio) {
         this.fechainicio = fechainicio;
     }
 
-    public String getFechafin() {
+    public Date getFechafin() {
         return fechafin;
     }
 
-    public void setFechafin(String fechafin) {
+    public void setFechafin(Date fechafin) {
         this.fechafin = fechafin;
     }
 
+  
     public String getLugar() {
         return lugar;
     }
@@ -91,5 +94,9 @@ public class Mantencion extends BaseBean {
             return false;
         }
         return true;
+    }
+
+    public void getFechainicio(Date fecha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

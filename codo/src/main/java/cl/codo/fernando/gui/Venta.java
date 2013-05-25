@@ -3,6 +3,8 @@ package cl.codo.fernando.gui;
 
 import cl.codo.fernando.servicio.ServicioDB;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this template, choose Tools | Templates
@@ -88,7 +90,7 @@ public class Venta extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -111,12 +113,17 @@ public class Venta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+            DefaultTableModel modelo = new DefaultTableModel();
+            JTable tabla = new JTable(modelo);
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Producto");
+            modelo.addColumn("Valor Unitario Compra");
+            modelo.addColumn("Valor Unitario venta");
+            modelo.addColumn("Proveedor");
+            String hola=(String) modelo.getColumnName(0);
+            JOptionPane.showMessageDialog(rootPane, hola);
             ServicioDB servicio=new ServicioDB();
             JOptionPane.showMessageDialog(rootPane, "Guardado");
-            Colas form = new Colas();
-            form.setVisible(true);
-            form.setLocationRelativeTo(null);
             this.dispose();
         
         // TODO add your handling code here:
@@ -125,9 +132,6 @@ public class Venta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
             JOptionPane.showMessageDialog(rootPane, "NO A GUARDADO NADA");
-            Colas form = new Colas();
-            form.setVisible(true);
-            form.setLocationRelativeTo(null);
             this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
