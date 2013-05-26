@@ -210,16 +210,15 @@ public class Boleta extends javax.swing.JFrame {
         ServicioDB servicio = new ServicioDB();
         String rutStr = this.jTextField1.getText() ;
 
-        List<Empresa> empresas = servicio.getEmpresasPorRut(rutStr);
-        if (!empresas.isEmpty()) {
-            for (Empresa empresa : empresas) {
-                Object[] fila = new Object[20];
-
-                cl.codo.fernando.modelo.Boleta boleta = servicio.getBoletaPorIdEmpresa(empresa.getIdempresa());
+        Empresa empresa = new Empresa();
+        empresa=servicio.getEmpresaPorRut(rutStr);
+        
+                Object[] fila = new Object[20][20];
+                int j=0;
+                //cl.codo.fernando.modelo.Boleta boleta = servicio.getBoletaPorIdEmpresa(empresa.getIdempresa());
                 List<cl.codo.fernando.modelo.Boleta> boletas = servicio.getboletas(empresa.getIdempresa());
                 if(!boletas.isEmpty()){
                 for(cl.codo.fernando.modelo.Boleta bolet : boletas){
-
                 fila[0] = empresa.getRut();
                 if (bolet != null) {
                     fila[3] = bolet.getFecha();
@@ -230,13 +229,15 @@ public class Boleta extends javax.swing.JFrame {
                 }
                 fila[1] = empresa.getNombre();
                 fila[6] = empresa.getContacto();
-                
-            }}else
-                    JOptionPane.showMessageDialog(rootPane, "vacia la wea");
-                  modelo.addRow(fila);
+                j++;
+                modelo.addRow(fila);
             }
+                }else
+                    JOptionPane.showMessageDialog(rootPane, "vacia la wea");
+                  
+            
       
-        }
+        
 
         tabla1.setModel(modelo);
         // TODO add your handling code here:
