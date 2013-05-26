@@ -212,7 +212,45 @@ public class BusquedaMantencion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+String fecha(String mes) {
+        if ("enero".equals(mes)) {
+            return "1";
+        }
+        if ("febrero".equals(mes)) {
+            return "2";
+        }
+        if ("marzo".equals(mes)) {
+            return "3";
+        }
+        if ("abril".equals(mes)) {
+            return "4";
+        }
+        if ("mayo".equals(mes)) {
+            return "5";
+        }
+        if ("junio".equals(mes)) {
+            return "6";
+        }
+        if ("julio".equals(mes)) {
+            return "7";
+        }
+        if ("agosto".equals(mes)) {
+            return "8";
+        }
+        if ("octubre".equals(mes)) {
+            return "10";
+        }
+        if ("spetiembre".equals(mes)) {
+            return "9";
+        }
+        if ("noviembre".equals(mes)) {
+            return "11";
+        }
+        if ("diciembre".equals(mes)) {
+            return "12";
+        }
+        return "0";
+    }
     public void Sletras(JTextField a){
         a.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
@@ -260,31 +298,35 @@ public class BusquedaMantencion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         
-        String dias=null,mess=null, anios=null;
-        String ruts=null,verificadores=null;
+  String dias=null,mess=null, anios=null;
+        String ruts=null;
         String lugars=null;
-        dias=(String) this.dia_text.getSelectedItem();
-        mess= (String) this.mes_text.getSelectedItem();
-        anios=(String) this.anio_text.getSelectedItem();
+        dias= this.dia_text.getSelectedItem().toString();
+        mess= this.mes_text.getSelectedItem().toString();
+        anios= this.anio_text.getSelectedItem().toString();
         ruts =this.rut_text.getText();
         lugars=this.lugar_text.getText();
-        ruts=this.rut_text.getText();
-        verificadores =this.verificador_text.getText();
 
-        if("".equals(dias) || "".equals(anios) || "".equals(mess))
+
+         if("*".equals(dias) || "*".equals(anios) || "*".equals(mess))
         {
-            if("".equals(lugars))
+            if("".equals(lugars) && "".equals(ruts))
             {
-                if("".equals(ruts))
-                {
                     JOptionPane.showMessageDialog(anio_text,"No ingreso ningun campo");
-                }
-                else
+                
+            }
+            else
                 {
                     JOptionPane.showMessageDialog(anio_text,"la pichula parada");
                 }
-            }
         }
+         else
+         {
+             Integer d=Integer.parseInt(dias);
+             Integer a= Integer.parseInt(anios);
+             Integer m= Integer.parseInt(fecha(mess));
+
+         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

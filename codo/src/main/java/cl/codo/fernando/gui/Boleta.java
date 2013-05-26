@@ -3,6 +3,7 @@ package cl.codo.fernando.gui;
 import cl.codo.fernando.modelo.Empresa;
 import cl.codo.fernando.servicio.ServicioDB;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -190,21 +191,24 @@ public class Boleta extends javax.swing.JFrame {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
 
-
-        DefaultTableModel modelo = new DefaultTableModel();
+  DefaultTableModel modelo = new DefaultTableModel();
         JTable tabla = new JTable(modelo);
+        modelo.addColumn("rut");
         modelo.addColumn("nombre");
-        modelo.addColumn("fecha emicion");
         modelo.addColumn("n° factura");
-        modelo.addColumn("contacto");
-        modelo.addColumn("direccion");
-        modelo.addColumn("factoring");
+        modelo.addColumn("fecha emicion");
         modelo.addColumn("monto");
         modelo.addColumn("fecha vencimiento");
+        modelo.addColumn("contacto");
+        modelo.addColumn("factoring");
+        modelo.addColumn("estado");
+
+
+        
 
 
         ServicioDB servicio = new ServicioDB();
-        String rutStr = this.jTextField1.getText() + "-" + this.jTextField2.getText();
+        String rutStr = this.jTextField1.getText() ;
 
         List<Empresa> empresas = servicio.getEmpresasPorRut(rutStr);
         if (!empresas.isEmpty()) {
@@ -212,23 +216,29 @@ public class Boleta extends javax.swing.JFrame {
                 Object[] fila = new Object[20];
 
                 cl.codo.fernando.modelo.Boleta boleta = servicio.getBoletaPorIdEmpresa(empresa.getIdempresa());
+                List<cl.codo.fernando.modelo.Boleta> boletas = servicio.getboletas(empresa.getIdempresa());
+                if(!boletas.isEmpty()){
+                for(cl.codo.fernando.modelo.Boleta bolet : boletas){
 
                 fila[0] = empresa.getRut();
-                if (boleta != null) {
-                    fila[1] = boleta.getFecha();
-                    fila[2] = boleta.getIdboleta();
+                if (bolet != null) {
+                    fila[3] = bolet.getFecha();
+                    fila[2] = bolet.getIdboleta();
                 } else {
                     fila[1] = "";
                     fila[2] = "";
                 }
-                fila[3] = empresa.getNombre();
-                fila[4] = empresa.getContacto();
-                modelo.addRow(fila);
+                fila[1] = empresa.getNombre();
+                fila[6] = empresa.getContacto();
+                
+            }}else
+                    JOptionPane.showMessageDialog(rootPane, "vacia la wea");
+                  modelo.addRow(fila);
             }
+      
         }
 
         tabla1.setModel(modelo);
-
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarActionPerformed
 

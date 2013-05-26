@@ -227,6 +227,46 @@ public Boleta getBoletaporid(Integer id) {
         return empresa;
     }
 
+       public List<Boleta> getboletas(int id) {
+        List<Boleta> boletas = new ArrayList<Boleta>();
+        try {
+        
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM boleta WHERE idempresa=?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    st.setInt(1, id);
+
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        if (rs.next()) {
+                            Boleta boleta =new Boleta();
+                            boleta.setIdboleta(rs.getInt("idboleta"));
+                            boleta.setFecha(rs.getDate("fecha"));
+
+                            boletas.add(boleta);
+                        } else {
+                            logger.info("ERROR: No existe empresa");
+                        }
+                        rs.close();
+                    }
+                    st.close();
+                }
+
+        } catch (Exception e) {
+            boletas = new ArrayList<Boleta>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener empresas por rut " + id, e);
+        }
+        return boletas;
+    }
+
+    
     public List<Empresa> getEmpresasPorRut(String rut) {
         List<Empresa> empresas = new ArrayList<Empresa>();
         try {
@@ -276,7 +316,7 @@ public Boleta getBoletaporid(Integer id) {
     
 public Empresa getEmpresaPorRut(String rut) {
         Empresa empresa = new Empresa();
-        empresa=null;
+
         try {
             if (!StringUtils.isEmpty(rut)) {
                 // Conectamos si no está conectado
@@ -293,7 +333,6 @@ public Empresa getEmpresaPorRut(String rut) {
                     ResultSet rs = st.executeQuery();
                     if (rs != null) {
                         if (rs.next()) {
-                            
                             empresa.setContacto(rs.getString("contacto"));
                             empresa.setDireccion(rs.getString("direccion"));
                             empresa.setIdempresa(rs.getInt("idempresa"));
@@ -394,10 +433,10 @@ public Empresa getEmpresaPorRut(String rut) {
         return boleta;
     }
 public boolean guardar(Mantencion mantencion) {
- logger.error("PISCO");
+
     boolean resultado = false;
  try {
-     logger.error("PICO");
+     logger.error("hola");
      if (mantencion != null) {
          // Conectamos si no está conectado
          if (!isConectado()) {
@@ -407,7 +446,7 @@ public boolean guardar(Mantencion mantencion) {
 
          PreparedStatement st = null;
          String query = "";
-         query = "INSERT INTO mantencion (fechainicio,fechafinl,lugarl,detalle,comentario,idbotella)"
+         query = "INSERT INTO mantencion (fechainicio,fechafinl,lugarl,detalle,comentario,idboleta)"
                  + " VALUES (?,?,?,?,?,?)";
          st = conexion.prepareStatement(query);
 
@@ -442,6 +481,7 @@ public boolean guardar(Mantencion mantencion) {
     public boolean guardar(Empresa empresa) {
         boolean resultado = false;
         try {
+            logger.error("algo");
             if (empresa != null) {
                 // Conectamos si no está conectado
                 if (!isConectado()) {
@@ -472,6 +512,7 @@ public boolean guardar(Mantencion mantencion) {
                     st.setString(2, empresa.getNombre());
                     st.setString(3, empresa.getDireccion());
                     st.setString(4, empresa.getContacto());
+                    
                 }
 
                 if (st != null) {

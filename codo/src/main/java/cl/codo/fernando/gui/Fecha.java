@@ -35,6 +35,45 @@ public class Fecha extends javax.swing.JFrame {
             }
         });
     }
+    String fecha(String mes) {
+        if ("enero".equals(mes)) {
+            return "1";
+        }
+        if ("febrero".equals(mes)) {
+            return "2";
+        }
+        if ("marzo".equals(mes)) {
+            return "3";
+        }
+        if ("abril".equals(mes)) {
+            return "4";
+        }
+        if ("mayo".equals(mes)) {
+            return "5";
+        }
+        if ("junio".equals(mes)) {
+            return "6";
+        }
+        if ("julio".equals(mes)) {
+            return "7";
+        }
+        if ("agosto".equals(mes)) {
+            return "8";
+        }
+        if ("octubre".equals(mes)) {
+            return "10";
+        }
+        if ("spetiembre".equals(mes)) {
+            return "9";
+        }
+        if ("noviembre".equals(mes)) {
+            return "11";
+        }
+        if ("diciembre".equals(mes)) {
+            return "12";
+        }
+        return "0";
+    }
        public void Nletras(JTextField a){
         a.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){

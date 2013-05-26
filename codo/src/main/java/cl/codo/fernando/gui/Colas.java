@@ -135,7 +135,6 @@ public class Colas extends javax.swing.JFrame {
     public Colas() {
         initComponents();
         Sletras(nombre_text);
-        Sletras(direccion_text);
         Nletras(monto_text);
         Nletras(factura_text);
         
@@ -655,7 +654,7 @@ public class Colas extends javax.swing.JFrame {
         Mantencion form = new Mantencion();
         form.setVisible(true);
         form.setLocationRelativeTo(null);
-        this.dispose();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_mantencion_botonActionPerformed
 
