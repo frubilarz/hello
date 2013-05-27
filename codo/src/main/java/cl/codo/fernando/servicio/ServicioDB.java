@@ -362,6 +362,58 @@ public Boleta getBoletaporid(Integer id) {
         }
         return mantenciones;
     }
+ 
+ public List<Mantencion> getmantencion( String lugar , String id, java.util.Date fecha) {
+        List<Mantencion> mantenciones = new ArrayList<Mantencion>();
+
+        try {
+            if (lugar!=null && id!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM mantencion WHERE (fechainicio=? || fechafinl=?)"
+                        + "  and  lugarl=? and idboleta in "
+                        + "(select idboleta from boleta where idempresa="
+                        + "(select idempresa from empresa  where rut=?))";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    java.sql.Date few = new java.sql.Date(fecha.getTime());
+                    st.setDate(1, few);
+                    st.setDate(2, few);
+                    st.setString(3, lugar);
+                    Integer id1 = Integer.parseInt(id);
+                    st.setInt(4, id1);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            Mantencion mantencion =new Mantencion();
+                            mantencion = new Mantencion();
+                            mantencion.setComentario(rs.getString("comentario"));
+                           mantencion.setDetalle(rs.getString("detalle"));
+                           mantencion.setFechafin(rs.getDate("fechafinl"));
+                           mantencion.setFechainicio(rs.getDate("fechainicio"));
+                           mantencion.setLugar(rs.getString("lugarl"));
+                           mantencion.setIdmantencion(rs.getInt("idmantencion"));
+                           mantencion.setIdboleta(rs.getInt("idboleta"));
+                           mantenciones.add(mantencion);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          mantenciones = new ArrayList<Mantencion>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + lugar, e);
+        }
+        return mantenciones;
+    }
   public List<Mantencion> getmantencionporid( String id) {
         List<Mantencion> mantenciones = new ArrayList<Mantencion>();
 

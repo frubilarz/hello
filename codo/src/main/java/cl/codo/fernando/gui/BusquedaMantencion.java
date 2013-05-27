@@ -430,6 +430,38 @@ String fecha(String mes) {
             }
                      
          }
+          if(!"*".equals(dias) || !"*".equals(anios) || !"*".equals(mess))
+          {
+              if(!"".equals(lugars) && !"".equals(ruts))
+              {
+                               Integer d=Integer.parseInt(dias);
+             Integer a= Integer.parseInt(anios);
+             Integer m= Integer.parseInt(fecha(mess));
+                  JOptionPane.showMessageDialog(anio_text,"buscara por los 3 campos");
+                    Date fechas=null;
+                    fechas=FechaUtils.getFecha(a, m-1, d);
+                     Object[] fila = new Object[20];
+                     List<cl.codo.fernando.modelo.Mantencion> mantenciones = servicio.getmantencion(lugars,ruts,fechas);
+                    if(!mantenciones.isEmpty())
+                    {
+                        for(cl.codo.fernando.modelo.Mantencion manten : mantenciones)
+                        {
+                            fila[0]=manten.getIdboleta();
+                            fila[1]=manten.getFechainicio();
+                            fila[2]=manten.getFechafin();
+                            fila[3]=manten.getLugar();
+                            fila[4]=manten.getLugar();
+                            fila[5]=manten.getComentario();
+                            modelo.addRow(fila);
+                        }
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(anio_text,"NO tenenmos regstro de mantenciones"
+                                + "en esa fecha lugar o rut");
+                    }
+              }
+          }
+        
          Table1.setModel(modelo);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

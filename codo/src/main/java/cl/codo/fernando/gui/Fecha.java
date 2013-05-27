@@ -2,8 +2,10 @@ package cl.codo.fernando.gui;
 
 
 import cl.codo.fernando.servicio.ServicioDB;
+import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import javax.swing.JTextField;
 
 /*
@@ -308,10 +310,17 @@ public class Fecha extends javax.swing.JFrame {
 
          ServicioDB servicio = new ServicioDB();
          String rut = this.rut_text.getText();
+         Integer dia1=Integer.parseInt(this.dia_text.getSelectedItem().toString());
+         Integer dia2= Integer.parseInt(this.dia_text1.getSelectedItem().toString());
+         Integer mes1= Integer.parseInt(fecha(this.mes_text.getSelectedItem().toString()));
+         Integer mes2= Integer.parseInt(fecha(this.mes_text.getSelectedItem().toString()));
+         Integer anio1= Integer.parseInt(this.anio_text.getSelectedItem().toString());
+         Integer anio2= Integer.parseInt(this.anio_text1.getSelectedItem().toString());        
+         Date fecha=null;
+         Date fecha1=null;
+         fecha=FechaUtils.getFecha(anio1, (mes1)-1, dia1);
+         fecha1=FechaUtils.getFecha(anio2, (mes2)-1, dia2);
          
-         
-         
-        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
