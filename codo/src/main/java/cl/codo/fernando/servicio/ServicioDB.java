@@ -268,8 +268,9 @@ public Boleta getBoletaporid(Integer id) {
         }
         return pago;
     }
-       public Mantencion getmantencion(java.util.Date fecha) {
-        Mantencion mantencion = null;
+         public List<Mantencion> getmantencion(java.util.Date fecha) {
+        List<Mantencion> mantenciones = new ArrayList<Mantencion>();
+
         try {
             if (fecha != null) {
                 // Conectamos si no está conectado
@@ -281,12 +282,14 @@ public Boleta getBoletaporid(Integer id) {
                 String query = "SELECT * FROM mantencion WHERE fechainicio=? || fechafinl=?";
                 st = conexion.prepareStatement(query);
                 if (st != null) {
+                    
                     java.sql.Date few = new java.sql.Date(fecha.getTime());
                     st.setDate(1, few);
                     st.setDate(2, few);
                     ResultSet rs = st.executeQuery();
                     if (rs != null) {
-                        if (rs.next()) {
+                        while (rs.next()) {
+                            Mantencion mantencion =new Mantencion();
                             mantencion = new Mantencion();
                             mantencion.setComentario(rs.getString("comentario"));
                            mantencion.setDetalle(rs.getString("detalle"));
@@ -295,9 +298,8 @@ public Boleta getBoletaporid(Integer id) {
                            mantencion.setLugar(rs.getString("lugarl"));
                            mantencion.setIdmantencion(rs.getInt("idmantencion"));
                            mantencion.setIdboleta(rs.getInt("idboleta"));
-                        } else {
-                            logger.info("ERROR: no existe pago");
-                        }
+                           mantenciones.add(mantencion);
+                        } 
                         rs.close();
                     }
                     st.close();
@@ -306,13 +308,153 @@ public Boleta getBoletaporid(Integer id) {
                 logger.info("ERROR: ID nulo");
             }
         } catch (Exception e) {
-            mantencion = null;
+          mantenciones = new ArrayList<Mantencion>();
             logger.error(e.toString());
             logger.debug("Error al obtener mantencion por fecha " + fecha, e);
         }
-        return mantencion;
+        return mantenciones;
+    }
+ public List<Mantencion> getmantencion( String lugar , String id) {
+        List<Mantencion> mantenciones = new ArrayList<Mantencion>();
+
+        try {
+            if (lugar!=null && id!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM mantencion WHERE   lugarl=? and idboleta in "
+                        + "(select idboleta from boleta where idempresa="
+                        + "(select idempresa from empresa  where rut=?))";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+
+                    st.setString(1, lugar);
+                    Integer id1 = Integer.parseInt(id);
+                    st.setInt(2, id1);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            Mantencion mantencion =new Mantencion();
+                            mantencion = new Mantencion();
+                            mantencion.setComentario(rs.getString("comentario"));
+                           mantencion.setDetalle(rs.getString("detalle"));
+                           mantencion.setFechafin(rs.getDate("fechafinl"));
+                           mantencion.setFechainicio(rs.getDate("fechainicio"));
+                           mantencion.setLugar(rs.getString("lugarl"));
+                           mantencion.setIdmantencion(rs.getInt("idmantencion"));
+                           mantencion.setIdboleta(rs.getInt("idboleta"));
+                           mantenciones.add(mantencion);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          mantenciones = new ArrayList<Mantencion>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + lugar, e);
+        }
+        return mantenciones;
+    }
+  public List<Mantencion> getmantencionporid( String id) {
+        List<Mantencion> mantenciones = new ArrayList<Mantencion>();
+
+        try {
+            if (id!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM mantencion WHERE idboleta in "
+                        + "(select idboleta from boleta where idempresa="
+                        + "(select idempresa from empresa  where rut=?))";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+
+
+                    Integer id1 = Integer.parseInt(id);
+                    st.setInt(1, id1);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            Mantencion mantencion =new Mantencion();
+                            mantencion = new Mantencion();
+                            mantencion.setComentario(rs.getString("comentario"));
+                           mantencion.setDetalle(rs.getString("detalle"));
+                           mantencion.setFechafin(rs.getDate("fechafinl"));
+                           mantencion.setFechainicio(rs.getDate("fechainicio"));
+                           mantencion.setLugar(rs.getString("lugarl"));
+                           mantencion.setIdmantencion(rs.getInt("idmantencion"));
+                           mantencion.setIdboleta(rs.getInt("idboleta"));
+                           mantenciones.add(mantencion);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          mantenciones = new ArrayList<Mantencion>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + id, e);
+        }
+        return mantenciones;
     }
 
+     public List<Mantencion> getmantencion( String lugar ) {
+        List<Mantencion> mantenciones = new ArrayList<Mantencion>();
+
+        try {
+            if (lugar!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM mantencion WHERE lugarl=?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+
+                    st.setString(1, lugar);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            Mantencion mantencion =new Mantencion();
+                            mantencion = new Mantencion();
+                            mantencion.setComentario(rs.getString("comentario"));
+                           mantencion.setDetalle(rs.getString("detalle"));
+                           mantencion.setFechafin(rs.getDate("fechafinl"));
+                           mantencion.setFechainicio(rs.getDate("fechainicio"));
+                           mantencion.setLugar(rs.getString("lugarl"));
+                           mantencion.setIdmantencion(rs.getInt("idmantencion"));
+                           mantencion.setIdboleta(rs.getInt("idboleta"));
+                           mantenciones.add(mantencion);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          mantenciones = new ArrayList<Mantencion>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + lugar, e);
+        }
+        return mantenciones;
+    }
        public List<Boleta> getboletas(int id) {
         List<Boleta> boletas = new ArrayList<Boleta>();
         try {

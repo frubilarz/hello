@@ -6,8 +6,11 @@ import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 
 /*
@@ -26,7 +29,7 @@ public class BusquedaMantencion extends javax.swing.JFrame {
      */
     public BusquedaMantencion() {
         initComponents();
-        Sletras(lugar_text);
+
   
     }
 
@@ -49,11 +52,9 @@ public class BusquedaMantencion extends javax.swing.JFrame {
         rut_text = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Table1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         mes_text = new javax.swing.JComboBox();
-        jLabel7 = new javax.swing.JLabel();
-        verificador_text = new javax.swing.JTextField();
         anio_text = new javax.swing.JComboBox();
         dia_text = new javax.swing.JComboBox();
 
@@ -95,7 +96,7 @@ public class BusquedaMantencion extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -114,7 +115,7 @@ public class BusquedaMantencion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Table1);
 
         jButton2.setText("Aceptar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -124,8 +125,6 @@ public class BusquedaMantencion extends javax.swing.JFrame {
         });
 
         mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
-
-        jLabel7.setText("-");
 
         anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         anio_text.addActionListener(new java.awt.event.ActionListener() {
@@ -168,10 +167,7 @@ public class BusquedaMantencion extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(verificador_text, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(25, 25, 25)
+                                        .addGap(92, 92, 92)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
@@ -184,7 +180,7 @@ public class BusquedaMantencion extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dia_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lugar_text, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -209,9 +205,7 @@ public class BusquedaMantencion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(rut_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(verificador_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
@@ -307,7 +301,15 @@ String fecha(String mes) {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         ServicioDB servicio =new ServicioDB();
-  String dias=null,mess=null, anios=null;
+        DefaultTableModel modelo = new DefaultTableModel();
+        JTable tabla = new JTable(modelo);
+        modelo.addColumn("Nº Factura");
+        modelo.addColumn("Fecha Inicio");
+        modelo.addColumn("Fecha Termino");
+        modelo.addColumn("Lugar");
+        modelo.addColumn("Detalle");
+        modelo.addColumn("Comentario");
+        String dias=null,mess=null, anios=null;
         String ruts=null;
         String lugars=null;
         dias= this.dia_text.getSelectedItem().toString();
@@ -318,15 +320,81 @@ String fecha(String mes) {
 
 
          if("*".equals(dias) || "*".equals(anios) || "*".equals(mess))
-        {
+         {
             if("".equals(lugars) && "".equals(ruts))
             {
                     JOptionPane.showMessageDialog(anio_text,"No ingreso ningun campo");
                 
             }
-            else
+            if("".equals(ruts) && !"".equals(lugars))
+            {
+                JOptionPane.showMessageDialog(anio_text,"solo ingreso lugar");
+                     Object[] fila = new Object[20];
+                     List<cl.codo.fernando.modelo.Mantencion> mantenciones = servicio.getmantencion(lugars);
+                    if(!mantenciones.isEmpty())
+                    {
+                        for(cl.codo.fernando.modelo.Mantencion manten : mantenciones)
+                        {
+                            fila[0]=manten.getIdboleta();
+                            fila[1]=manten.getFechainicio();
+                            fila[2]=manten.getFechafin();
+                            fila[3]=manten.getLugar();
+                            fila[4]=manten.getLugar();
+                            fila[5]=manten.getComentario();
+                            modelo.addRow(fila);
+                        }
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(anio_text,"NO tenenmos regstro de mantenciones"
+                                + "en esa fecha");
+                    }
+
+            }
+                if(!"".equals(lugars) && !"".equals(ruts))
                 {
-                    JOptionPane.showMessageDialog(anio_text,"la pichula parada");
+                    JOptionPane.showMessageDialog(anio_text,"Ingreso RUT y Lugar");
+                     Object[] fila = new Object[20];
+                    List<cl.codo.fernando.modelo.Mantencion> mantenciones = servicio.getmantencion(lugars,ruts);
+                    if(!mantenciones.isEmpty())
+                    {
+                        for(cl.codo.fernando.modelo.Mantencion manten : mantenciones)
+                        {
+                            fila[0]=manten.getIdboleta();
+                            fila[1]=manten.getFechainicio();
+                            fila[2]=manten.getFechafin();
+                            fila[3]=manten.getLugar();
+                            fila[4]=manten.getLugar();
+                            fila[5]=manten.getComentario();
+                            modelo.addRow(fila);
+                        }
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(anio_text,"NO tenenmos regstro de mantenciones"
+                                + "en ese lugar y fecha");
+                    }
+                }
+                if("".equals(lugars) && !"".equals(ruts))
+                {
+                    JOptionPane.showMessageDialog(anio_text,"Ingreso solo rut");
+                     Object[] fila = new Object[20];
+                    List<cl.codo.fernando.modelo.Mantencion> mantenciones = servicio.getmantencionporid(ruts);
+                    if(!mantenciones.isEmpty())
+                    {
+                        for(cl.codo.fernando.modelo.Mantencion manten : mantenciones)
+                        {
+                            fila[0]=manten.getIdboleta();
+                            fila[1]=manten.getFechainicio();
+                            fila[2]=manten.getFechafin();
+                            fila[3]=manten.getLugar();
+                            fila[4]=manten.getLugar();
+                            fila[5]=manten.getComentario();
+                            modelo.addRow(fila);
+                        }
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(anio_text,"NO tenenmos regstro de mantenciones"
+                                + "con ese rut");
+                    }
                 }
         }
          else
@@ -339,10 +407,30 @@ String fecha(String mes) {
                     JOptionPane.showMessageDialog(anio_text,"solo ingreso fecha");
                     Date fecha=null;
                     fecha=FechaUtils.getFecha(a, m-1, d);
-                    cl.codo.fernando.modelo.Mantencion mantencion = servicio.getmantencion(fecha);
+                     Object[] fila = new Object[20];
+                     List<cl.codo.fernando.modelo.Mantencion> mantenciones = servicio.getmantencion(fecha);
+                    if(!mantenciones.isEmpty())
+                    {
+                        for(cl.codo.fernando.modelo.Mantencion manten : mantenciones)
+                        {
+                            fila[0]=manten.getIdboleta();
+                            fila[1]=manten.getFechainicio();
+                            fila[2]=manten.getFechafin();
+                            fila[3]=manten.getLugar();
+                            fila[4]=manten.getLugar();
+                            fila[5]=manten.getComentario();
+                            modelo.addRow(fila);
+                        }
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(anio_text,"NO tenenmos regstro de mantenciones"
+                                + "en esa fecha");
+                    }
                 
             }
+                     
          }
+         Table1.setModel(modelo);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -385,6 +473,7 @@ String fecha(String mes) {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table1;
     private javax.swing.JComboBox anio_text;
     private javax.swing.JComboBox dia_text;
     private javax.swing.JButton jButton1;
@@ -395,12 +484,9 @@ String fecha(String mes) {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lugar_text;
     private javax.swing.JComboBox mes_text;
     private javax.swing.JTextField rut_text;
-    private javax.swing.JTextField verificador_text;
     // End of variables declaration//GEN-END:variables
 }

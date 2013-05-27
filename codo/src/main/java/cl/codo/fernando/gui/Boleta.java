@@ -180,7 +180,7 @@ public class Boleta extends javax.swing.JFrame {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
 
-  DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel();
         JTable tabla = new JTable(modelo);
         modelo.addColumn("rut");
         modelo.addColumn("nombre");
@@ -203,7 +203,6 @@ public class Boleta extends javax.swing.JFrame {
         empresa=servicio.getEmpresaPorRut(rutStr);
         
                 Object[] fila = new Object[20];
-                //cl.codo.fernando.modelo.Boleta boleta = servicio.getBoletaPorIdEmpresa(empresa.getIdempresa());
                 List<cl.codo.fernando.modelo.Boleta> boletas = servicio.getboletas(empresa.getIdempresa());
                 if(!boletas.isEmpty()){
                 for(cl.codo.fernando.modelo.Boleta bolet : boletas){
@@ -228,7 +227,7 @@ public class Boleta extends javax.swing.JFrame {
 
             }
                 }else
-                    JOptionPane.showMessageDialog(rootPane, "vacia la wea");
+                    JOptionPane.showMessageDialog(rootPane, "No existen datos para esa empresa");
                   
             
       
