@@ -226,6 +226,92 @@ public Boleta getBoletaporid(Integer id) {
         }
         return empresa;
     }
+    public Pago getpago(Integer id) {
+        Pago pago = null;
+        try {
+            if (id != null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM pago WHERE idboleta=?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    st.setInt(1, id);
+
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        if (rs.next()) {
+                            pago = new Pago();
+                            pago.setEstado(rs.getString("estado"));
+                            pago.setFechaVencimiento(rs.getDate("fechavencimiento"));
+                            pago.setIdfactoring(rs.getInt("idfactoring"));
+                            pago.setIdPago(rs.getInt("idpago"));
+                            pago.setMonto(rs.getFloat("monto"));
+                            
+                        } else {
+                            logger.info("ERROR: no existe pago");
+                        }
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+            pago = null;
+            logger.error(e.toString());
+            logger.debug("Error al obtener empresa por id " + id, e);
+        }
+        return pago;
+    }
+       public Mantencion getmantencion(java.util.Date fecha) {
+        Mantencion mantencion = null;
+        try {
+            if (fecha != null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM mantencion WHERE fechainicio=? || fechafinl=?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    java.sql.Date few = new java.sql.Date(fecha.getTime());
+                    st.setDate(1, few);
+                    st.setDate(2, few);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        if (rs.next()) {
+                            mantencion = new Mantencion();
+                            mantencion.setComentario(rs.getString("comentario"));
+                           mantencion.setDetalle(rs.getString("detalle"));
+                           mantencion.setFechafin(rs.getDate("fechafinl"));
+                           mantencion.setFechainicio(rs.getDate("fechainicio"));
+                           mantencion.setLugar(rs.getString("lugarl"));
+                           mantencion.setIdmantencion(rs.getInt("idmantencion"));
+                           mantencion.setIdboleta(rs.getInt("idboleta"));
+                        } else {
+                            logger.info("ERROR: no existe pago");
+                        }
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+            mantencion = null;
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por fecha " + fecha, e);
+        }
+        return mantencion;
+    }
 
        public List<Boleta> getboletas(int id) {
         List<Boleta> boletas = new ArrayList<Boleta>();
@@ -244,15 +330,13 @@ public Boleta getBoletaporid(Integer id) {
 
                     ResultSet rs = st.executeQuery();
                     if (rs != null) {
-                        if (rs.next()) {
+                        while (rs.next()) {
+
                             Boleta boleta =new Boleta();
                             boleta.setIdboleta(rs.getInt("idboleta"));
                             boleta.setFecha(rs.getDate("fecha"));
-
                             boletas.add(boleta);
-                        } else {
-                            logger.info("ERROR: No existe empresa");
-                        }
+                            }
                         rs.close();
                     }
                     st.close();

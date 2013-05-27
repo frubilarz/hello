@@ -1,10 +1,14 @@
 package cl.codo.fernando.gui;
 
 
+import cl.codo.fernando.servicio.ServicioDB;
+import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -302,7 +306,7 @@ String fecha(String mes) {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        
+        ServicioDB servicio =new ServicioDB();
   String dias=null,mess=null, anios=null;
         String ruts=null;
         String lugars=null;
@@ -330,7 +334,14 @@ String fecha(String mes) {
              Integer d=Integer.parseInt(dias);
              Integer a= Integer.parseInt(anios);
              Integer m= Integer.parseInt(fecha(mess));
-
+             if("".equals(lugars) && "".equals(ruts))
+            {
+                    JOptionPane.showMessageDialog(anio_text,"solo ingreso fecha");
+                    Date fecha=null;
+                    fecha=FechaUtils.getFecha(a, m-1, d);
+                    cl.codo.fernando.modelo.Mantencion mantencion = servicio.getmantencion(fecha);
+                
+            }
          }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

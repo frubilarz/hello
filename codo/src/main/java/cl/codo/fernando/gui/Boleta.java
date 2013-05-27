@@ -1,6 +1,7 @@
 package cl.codo.fernando.gui;
 
 import cl.codo.fernando.modelo.Empresa;
+import cl.codo.fernando.modelo.Pago;
 import cl.codo.fernando.servicio.ServicioDB;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -17,6 +18,17 @@ public class Boleta extends javax.swing.JFrame {
 
 
     }
+    String factoring(int factor)
+    {
+        String fac=null;
+        if(factor==1)
+            return "BCI";
+        if(factor == 2)
+            return "Yakora";
+        if(factor==3)
+            return "LYM";
+        return fac;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,8 +43,6 @@ public class Boleta extends javax.swing.JFrame {
         tabla1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -95,19 +105,6 @@ public class Boleta extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("-");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField2KeyTyped(evt);
-            }
-        });
-
         buscar.setText("Buscar");
         buscar.setMaximumSize(new java.awt.Dimension(53, 23));
         buscar.setMinimumSize(new java.awt.Dimension(53, 23));
@@ -141,16 +138,14 @@ public class Boleta extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(158, 158, 158)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(53, 53, 53))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -162,8 +157,6 @@ public class Boleta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,10 +177,6 @@ public class Boleta extends javax.swing.JFrame {
             evt.consume();          // TODO add your handling code here:
         }
     }//GEN-LAST:event_jTextField1KeyTyped
-
-    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
-// TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2KeyTyped
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
 
@@ -213,12 +202,13 @@ public class Boleta extends javax.swing.JFrame {
         Empresa empresa = new Empresa();
         empresa=servicio.getEmpresaPorRut(rutStr);
         
-                Object[] fila = new Object[20][20];
-                int j=0;
+                Object[] fila = new Object[20];
                 //cl.codo.fernando.modelo.Boleta boleta = servicio.getBoletaPorIdEmpresa(empresa.getIdempresa());
                 List<cl.codo.fernando.modelo.Boleta> boletas = servicio.getboletas(empresa.getIdempresa());
                 if(!boletas.isEmpty()){
                 for(cl.codo.fernando.modelo.Boleta bolet : boletas){
+                    Pago pago =new Pago();
+                    pago = servicio.getpago(bolet.getIdboleta());
                 fila[0] = empresa.getRut();
                 if (bolet != null) {
                     fila[3] = bolet.getFecha();
@@ -227,10 +217,15 @@ public class Boleta extends javax.swing.JFrame {
                     fila[1] = "";
                     fila[2] = "";
                 }
+                fila[5]=pago.getFechaVencimiento();
+                fila[4]=pago.getMonto();
                 fila[1] = empresa.getNombre();
                 fila[6] = empresa.getContacto();
-                j++;
+                fila[7]=factoring(pago.getIdfactoring());
+                fila[8]=pago.getEstado();
                 modelo.addRow(fila);
+
+
             }
                 }else
                     JOptionPane.showMessageDialog(rootPane, "vacia la wea");
@@ -242,10 +237,6 @@ public class Boleta extends javax.swing.JFrame {
         tabla1.setModel(modelo);
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Principal panel = new Principal();
@@ -294,11 +285,9 @@ public class Boleta extends javax.swing.JFrame {
     private javax.swing.JButton buscar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tabla1;
     // End of variables declaration//GEN-END:variables
 

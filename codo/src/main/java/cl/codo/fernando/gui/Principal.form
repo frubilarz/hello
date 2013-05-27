@@ -41,6 +41,24 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu6MouseClicked"/>
               </Events>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="jMenu13">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Fecha Y RUT"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu13MouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="jMenu14">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value=" RUT"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu14MouseClicked"/>
+                  </Events>
+                </Menu>
+              </SubComponents>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu2">
               <Properties>

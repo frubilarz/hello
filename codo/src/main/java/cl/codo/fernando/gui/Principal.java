@@ -32,6 +32,8 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
+        jMenu13 = new javax.swing.JMenu();
+        jMenu14 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
@@ -79,6 +81,23 @@ public class Principal extends javax.swing.JFrame {
                 jMenu6MouseClicked(evt);
             }
         });
+
+        jMenu13.setText("Fecha Y RUT");
+        jMenu13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu13MouseClicked(evt);
+            }
+        });
+        jMenu6.add(jMenu13);
+
+        jMenu14.setText(" RUT");
+        jMenu14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu14MouseClicked(evt);
+            }
+        });
+        jMenu6.add(jMenu14);
+
         jMenu3.add(jMenu6);
 
         jMenu2.setText("Factura");
@@ -205,10 +224,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseEntered
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
-            Fecha form = new Fecha();
-            form.setVisible(true);
-            form.setLocationRelativeTo(null);
-            this.dispose();                     // TODO add your handling code here:
+                    // TODO add your handling code here:
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
@@ -281,6 +297,23 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu12ActionPerformed
 
+    private void jMenu13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu13MouseClicked
+
+                    Fecha form = new Fecha();
+            form.setVisible(true);
+            form.setLocationRelativeTo(null);
+            this.dispose(); 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu13MouseClicked
+
+    private void jMenu14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu14MouseClicked
+
+            Boleta form = new Boleta();
+            form.setVisible(true);
+            form.setLocationRelativeTo(null);
+            this.dispose(); // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu14MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +354,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

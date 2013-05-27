@@ -294,7 +294,7 @@ public class Mantencion extends javax.swing.JFrame {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
 
-                      ServicioDB servicio= new ServicioDB();
+              ServicioDB servicio= new ServicioDB();
             Integer dia1=Integer.parseInt(this.dia_text.getSelectedItem().toString());
             Integer dia2=Integer.parseInt(this.dia_text1.getSelectedItem().toString());
             Integer mes1= Integer.parseInt(fecha(this.mes_text1.getSelectedItem().toString()));
@@ -316,12 +316,12 @@ public class Mantencion extends javax.swing.JFrame {
             {
             
                        JOptionPane.showMessageDialog(anio_text, "REVISE QUE LA FCHA ESTE BIEN");
-          
             }else{
             servicio.guardar(mantencion);
             JOptionPane.showMessageDialog(rootPane, "Guardado");
-            }
             this.dispose();
+            }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_aceptarActionPerformed
 
