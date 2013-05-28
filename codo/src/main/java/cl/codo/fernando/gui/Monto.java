@@ -1,8 +1,13 @@
 package cl.codo.fernando.gui;
 
 
+import cl.codo.fernando.servicio.ServicioDB;
+import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /*
@@ -22,6 +27,45 @@ public class Monto extends javax.swing.JFrame {
     public Monto() {
         initComponents();
 //        Nletras(anio);
+    }
+  String fecha(String mes) {
+        if ("enero".equals(mes)) {
+            return "1";
+        }
+        if ("febrero".equals(mes)) {
+            return "2";
+        }
+        if ("marzo".equals(mes)) {
+            return "3";
+        }
+        if ("abril".equals(mes)) {
+            return "4";
+        }
+        if ("mayo".equals(mes)) {
+            return "5";
+        }
+        if ("junio".equals(mes)) {
+            return "6";
+        }
+        if ("julio".equals(mes)) {
+            return "7";
+        }
+        if ("agosto".equals(mes)) {
+            return "8";
+        }
+        if ("octubre".equals(mes)) {
+            return "10";
+        }
+        if ("spetiembre".equals(mes)) {
+            return "9";
+        }
+        if ("noviembre".equals(mes)) {
+            return "11";
+        }
+        if ("diciembre".equals(mes)) {
+            return "12";
+        }
+        return "0";
     }
 
     /**
@@ -43,6 +87,7 @@ public class Monto extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         mes_text1 = new javax.swing.JComboBox();
         anio_text = new javax.swing.JComboBox();
+        monto_text = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,6 +96,11 @@ public class Monto extends javax.swing.JFrame {
         jLabel2.setText("Mes");
 
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Monto");
 
@@ -71,6 +121,8 @@ public class Monto extends javax.swing.JFrame {
 
         anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
+        monto_text.setText(".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,23 +134,26 @@ public class Monto extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mes_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(anio_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(monto_text))
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(342, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,7 +172,9 @@ public class Monto extends javax.swing.JFrame {
                     .addComponent(mes_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(anio_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(monto_text))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -154,6 +211,30 @@ public class Monto extends javax.swing.JFrame {
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Integer anio = Integer.parseInt(this.anio_text.getSelectedItem().toString());
+        Integer mes = Integer.parseInt(fecha(this.mes_text1.getSelectedItem().toString()));
+        Integer dia =01;
+        Date fecha1=FechaUtils.getFecha(anio,mes-1,dia);
+        Date fecha2=FechaUtils.getFecha(anio,mes,dia-1);
+        float monto1=0,iva,neto;
+        ServicioDB servicio = new ServicioDB();
+        List<cl.codo.fernando.modelo.Pago> pagos = servicio.getmonto(fecha1, fecha2);
+        if(!pagos.isEmpty())
+        {
+            for(cl.codo.fernando.modelo.Pago pago :pagos)
+            {
+               monto1 = monto1 + pago.getMonto();
+            }
+        }else
+            JOptionPane.showMessageDialog(anio_text,"algo");
+        String m=""+monto1;
+        this.monto_text.setText(m);
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,5 +281,6 @@ public class Monto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox mes_text1;
+    private javax.swing.JLabel monto_text;
     // End of variables declaration//GEN-END:variables
 }

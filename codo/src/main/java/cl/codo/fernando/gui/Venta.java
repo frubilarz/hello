@@ -121,7 +121,7 @@ public class Venta extends javax.swing.JFrame {
             modelo.addColumn("Valor Unitario venta");
             modelo.addColumn("Proveedor");
             String hola=(String) modelo.getColumnName(0);
-            JOptionPane.showMessageDialog(rootPane, hola);
+
             ServicioDB servicio=new ServicioDB();
             JOptionPane.showMessageDialog(rootPane, "Guardado");
             this.dispose();

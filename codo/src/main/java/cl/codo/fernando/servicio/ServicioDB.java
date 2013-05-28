@@ -510,6 +510,50 @@ public Boleta getBoletaporid(Integer id) {
         }
         return mantenciones;
     }
+     
+         public List<Pago> getmonto( java.util.Date fecha1, java.util.Date fecha2 ) {
+        List<Pago> pagos = new ArrayList<Pago>();
+
+        try {
+            if (fecha1!=null && fecha2!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "select monto from pago  where idboleta in  "
+                        + "(SELECT idboleta FROM boleta WHERE DATE(fechavencimiento) BETWEEN ? AND ?)";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                        java.sql.Date fe = new java.sql.Date(fecha1.getTime());
+                       java.sql.Date few = new java.sql.Date(fecha2.getTime());
+                    st.setDate(1, fe);
+                    st.setDate(2, few);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            
+                            Pago pago= new Pago();
+                            pago.setMonto(rs.getFloat("monto"));
+                            pagos.add(pago);
+ 
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          pagos = new ArrayList<Pago>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + fecha1, e);
+        }
+        return pagos;
+    }
+     
        public List<vista> getdatos(java.util.Date fecha1, java.util.Date fecha2 ) {
         List<vista> vistas = new ArrayList<vista>();
 
