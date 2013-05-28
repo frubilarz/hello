@@ -88,6 +88,8 @@ public class Monto extends javax.swing.JFrame {
         mes_text1 = new javax.swing.JComboBox();
         anio_text = new javax.swing.JComboBox();
         monto_text = new javax.swing.JLabel();
+        neto_text = new javax.swing.JLabel();
+        iva_text = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +125,10 @@ public class Monto extends javax.swing.JFrame {
 
         monto_text.setText(".");
 
+        neto_text.setText(".");
+
+        iva_text.setText(".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,7 +140,7 @@ public class Monto extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mes_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -147,13 +153,15 @@ public class Monto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(monto_text))
+                    .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iva_text)
+                    .addComponent(neto_text)
+                    .addComponent(monto_text))
+                .addContainerGap(310, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -176,9 +184,13 @@ public class Monto extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(monto_text))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(neto_text))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(iva_text))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -228,10 +240,19 @@ public class Monto extends javax.swing.JFrame {
             {
                monto1 = monto1 + pago.getMonto();
             }
-        }else
-            JOptionPane.showMessageDialog(anio_text,"algo");
-        String m=""+monto1;
+        }
+
+        
+        String m = ""+ monto1;
+        float netoneto;
+        netoneto = (float) (monto1/1.19);
+        float i_v_a; 
+        i_v_a = monto1-netoneto;
+        String n= ""+netoneto;
+        String i=""+i_v_a;
         this.monto_text.setText(m);
+        this.neto_text.setText(n);
+        this.iva_text.setText(i);
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -272,6 +293,7 @@ public class Monto extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox anio_text;
+    private javax.swing.JLabel iva_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -282,5 +304,6 @@ public class Monto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox mes_text1;
     private javax.swing.JLabel monto_text;
+    private javax.swing.JLabel neto_text;
     // End of variables declaration//GEN-END:variables
 }

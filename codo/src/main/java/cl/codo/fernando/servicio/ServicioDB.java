@@ -523,7 +523,7 @@ public Boleta getBoletaporid(Integer id) {
 
                 PreparedStatement st = null;
                 String query = "select monto from pago  where idboleta in  "
-                        + "(SELECT idboleta FROM boleta WHERE DATE(fechavencimiento) BETWEEN ? AND ?)";
+                        + "(SELECT idboleta FROM boleta WHERE DATE(fecha) BETWEEN ? AND ?)";
                 st = conexion.prepareStatement(query);
                 if (st != null) {
                         java.sql.Date fe = new java.sql.Date(fecha1.getTime());
