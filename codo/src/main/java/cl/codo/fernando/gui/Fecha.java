@@ -1,12 +1,18 @@
 package cl.codo.fernando.gui;
 
 
+import cl.codo.fernando.modelo.Empresa;
+import cl.codo.fernando.modelo.Pago;
 import cl.codo.fernando.servicio.ServicioDB;
 import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this template, choose Tools | Templates
@@ -25,6 +31,17 @@ public class Fecha extends javax.swing.JFrame {
     public Fecha() {
         initComponents();
        Nletras(rut_text);
+    }
+    String factoring(int factor)
+    {
+        String fac=null;
+        if(factor==1)
+            return "BCI";
+        if(factor == 2)
+            return "Yakora";
+        if(factor==3)
+            return "LYM";
+        return fac;
     }
 
     @SuppressWarnings("unchecked")
@@ -194,17 +211,17 @@ public class Fecha extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla1);
 
-        mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
+        mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
 
-        mes_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
+        mes_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
 
-        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
+        anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
-        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        anio_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
+        anio_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -309,17 +326,121 @@ public class Fecha extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
          ServicioDB servicio = new ServicioDB();
-         String rut = this.rut_text.getText();
-         Integer dia1=Integer.parseInt(this.dia_text.getSelectedItem().toString());
-         Integer dia2= Integer.parseInt(this.dia_text1.getSelectedItem().toString());
-         Integer mes1= Integer.parseInt(fecha(this.mes_text.getSelectedItem().toString()));
-         Integer mes2= Integer.parseInt(fecha(this.mes_text.getSelectedItem().toString()));
-         Integer anio1= Integer.parseInt(this.anio_text.getSelectedItem().toString());
-         Integer anio2= Integer.parseInt(this.anio_text1.getSelectedItem().toString());        
-         Date fecha=null;
-         Date fecha1=null;
-         fecha=FechaUtils.getFecha(anio1, (mes1)-1, dia1);
-         fecha1=FechaUtils.getFecha(anio2, (mes2)-1, dia2);
+         DefaultTableModel modelo = new DefaultTableModel();
+        JTable tabla = new JTable(modelo);
+        modelo.addColumn("rut");
+        modelo.addColumn("nombre");
+        modelo.addColumn("n° factura");
+        modelo.addColumn("fecha emicion");
+        modelo.addColumn("monto");
+        modelo.addColumn("fecha vencimiento");
+        modelo.addColumn("contacto");
+        modelo.addColumn("factoring");
+        modelo.addColumn("estado");
+        String rutStr = this.rut_text.getText() ;
+        if("*".equals(this.anio_text1.getSelectedItem().toString())||"*".equals(this.anio_text.getSelectedItem().toString())||"*".equals(this.mes_text.getSelectedItem().toString())|| "*".equals(this.mes_text1.getSelectedItem().toString())||"*".equals(this.dia_text.getSelectedItem().toString())||"*".equals(this.dia_text1.getSelectedItem().toString())){
+
+                    Integer rut= Integer.parseInt(rutStr);
+                    Object[] fila = new Object[20];
+                    List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatos(rut);
+                    if(!vistas.isEmpty()){
+                    for (cl.codo.fernando.modelo.vista visstas: vistas)
+                    {
+                        fila[0]=visstas.getRut();
+                        fila[1]=visstas.getNombre();
+                        fila[2]=visstas.getRut();
+                        fila[3]=visstas.getFechaemicion();
+                        fila[4]=visstas.getMonto();
+                        fila[5]=visstas.getFechavencimiento();
+                        fila[6]=visstas.getNumero();
+                        fila[7]=visstas.getFactoring();
+                        fila[8]=visstas.getEstado();
+                        modelo.addRow(fila);
+                    }
+                    }else
+                        JOptionPane.showMessageDialog(anio_text,"no existen datos en ese rut");
+
+        }
+        if(!"*".equals(this.anio_text1.getSelectedItem().toString()) &&!"*".equals(this.anio_text.getSelectedItem().toString())&&!"*".equals(this.mes_text.getSelectedItem().toString())&& !"*".equals(this.mes_text1.getSelectedItem().toString())&&
+                !"*".equals(this.dia_text.getSelectedItem().toString())&& !"*".equals(this.dia_text1.getSelectedItem().toString()))
+        {
+            if("".equals(rutStr)){
+                    Integer d1= Integer.parseInt(this.dia_text.getSelectedItem().toString());
+                    Integer d2= Integer.parseInt(this.dia_text1.getSelectedItem().toString());
+                    Integer m1= Integer.parseInt(fecha(this.mes_text.getSelectedItem().toString()));
+                    Integer m2= Integer.parseInt(fecha(this.mes_text1.getSelectedItem().toString()));
+                    Integer a1= Integer.parseInt(this.anio_text.getSelectedItem().toString());
+                    Integer a2= Integer.parseInt(this.anio_text1.getSelectedItem().toString());
+                    Date fecha=null;
+                    Date fecha2 = null;
+                    fecha=FechaUtils.getFecha(a1, (m1)-1, d1);
+                    fecha2=FechaUtils.getFecha(a2, (m2)-1, d2);
+                    Object[] fila = new Object[20];
+                    List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatos(fecha, fecha2);
+                    if(!vistas.isEmpty()){
+                        for (cl.codo.fernando.modelo.vista visstas: vistas)
+                            {
+                                fila[0]=visstas.getRut();
+                                fila[1]=visstas.getNombre();
+                                cl.codo.fernando.modelo.Empresa empresa = new cl.codo.fernando.modelo.Empresa();
+                                empresa=servicio.getEmpresaPorRut(visstas.getRut().toString());
+                                fila[2]=empresa.getNombre();
+                                fila[3]=visstas.getFechaemicion();
+                                fila[4]=visstas.getMonto();
+                                fila[5]=visstas.getFechavencimiento();
+                                fila[6]=visstas.getNumero();
+                                fila[7]=visstas.getFactoring();
+                                fila[8]=visstas.getEstado();
+                                modelo.addRow(fila);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(anio_text,"no existen datos entre esas fechas");
+                    }
+            }
+                    if(!"*".equals(this.anio_text1.getSelectedItem().toString()) &&!"*".equals(this.anio_text.getSelectedItem().toString())&&!"*".equals(this.mes_text.getSelectedItem().toString())&& !"*".equals(this.mes_text1.getSelectedItem().toString())&&
+                !"*".equals(this.dia_text.getSelectedItem().toString())&& !"*".equals(this.dia_text1.getSelectedItem().toString()))
+        {
+            if(!"".equals(rutStr)){
+               
+                    Integer d1= Integer.parseInt(this.dia_text.getSelectedItem().toString());
+                    Integer d2= Integer.parseInt(this.dia_text1.getSelectedItem().toString());
+                    Integer m1= Integer.parseInt(fecha(this.mes_text.getSelectedItem().toString()));
+                    Integer m2= Integer.parseInt(fecha(this.mes_text1.getSelectedItem().toString()));
+                    Integer a1= Integer.parseInt(this.anio_text.getSelectedItem().toString());
+                    Integer a2= Integer.parseInt(this.anio_text1.getSelectedItem().toString());
+                    Date fecha=null;
+                    Date fecha2 = null;
+                    fecha=FechaUtils.getFecha(a1, (m1)-1, d1);
+                    fecha2=FechaUtils.getFecha(a2, (m2)-1, d2);
+                    Integer rut = Integer.parseInt(rutStr);
+                    Object[] fila = new Object[20];
+                    List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatos(fecha, fecha2,rut);
+                    if(!vistas.isEmpty()){
+                        for (cl.codo.fernando.modelo.vista visstas: vistas)
+                            {
+                                fila[0]=visstas.getRut();
+                                fila[1]=visstas.getNombre();
+           
+                                fila[2]=visstas.getNombre();
+                                fila[3]=visstas.getFechaemicion();
+                                fila[4]=visstas.getMonto();
+                                fila[5]=visstas.getFechavencimiento();
+                                fila[6]=visstas.getNumero();
+                                fila[7]=visstas.getFactoring();
+                                fila[8]=visstas.getEstado();
+                                modelo.addRow(fila);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(anio_text,"no existen datos entre esas fechas con el rut "  + rutStr);
+                    }
+            }
+        }
+            
+
+        }
+        
+        
+        tabla1.setModel(modelo);
          
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed

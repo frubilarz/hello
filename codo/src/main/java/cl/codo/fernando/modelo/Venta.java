@@ -13,6 +13,15 @@ public class Venta extends BaseBean {
     private Float precioventa = null;
     private String producto = null;
     private Integer idboleta = null;
+    private Integer numero; 
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
 
 
     public Integer getIdventa() {

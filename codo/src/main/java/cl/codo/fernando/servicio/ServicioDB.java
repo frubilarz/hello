@@ -1,6 +1,7 @@
 package cl.codo.fernando.servicio;
 
 import cl.codo.fernando.modelo.Boleta;
+import cl.codo.fernando.modelo.vista;
 import cl.codo.fernando.modelo.Empresa;
 import cl.codo.fernando.modelo.Mantencion;
 import cl.codo.fernando.modelo.Pago;
@@ -463,6 +464,8 @@ public Boleta getBoletaporid(Integer id) {
         return mantenciones;
     }
 
+  
+  
      public List<Mantencion> getmantencion( String lugar ) {
         List<Mantencion> mantenciones = new ArrayList<Mantencion>();
 
@@ -507,7 +510,147 @@ public Boleta getBoletaporid(Integer id) {
         }
         return mantenciones;
     }
-       public List<Boleta> getboletas(int id) {
+       public List<vista> getdatos(java.util.Date fecha1, java.util.Date fecha2 ) {
+        List<vista> vistas = new ArrayList<vista>();
+
+        try {
+            if (fecha1!=null && fecha2 !=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM todo WHERE DATE(fecha) BETWEEN ? AND ?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                      java.sql.Date fe = new java.sql.Date(fecha1.getTime());
+                       java.sql.Date few = new java.sql.Date(fecha2.getTime());
+                    st.setDate(1, fe);
+                    st.setDate(2, few);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            vista vist =new vista();
+                            vist.setRut(rs.getInt("rut"));
+                            vist.setNombre(rs.getString("nombre"));
+                            vist.setEstado(rs.getString("estado"));
+                            vist.setFechaemicion(rs.getDate("fecha"));
+                            vist.setFechavencimiento(rs.getDate("fechavencimiento"));
+                            vist.setFactoring(rs.getString("factoring"));
+                            vist.setMonto(rs.getFloat("monto"));
+                            vist.setNumero(rs.getInt("contacto"));
+                            
+                            vistas.add(vist);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+         vistas = new ArrayList<vista>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener vista con esa fecha " + fecha1, e);
+        }
+        return vistas;
+    }
+            public List<vista> getdatos(java.util.Date fecha1, java.util.Date fecha2 , int rut) {
+        List<vista> vistas = new ArrayList<vista>();
+
+        try {
+            if (fecha1!=null && fecha2 !=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM todo WHERE DATE(fecha) BETWEEN ? AND ? AND rut =?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                      java.sql.Date fe = new java.sql.Date(fecha1.getTime());
+                       java.sql.Date few = new java.sql.Date(fecha2.getTime());
+                    st.setDate(1, fe);
+                    st.setDate(2, few);
+                    st.setInt(3, rut);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            vista vist =new vista();
+                            vist.setRut(rs.getInt("rut"));
+                            vist.setNombre(rs.getString("nombre"));
+                            vist.setEstado(rs.getString("estado"));
+                            vist.setFechaemicion(rs.getDate("fecha"));
+                            vist.setFechavencimiento(rs.getDate("fechavencimiento"));
+                            vist.setFactoring(rs.getString("factoring"));
+                            vist.setMonto(rs.getFloat("monto"));
+                            vist.setNumero(rs.getInt("contacto"));
+                            
+                            vistas.add(vist);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+         vistas = new ArrayList<vista>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener vista con esa fecha " + fecha1, e);
+        }
+        return vistas;
+    }
+               public List<vista> getdatos( int rut) {
+        List<vista> vistas = new ArrayList<vista>();
+
+        try {
+            if (rut!=0) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM todo WHERE  rut =?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    st.setInt(1, rut);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            vista vist =new vista();
+                            vist.setRut(rs.getInt("rut"));
+                            vist.setNombre(rs.getString("nombre"));
+                            vist.setEstado(rs.getString("estado"));
+                            vist.setFechaemicion(rs.getDate("fecha"));
+                            vist.setFechavencimiento(rs.getDate("fechavencimiento"));
+                            vist.setFactoring(rs.getString("factoring"));
+                            vist.setMonto(rs.getFloat("monto"));
+                            vist.setNumero(rs.getInt("contacto"));
+                            
+                            vistas.add(vist);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+         vistas = new ArrayList<vista>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener vista con ese rut " + rut, e);
+        }
+        return vistas;
+    }
+     
+      public List<Boleta> getboletas(int id) {
         List<Boleta> boletas = new ArrayList<Boleta>();
         try {
         

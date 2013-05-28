@@ -220,3 +220,6 @@ COLLATE = utf8_spanish_ci;
 INSERT INTO `cododb`.`factoring` (`idfactoring`, `nombre`) VALUES (1, 'BCI');
 INSERT INTO `cododb`.`factoring` (`idfactoring`, `nombre`) VALUES (2, 'YAKORA');
 INSERT INTO `cododb`.`factoring` (`idfactoring`, `nombre`) VALUES (3, 'LYM');
+
+
+CREATE VIEW todo AS SELECT e.rut, e.nombre, e.contacto, b.fecha, p.fechavencimiento, p.monto, p.estado, f.nombre AS factoring FROM empresa e, boleta b, pago p, factoring f WHERE b.idempresa = e.idempresa AND f.idfactoring = p.idfactoring AND p.idboleta = b.idboleta;
