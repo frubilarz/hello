@@ -1059,14 +1059,14 @@ public boolean guardar(Mantencion mantencion) {
                 PreparedStatement st = null;
                 String query = "";
 
-                    query = "INSERT INTO venta (cantidad,proveedor,preciocompra,precioventa,producto,idboleta) VALUES (?, ?,?,?,?,?)";
+                    query = "INSERT INTO venta (idboleta,cantidad,producto,preciocompra,precioventa,proveedor) VALUES (?, ?,?,?,?,?)";
                     st = conexion.prepareStatement(query);
-                    st.setString(1, venta.getCantidad());
-                    st.setString(2, venta.getProveedor());
-                    st.setFloat(3, venta.getPreciocompra());
-                    st.setFloat(4,venta.getPrecioventa());
-                    st.setString(5, venta.getProducto());
-                    st.setInt(5, venta.getIdboleta());
+                    st.setString(2, venta.getCantidad());
+                    st.setString(6, venta.getProveedor());
+                    st.setFloat(4, venta.getPreciocompra());
+                    st.setFloat(5,venta.getPrecioventa());
+                    st.setString(3, venta.getProducto());
+                    st.setInt(1, venta.getIdboleta());
 
                 if (st != null) {
                     logger.info(st.toString());

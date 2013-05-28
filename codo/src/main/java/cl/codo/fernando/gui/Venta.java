@@ -38,6 +38,19 @@ public class Venta extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        factura_text = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cantidad_text = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        producto_text = new javax.swing.JTextField();
+        compra_text = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        venta_tex = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        proveedor_text = new javax.swing.JTextField();
+        Enviar_boton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +89,25 @@ public class Venta extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel2.setText("Numero Factura");
+
+        jLabel3.setText("Cantidad");
+
+        jLabel4.setText("Producto");
+
+        jLabel5.setText("Valor U. Compra");
+
+        jLabel6.setText("Valor U. Venta");
+
+        jLabel7.setText("Proveedor");
+
+        Enviar_boton.setText("Enviar");
+        Enviar_boton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Enviar_botonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,15 +126,61 @@ public class Venta extends javax.swing.JFrame {
                         .addComponent(jButton1))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(venta_tex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addComponent(compra_text)
+                    .addComponent(producto_text)
+                    .addComponent(cantidad_text)
+                    .addComponent(factura_text)
+                    .addComponent(proveedor_text))
+                .addGap(44, 44, 44)
+                .addComponent(Enviar_boton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(factura_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cantidad_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(producto_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(compra_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(venta_tex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(proveedor_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Enviar_boton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -113,18 +191,8 @@ public class Venta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            DefaultTableModel modelo = new DefaultTableModel();
-            JTable tabla = new JTable(modelo);
-            modelo.addColumn("Cantidad");
-            modelo.addColumn("Producto");
-            modelo.addColumn("Valor Unitario Compra");
-            modelo.addColumn("Valor Unitario venta");
-            modelo.addColumn("Proveedor");
-            String hola=(String) modelo.getColumnName(0);
-
-            ServicioDB servicio=new ServicioDB();
-            JOptionPane.showMessageDialog(rootPane, "Guardado");
-            this.dispose();
+           
+            //this.dispose();
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -135,6 +203,38 @@ public class Venta extends javax.swing.JFrame {
             this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void Enviar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enviar_botonActionPerformed
+ DefaultTableModel modelo = new DefaultTableModel();
+            JTable tabla = new JTable(modelo);
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Producto");
+            modelo.addColumn("Valor Unitario Compra");
+            modelo.addColumn("Valor Unitario venta");
+            modelo.addColumn("Proveedor");
+            Integer fact= Integer.parseInt(this.factura_text.getText().toString());
+            String cantidad = this.cantidad_text.getText().toString();
+            String producto= this.producto_text.getText().toString();
+            float compra = Float.parseFloat(this.compra_text.getText().toString());
+            float venta = Float.parseFloat(this.venta_tex.getText().toString());
+            String prov = this.proveedor_text.getText().toString();
+            cl.codo.fernando.modelo.Venta vent = new cl.codo.fernando.modelo.Venta();
+            vent.setIdboleta(fact);
+            vent.setCantidad(cantidad);
+            vent.setProducto(producto);
+            vent.setPreciocompra(compra);
+            vent.setPrecioventa(venta);
+            vent.setProveedor(prov);
+            ServicioDB servicio=new ServicioDB();
+            servicio.guardar(vent);
+            Object[] fila = new Object[20];ç
+            tabla.setModel(modelo);
+
+            
+            JOptionPane.showMessageDialog(rootPane, "Guardado");
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Enviar_botonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,10 +271,23 @@ public class Venta extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Enviar_boton;
+    private javax.swing.JTextField cantidad_text;
+    private javax.swing.JTextField compra_text;
+    private javax.swing.JTextField factura_text;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField producto_text;
+    private javax.swing.JTextField proveedor_text;
+    private javax.swing.JTextField venta_tex;
     // End of variables declaration//GEN-END:variables
 }
