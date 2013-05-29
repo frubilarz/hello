@@ -124,7 +124,7 @@ public class BusquedaMantencion extends javax.swing.JFrame {
             }
         });
 
-        mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
+        mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
         anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         anio_text.addActionListener(new java.awt.event.ActionListener() {
@@ -216,40 +216,40 @@ public class BusquedaMantencion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 String fecha(String mes) {
-        if ("enero".equals(mes)) {
+        if ("Enero".equals(mes)) {
             return "1";
         }
-        if ("febrero".equals(mes)) {
+        if ("Febrero".equals(mes)) {
             return "2";
         }
-        if ("marzo".equals(mes)) {
+        if ("Marzo".equals(mes)) {
             return "3";
         }
-        if ("abril".equals(mes)) {
+        if ("Abril".equals(mes)) {
             return "4";
         }
-        if ("mayo".equals(mes)) {
+        if ("Mayo".equals(mes)) {
             return "5";
         }
-        if ("junio".equals(mes)) {
+        if ("Junio".equals(mes)) {
             return "6";
         }
-        if ("julio".equals(mes)) {
+        if ("Julio".equals(mes)) {
             return "7";
         }
-        if ("agosto".equals(mes)) {
+        if ("Agosto".equals(mes)) {
             return "8";
         }
-        if ("octubre".equals(mes)) {
+        if ("Octubre".equals(mes)) {
             return "10";
         }
-        if ("spetiembre".equals(mes)) {
+        if ("Septiembre".equals(mes)) {
             return "9";
         }
-        if ("noviembre".equals(mes)) {
+        if ("Noviembre".equals(mes)) {
             return "11";
         }
-        if ("diciembre".equals(mes)) {
+        if ("Diciembre".equals(mes)) {
             return "12";
         }
         return "0";

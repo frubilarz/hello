@@ -464,6 +464,49 @@ public Boleta getBoletaporid(Integer id) {
         return mantenciones;
     }
 
+  public List<Venta> getventa( String producto) {
+        List<Venta> ventas = new ArrayList<Venta>();
+
+        try {
+            if (producto!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query ="select * from venta where producto = ?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+
+
+
+                    st.setString(1, producto);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            Mantencion mantencion =new Mantencion();
+                            Venta venta = new Venta();
+                            venta.setCantidad(rs.getString("cantidad"));
+                            venta.setPreciocompra(rs.getFloat("preciocompra"));
+                            
+                            ventas.add(venta);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          ventas = new ArrayList<Venta>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + producto, e);
+        }
+        return ventas;
+    }
+
   
   
      public List<Mantencion> getmantencion( String lugar ) {
@@ -1049,12 +1092,7 @@ public boolean guardar(Mantencion mantencion) {
                     conectar();
                 }
 
-                boolean update = false;
-                if ( venta!= null) {
-                    if (venta.getIdventa() > 0) {
-                        update = true;
-                    }
-                }
+
 
                 PreparedStatement st = null;
                 String query = "";

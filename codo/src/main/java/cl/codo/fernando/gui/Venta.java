@@ -16,12 +16,16 @@ import javax.swing.table.DefaultTableModel;
  * @author fernando
  */
 public class Venta extends javax.swing.JFrame {
-
+        DefaultTableModel modelo;
     /**
      * Creates new form Venta
      */
     public Venta() {
         initComponents();
+        String cabecera[]={"Cantidad","Producto","Valor Unitario Compra","Valor Unitario venta","Proveedor"};
+        String dats[][]={};
+        modelo = new DefaultTableModel(dats,cabecera);
+        TABLA.setModel(modelo);
     }
 
     /**
@@ -37,7 +41,7 @@ public class Venta extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TABLA = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         factura_text = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -70,7 +74,7 @@ public class Venta extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TABLA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -87,7 +91,7 @@ public class Venta extends javax.swing.JFrame {
                 "cantidad", "producto", "valor unitario compra", "valor unitario venta", "proveedor"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TABLA);
 
         jLabel2.setText("Numero Factura");
 
@@ -191,27 +195,27 @@ public class Venta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-           
-            //this.dispose();
+this.dispose();
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             
-            JOptionPane.showMessageDialog(rootPane, "NO A GUARDADO NADA");
             this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
+void limpiar ()
+{
+    this.factura_text.setText("");
+    this.cantidad_text.setText("");
+    this.compra_text.setText("");
+    this.venta_tex.setText("");
+    this.proveedor_text.setText("");
+    this.producto_text.setText("");
+}
     private void Enviar_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enviar_botonActionPerformed
- DefaultTableModel modelo = new DefaultTableModel();
-            JTable tabla = new JTable(modelo);
-            modelo.addColumn("Cantidad");
-            modelo.addColumn("Producto");
-            modelo.addColumn("Valor Unitario Compra");
-            modelo.addColumn("Valor Unitario venta");
-            modelo.addColumn("Proveedor");
+
             Integer fact= Integer.parseInt(this.factura_text.getText().toString());
             String cantidad = this.cantidad_text.getText().toString();
             String producto= this.producto_text.getText().toString();
@@ -227,12 +231,10 @@ public class Venta extends javax.swing.JFrame {
             vent.setProveedor(prov);
             ServicioDB servicio=new ServicioDB();
             servicio.guardar(vent);
-            Object[] fila = new Object[20];ç
-            tabla.setModel(modelo);
-
-            
-            JOptionPane.showMessageDialog(rootPane, "Guardado");
-        
+            Object fila[] = {vent.getCantidad(),vent.getProducto(),vent.getPrecioventa(),vent.getPrecioventa(),vent.getProveedor()};
+            modelo.addRow(fila);
+            JOptionPane.showMessageDialog(cantidad_text, "Datos ingresado a la BASE DE DATOS");
+            limpiar();
         // TODO add your handling code here:
     }//GEN-LAST:event_Enviar_botonActionPerformed
 
@@ -272,6 +274,7 @@ public class Venta extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Enviar_boton;
+    private javax.swing.JTable TABLA;
     private javax.swing.JTextField cantidad_text;
     private javax.swing.JTextField compra_text;
     private javax.swing.JTextField factura_text;
@@ -285,7 +288,6 @@ public class Venta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField producto_text;
     private javax.swing.JTextField proveedor_text;
     private javax.swing.JTextField venta_tex;
