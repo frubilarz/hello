@@ -463,7 +463,53 @@ public Boleta getBoletaporid(Integer id) {
         }
         return mantenciones;
     }
+  public List<Venta> getventa( String producto, java.util.Date fecha, java.util.Date fecha2 ) {
+        List<Venta> ventas = new ArrayList<Venta>();
 
+        try {
+            if (producto!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query ="select * from venta where producto = ?"
+                        + " and idboleta in (select idboleta from boleta WHERE DATE(fecha) BETWEEN ? AND ?)";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    java.sql.Date few = new java.sql.Date(fecha.getTime());
+                    java.sql.Date fe =new java.sql.Date(fecha2.getTime());
+                    st.setDate(2, few);
+                    st.setString(1, producto);
+                    st.setDate(3, fe);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            Mantencion mantencion =new Mantencion();
+                            Venta venta = new Venta();
+                            venta.setCantidad(rs.getString("cantidad"));
+                            venta.setPreciocompra(rs.getFloat("preciocompra"));
+                            venta.setPrecioventa(rs.getFloat("precioventa"));
+                            venta.setProducto(rs.getString("producto"));
+                            venta.setIdboleta(rs.getInt("idboleta"));
+                            venta.setProveedor(rs.getString("proveedor"));
+                            ventas.add(venta);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          ventas = new ArrayList<Venta>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + producto, e);
+        }
+        return ventas;
+    }
   public List<Venta> getventa( String producto) {
         List<Venta> ventas = new ArrayList<Venta>();
 
@@ -489,7 +535,10 @@ public Boleta getBoletaporid(Integer id) {
                             Venta venta = new Venta();
                             venta.setCantidad(rs.getString("cantidad"));
                             venta.setPreciocompra(rs.getFloat("preciocompra"));
-                            
+                            venta.setPrecioventa(rs.getFloat("precioventa"));
+                            venta.setProducto(rs.getString("producto"));
+                            venta.setIdboleta(rs.getInt("idboleta"));
+                            venta.setProveedor(rs.getString("proveedor"));
                             ventas.add(venta);
                         } 
                         rs.close();

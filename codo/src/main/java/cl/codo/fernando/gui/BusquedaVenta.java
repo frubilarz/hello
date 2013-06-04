@@ -1,10 +1,14 @@
 package cl.codo.fernando.gui;
 
 
+import cl.codo.fernando.servicio.ServicioDB;
+import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this template, choose Tools | Templates
@@ -16,13 +20,17 @@ import javax.swing.JTextField;
  * @author fernando
  */
 public class BusquedaVenta extends javax.swing.JFrame {
-
+        DefaultTableModel modelo;
     /**
      * Creates new form BusquedaVenta
      */
     public BusquedaVenta() {
         initComponents();
         Sletras(producto_text);
+        String cabecera[]={"nº de Factura","Cantidad","Producto","Valor Unitario Compra","Valor Unitario venta","Proveedor","Valor compra","Valor venta"};
+        String dats[][]={};
+        modelo = new DefaultTableModel(dats,cabecera);
+        TABLA.setModel(modelo);
 
     }
     String fecha(String mes) {
@@ -94,7 +102,7 @@ public class BusquedaVenta extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TABLA = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -116,7 +124,7 @@ public class BusquedaVenta extends javax.swing.JFrame {
 
         jLabel1.setText("BUSQUEDA");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TABLA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -144,7 +152,7 @@ public class BusquedaVenta extends javax.swing.JFrame {
                 "N° Factura", "Cantidad", "Producto", "Valor unitario compra", "Valor unitario venta", "Proveedor", "Valor venta", "Valor compra"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TABLA);
 
         jLabel4.setText("-");
 
@@ -284,12 +292,42 @@ public class BusquedaVenta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        
+         if("".equals(this.producto_text.getText()))
+        {
+            if("*".equals(this.dia_text.getSelectedItem().toString()) || "*".equals(this.dia_text1.getSelectedItem().toString()) || "*".equals(this.mes_text.getSelectedItem().toString()) || "*".equals(this.mes2_text.getSelectedItem().toString())|| "*".equals(this.anio_text.getSelectedItem().toString())||"*".equals(this.anio_text1.getSelectedItem().toString()))
+            {
+                JOptionPane.showMessageDialog(anio_text,"No Ingresaste nada");
+            }
+        }
         if(!"".equals(this.producto_text.getText()))
         {
             if("*".equals(this.dia_text.getSelectedItem().toString()) || "*".equals(this.dia_text1.getSelectedItem().toString()) || "*".equals(this.mes_text.getSelectedItem().toString()) || "*".equals(this.mes2_text.getSelectedItem().toString())|| "*".equals(this.anio_text.getSelectedItem().toString())||"*".equals(this.anio_text1.getSelectedItem().toString()))
             {
                 JOptionPane.showMessageDialog(anio_text,"Solo ingreso producto");
+               ServicioDB servicio =new ServicioDB();
+                List<cl.codo.fernando.modelo.Venta> ventas= servicio.getventa(this.producto_text.getText());
+                Object fila[] = new Object[200];
+                  if(!ventas.isEmpty())
+                    {
+                        for(cl.codo.fernando.modelo.Venta vent : ventas)
+                        {
+                            Integer cantidad= Integer.parseInt(vent.getCantidad());
+                            fila[0]=vent.getIdboleta();
+                            fila[1]=vent.getCantidad();
+                            fila[2]=vent.getProducto();
+                            fila[3]=vent.getPreciocompra();
+                            fila[4]=vent.getPrecioventa();
+                            fila[5]=vent.getProveedor();
+                            fila[6]=vent.getPrecioventa() * cantidad;
+                            fila[7]=vent.getPrecioventa() * cantidad;
+                            modelo.addRow(fila);
+                         }
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(anio_text,"No Existe Regristo de ese producto");
+                    }
+       
+
             }
         }
         if(!"*".equals(this.dia_text.getSelectedItem().toString()) && !"*".equals(this.dia_text1.getSelectedItem().toString()) && !"*".equals(this.mes_text.getSelectedItem().toString()) && !"*".equals(this.mes2_text.getSelectedItem().toString()) && !"*".equals(this.anio_text.getSelectedItem().toString()) && !"*".equals(this.anio_text1.getSelectedItem().toString()))
@@ -302,10 +340,21 @@ public class BusquedaVenta extends javax.swing.JFrame {
         if(!"*".equals(this.dia_text.getSelectedItem().toString()) && !"*".equals(this.dia_text1.getSelectedItem().toString()) && !"*".equals(this.mes_text.getSelectedItem().toString()) && !"*".equals(this.mes2_text.getSelectedItem().toString()) && !"*".equals(this.anio_text.getSelectedItem().toString()) && !"*".equals(this.anio_text1.getSelectedItem().toString()))
         {
             if(!"".equals(this.producto_text.getText()))
-            {
+            {   ServicioDB servicio = new ServicioDB();
                 JOptionPane.showMessageDialog(anio_text,"Ingreso Ambos Campos");
+                
+                String m1= fecha(this.mes_text.getSelectedItem().toString());
+                String anio= this.anio_text.getSelectedItem().toString();
+                String dia = this.dia_text.getSelectedItem().toString();
+                String m2= fecha(this.mes2_text.getSelectedItem().toString());
+                String anio2= this.anio_text1.getSelectedItem().toString();
+                String dia2 = this.dia_text1.getSelectedItem().toString();
+                java.util.Date fecha1 = FechaUtils.getFecha(Integer.parseInt(anio), Integer.parseInt(m1)-1,Integer.parseInt(dia));
+                java.util.Date fecha2 = FechaUtils.getFecha(Integer.parseInt(anio2), Integer.parseInt(m2)-1,Integer.parseInt(dia2));
+                List<cl.codo.fernando.modelo.Venta> ventas= servicio.getventa(this.producto_text.getText(),fecha1,fecha2);
             }
-        }
+        }      
+        TABLA.setModel(modelo);
     // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -360,6 +409,7 @@ public class BusquedaVenta extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TABLA;
     private javax.swing.JComboBox anio_text;
     private javax.swing.JComboBox anio_text1;
     private javax.swing.JComboBox dia_text;
@@ -375,7 +425,6 @@ public class BusquedaVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox mes2_text;
     private javax.swing.JComboBox mes_text;
     private javax.swing.JTextField producto_text;
