@@ -3,7 +3,10 @@ package cl.codo.fernando.gui;
 
 import cl.codo.fernando.modelo.Empresa;
 import cl.codo.fernando.servicio.ServicioDB;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /*
  * To change this template, choose Tools | Templates
@@ -15,14 +18,33 @@ import javax.swing.JOptionPane;
  * @author fernando
  */
 public class Guardado extends javax.swing.JFrame {
-
+    public void Nletras(JTextField a) {
+        a.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume();
+                }
+            }
+        });
+    }
     /**
      * Creates new form Guardado
      */
     public Guardado() {
         initComponents();
+        Nletras(idboleta);
     }
-
+    String factoring(int f)
+    {
+        if(f==0)
+            return "BCI";
+        if (f==1)
+            return "Yakora";
+        if(f==2)
+            return "LYM";
+        return null;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,11 +75,11 @@ public class Guardado extends javax.swing.JFrame {
         direccion_text = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         fechav_text = new javax.swing.JTextField();
-        factura_text = new javax.swing.JTextField();
+        idboleta = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
-        fatoring = new javax.swing.JComboBox();
         estado = new javax.swing.JComboBox();
+        factoring_text = new javax.swing.JLabel();
+        estado_text = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,29 +140,24 @@ public class Guardado extends javax.swing.JFrame {
             }
         });
 
-        jLabel15.setText("Detalles");
-
-        fatoring.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BCI", "Yakora", "LYM" }));
-
         estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cero", "Pagado", "Excedente" }));
+
+        factoring_text.setText(".");
+
+        estado_text.setText(".");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(factura_text, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel15)))
-                .addGap(0, 135, Short.MAX_VALUE))
+                .addGap(148, 148, 148)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(idboleta, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 113, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,25 +176,24 @@ public class Guardado extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel18))
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel9))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(estado, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fechav_text)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(estado_text)
                                     .addComponent(direccion_text)
                                     .addComponent(monto_text)
                                     .addComponent(contacto_text)
                                     .addComponent(nombre_text)
                                     .addComponent(rut_text)
                                     .addComponent(n_factura)
-                                    .addComponent(fecha_emicion))
-                                .addGap(0, 404, Short.MAX_VALUE))
-                            .addComponent(fatoring, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fechav_text)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(134, 134, 134)
-                        .addComponent(estado, 0, 409, Short.MAX_VALUE)))
+                                    .addComponent(fecha_emicion)
+                                    .addComponent(factoring_text))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -186,7 +202,7 @@ public class Guardado extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(factura_text, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idboleta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -215,7 +231,7 @@ public class Guardado extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(fatoring, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(factoring_text))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -224,13 +240,13 @@ public class Guardado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(fechav_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(134, 134, 134)
+                    .addComponent(estado_text))
+                .addGap(14, 14, 14)
+                .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,11 +278,14 @@ public class Guardado extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         ServicioDB servicio = new ServicioDB();
-        String rut=null;
-        String factura = this.factura_text.getText();
-        int fac= Integer.parseInt(factura);
-        Boleta boleta = new Boleta();
-
+        String factura = this.idboleta.getText();
+        Integer fac= Integer.parseInt(factura);
+        cl.codo.fernando.modelo.Boleta boleta = servicio.getBoletaporid(factura);
+        cl.codo.fernando.modelo.Empresa empresa = servicio.getEmpresaPorId(boleta.getIdempresa());
+        cl.codo.fernando.modelo.Pago pago = servicio.getpago(boleta.getIdboleta());
+        int factor = pago.getIdfactoring();
+        String fatoring = factoring(factor);
+        this.fecha_emicion.setText(boleta.getFecha().toString());
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -309,15 +328,15 @@ public class Guardado extends javax.swing.JFrame {
     private javax.swing.JLabel contacto_text;
     private javax.swing.JLabel direccion_text;
     private javax.swing.JComboBox estado;
-    private javax.swing.JTextField factura_text;
-    private javax.swing.JComboBox fatoring;
+    private javax.swing.JLabel estado_text;
+    private javax.swing.JLabel factoring_text;
     private javax.swing.JLabel fecha_emicion;
     private javax.swing.JTextField fechav_text;
+    private javax.swing.JTextField idboleta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;

@@ -249,13 +249,13 @@ public class BusquedaVenta extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -335,6 +335,36 @@ public class BusquedaVenta extends javax.swing.JFrame {
             if("".equals(this.producto_text.getText()))
             {
                 JOptionPane.showMessageDialog(anio_text, "Solo Ingreso Fecha");
+                ServicioDB servicio = new ServicioDB();               
+                String m1= fecha(this.mes_text.getSelectedItem().toString());
+                String anio= this.anio_text.getSelectedItem().toString();
+                String dia = this.dia_text.getSelectedItem().toString();
+                String m2= fecha(this.mes2_text.getSelectedItem().toString());
+                String anio2= this.anio_text1.getSelectedItem().toString();
+                String dia2 = this.dia_text1.getSelectedItem().toString();
+                java.util.Date fecha1 = FechaUtils.getFecha(Integer.parseInt(anio), Integer.parseInt(m1)-1,Integer.parseInt(dia));
+                java.util.Date fecha2 = FechaUtils.getFecha(Integer.parseInt(anio2), Integer.parseInt(m2)-1,Integer.parseInt(dia2));
+                List<cl.codo.fernando.modelo.Venta> ventas= servicio.getventa(fecha1,fecha2);
+                  Object fila[] = new Object[200];
+                  if(!ventas.isEmpty())
+                    {
+                        for(cl.codo.fernando.modelo.Venta vent : ventas)
+                        {
+                            Integer cantidad= Integer.parseInt(vent.getCantidad());
+                            fila[0]=vent.getIdboleta();
+                            fila[1]=vent.getCantidad();
+                            fila[2]=vent.getProducto();
+                            fila[3]=vent.getPreciocompra();
+                            fila[4]=vent.getPrecioventa();
+                            fila[5]=vent.getProveedor();
+                            fila[6]=vent.getPrecioventa() * cantidad;
+                            fila[7]=vent.getPreciocompra() * cantidad;
+                            modelo.addRow(fila);
+                         }
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(anio_text,"No Existe Regristo de ese producto entre esas Fechas");
+                    }
             }
         }
         if(!"*".equals(this.dia_text.getSelectedItem().toString()) && !"*".equals(this.dia_text1.getSelectedItem().toString()) && !"*".equals(this.mes_text.getSelectedItem().toString()) && !"*".equals(this.mes2_text.getSelectedItem().toString()) && !"*".equals(this.anio_text.getSelectedItem().toString()) && !"*".equals(this.anio_text1.getSelectedItem().toString()))
@@ -352,6 +382,26 @@ public class BusquedaVenta extends javax.swing.JFrame {
                 java.util.Date fecha1 = FechaUtils.getFecha(Integer.parseInt(anio), Integer.parseInt(m1)-1,Integer.parseInt(dia));
                 java.util.Date fecha2 = FechaUtils.getFecha(Integer.parseInt(anio2), Integer.parseInt(m2)-1,Integer.parseInt(dia2));
                 List<cl.codo.fernando.modelo.Venta> ventas= servicio.getventa(this.producto_text.getText(),fecha1,fecha2);
+                  Object fila[] = new Object[200];
+                  if(!ventas.isEmpty())
+                    {
+                        for(cl.codo.fernando.modelo.Venta vent : ventas)
+                        {
+                            Integer cantidad= Integer.parseInt(vent.getCantidad());
+                            fila[0]=vent.getIdboleta();
+                            fila[1]=vent.getCantidad();
+                            fila[2]=vent.getProducto();
+                            fila[3]=vent.getPreciocompra();
+                            fila[4]=vent.getPrecioventa();
+                            fila[5]=vent.getProveedor();
+                            fila[6]=vent.getPrecioventa() * cantidad;
+                            fila[7]=vent.getPreciocompra() * cantidad;
+                            modelo.addRow(fila);
+                         }
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(anio_text,"No Existe Regristo de ese producto entre esas Fechas");
+                    }
             }
         }      
         TABLA.setModel(modelo);

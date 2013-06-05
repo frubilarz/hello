@@ -145,7 +145,46 @@ public Boleta getBoletaporid(Integer id) {
         }
         return boleta;
     }
+public Boleta getBoletaporid(String id) {
+        Boleta boleta = null;
+        try {
+            if (id != null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
 
+                PreparedStatement st = null;
+                String query = "SELECT * FROM boleta WHERE idboleta=?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    st.setInt(1, Integer.parseInt(id));
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        if (rs.next()) {
+                            boleta = new Boleta();
+                            boleta.setFecha(rs.getDate("fecha"));
+                            boleta.setIdempresa(rs.getString("idempresa"));
+                            boleta.setIdboleta(rs.getInt("idboleta"));
+                            boleta.setIdempresa(rs.getInt("idempresa"));
+
+                        } else {
+                            logger.info("No existe usuario: " + id);
+                        }
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: Rut vacío");
+            }
+        } catch (Exception e) {
+            boleta = null;
+            logger.error(e.toString());
+            logger.debug("Error al obtener usuario", e);
+        }
+        return boleta;
+    }
 
     public Usuario getUsuario(Integer rut) {
         Usuario usuario = null;
@@ -507,6 +546,53 @@ public Boleta getBoletaporid(Integer id) {
           ventas = new ArrayList<Venta>();
             logger.error(e.toString());
             logger.debug("Error al obtener mantencion por lugar " + producto, e);
+        }
+        return ventas;
+    }
+  
+   public List<Venta> getventa( java.util.Date fecha, java.util.Date fecha2 ) {
+        List<Venta> ventas = new ArrayList<Venta>();
+
+        try {
+            if (fecha!=null && fecha2!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query ="select * from venta where "
+                        + " idboleta in (select idboleta from boleta WHERE DATE(fecha) BETWEEN ? AND ?)";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    java.sql.Date few = new java.sql.Date(fecha.getTime());
+                    java.sql.Date fe =new java.sql.Date(fecha2.getTime());
+                    st.setDate(1, few);
+                    st.setDate(2, fe);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            Mantencion mantencion =new Mantencion();
+                            Venta venta = new Venta();
+                            venta.setCantidad(rs.getString("cantidad"));
+                            venta.setPreciocompra(rs.getFloat("preciocompra"));
+                            venta.setPrecioventa(rs.getFloat("precioventa"));
+                            venta.setProducto(rs.getString("producto"));
+                            venta.setIdboleta(rs.getInt("idboleta"));
+                            venta.setProveedor(rs.getString("proveedor"));
+                            ventas.add(venta);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          ventas = new ArrayList<Venta>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener venta por fecha " + fecha, e);
         }
         return ventas;
     }
