@@ -1,6 +1,7 @@
 package cl.codo.fernando.utils;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,7 +57,18 @@ public abstract class FechaUtils implements Serializable {
         }
         return fecha;
     }
-
+public static Date destringadate(String fecha)
+{
+    SimpleDateFormat formatodeltexto=new SimpleDateFormat("dd-MM-yyyy");
+    Date fechaEnviar= null;
+    try{
+        fechaEnviar= formatodeltexto.parse(fecha);
+        return fechaEnviar;
+    }catch(ParseException ex){
+        ex.printStackTrace();
+        return null;
+    }
+}
     public static Date getFecha(int anio, int mes) {
         Date fecha = null;
         try {

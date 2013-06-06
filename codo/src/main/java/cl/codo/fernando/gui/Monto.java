@@ -29,40 +29,40 @@ public class Monto extends javax.swing.JFrame {
 //        Nletras(anio);
     }
   String fecha(String mes) {
-        if ("enero".equals(mes)) {
+        if ("Enero".equals(mes)) {
             return "1";
         }
-        if ("febrero".equals(mes)) {
+        if ("Febrero".equals(mes)) {
             return "2";
         }
-        if ("marzo".equals(mes)) {
+        if ("Marzo".equals(mes)) {
             return "3";
         }
-        if ("abril".equals(mes)) {
+        if ("Abril".equals(mes)) {
             return "4";
         }
-        if ("mayo".equals(mes)) {
+        if ("Mayo".equals(mes)) {
             return "5";
         }
-        if ("junio".equals(mes)) {
+        if ("Junio".equals(mes)) {
             return "6";
         }
-        if ("julio".equals(mes)) {
+        if ("Julio".equals(mes)) {
             return "7";
         }
-        if ("agosto".equals(mes)) {
+        if ("Agosto".equals(mes)) {
             return "8";
         }
-        if ("octubre".equals(mes)) {
+        if ("Octubre".equals(mes)) {
             return "10";
         }
-        if ("spetiembre".equals(mes)) {
+        if ("Septiembre".equals(mes)) {
             return "9";
         }
-        if ("noviembre".equals(mes)) {
+        if ("Noviembre".equals(mes)) {
             return "11";
         }
-        if ("diciembre".equals(mes)) {
+        if ("Diciembre".equals(mes)) {
             return "12";
         }
         return "0";
@@ -119,7 +119,7 @@ public class Monto extends javax.swing.JFrame {
 
         jLabel6.setText("-");
 
-        mes_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
+        mes_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
         anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
@@ -140,7 +140,7 @@ public class Monto extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mes_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,7 +231,7 @@ public class Monto extends javax.swing.JFrame {
         Integer dia =01;
         Date fecha1=FechaUtils.getFecha(anio,mes-1,dia);
         Date fecha2=FechaUtils.getFecha(anio,mes,dia-1);
-        float monto1=0,iva,neto;
+        double monto1=0,iva,neto;
         ServicioDB servicio = new ServicioDB();
         List<cl.codo.fernando.modelo.Pago> pagos = servicio.getmonto(fecha1, fecha2);
         if(!pagos.isEmpty())
@@ -241,13 +241,11 @@ public class Monto extends javax.swing.JFrame {
                monto1 = monto1 + pago.getMonto();
             }
         }
-
-        
         String m = ""+ monto1;
         float netoneto;
         netoneto = (float) (monto1/1.19);
         float i_v_a; 
-        i_v_a = monto1-netoneto;
+        i_v_a = (float) (monto1-netoneto);
         String n= ""+netoneto;
         String i=""+i_v_a;
         this.monto_text.setText(m);

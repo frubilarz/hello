@@ -104,7 +104,8 @@ public class ServicioDB implements Serializable {
             logger.info("ERROR: conexión aún activa");
         }
     }
-public Boleta getBoletaporid(Integer id) {
+
+    public Boleta getBoletaPorIdboleta(Integer id) {
         Boleta boleta = null;
         try {
             if (id != null) {
@@ -114,7 +115,48 @@ public Boleta getBoletaporid(Integer id) {
                 }
 
                 PreparedStatement st = null;
-                String query = "SELECT * FROM boleta WHERE idboleta=?";
+                String query = "SELECT * FROM boleta WHERE idboleta=? ORDER BY idboleta DESC LIMIT 1";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                    st.setInt(1, id);
+
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        if (rs.next()) {
+                            boleta = new Boleta();
+                            boleta.setFecha(rs.getDate("fecha"));
+                            boleta.setIdboleta(rs.getInt("idboleta"));
+                            boleta.setIdempresa(rs.getInt("idempresa"));
+                        } else {
+                            logger.info("ERROR: No existe boleta");
+                        }
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+            boleta = null;
+            logger.error(e.toString());
+            logger.debug("Error al obtener boleta por id empresa " + id, e);
+        }
+        return boleta;
+    }    
+    
+    
+public Boleta getBoletaporid(int id) {
+        Boleta boleta = null;
+        try {
+            if (id != 0) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM boleta WHERE idboleta = ?";
                 st = conexion.prepareStatement(query);
                 if (st != null) {
                     st.setInt(1, id);
@@ -145,7 +187,7 @@ public Boleta getBoletaporid(Integer id) {
         }
         return boleta;
     }
-public Boleta getBoletaporid(String id) {
+    public Boleta getboleta(Integer id) {
         Boleta boleta = null;
         try {
             if (id != null) {
@@ -158,7 +200,8 @@ public Boleta getBoletaporid(String id) {
                 String query = "SELECT * FROM boleta WHERE idboleta=?";
                 st = conexion.prepareStatement(query);
                 if (st != null) {
-                    st.setInt(1, Integer.parseInt(id));
+                    st.setInt(1, id);
+
                     ResultSet rs = st.executeQuery();
                     if (rs != null) {
                         if (rs.next()) {
@@ -166,22 +209,22 @@ public Boleta getBoletaporid(String id) {
                             boleta.setFecha(rs.getDate("fecha"));
                             boleta.setIdempresa(rs.getString("idempresa"));
                             boleta.setIdboleta(rs.getInt("idboleta"));
-                            boleta.setIdempresa(rs.getInt("idempresa"));
 
+                            
                         } else {
-                            logger.info("No existe usuario: " + id);
+                            logger.info("ERROR: no existe boleta");
                         }
                         rs.close();
                     }
                     st.close();
                 }
             } else {
-                logger.info("ERROR: Rut vacío");
+                logger.info("ERROR: ID nulo");
             }
         } catch (Exception e) {
             boleta = null;
             logger.error(e.toString());
-            logger.debug("Error al obtener usuario", e);
+            logger.debug("Error al obtener boleta por id " + id, e);
         }
         return boleta;
     }
@@ -1055,7 +1098,6 @@ public Empresa getEmpresaPorRut(String rut) {
                         if (rs.next()) {
                             boleta = new Boleta();
                             boleta.setFecha(rs.getDate("fecha"));
-                            //boleta.setNumero(rs.getString("numero"));
                             boleta.setIdboleta(rs.getInt("idboleta"));
                             boleta.setIdempresa(rs.getInt("idempresa"));
                         } else {
@@ -1119,6 +1161,54 @@ public boolean guardar(Mantencion mantencion) {
  }
  return resultado;
 }
+
+ 
+  public boolean guardarcambios(Integer id, String estado) {
+        boolean resultado = false;
+        try {
+            logger.error("algo");
+            if (estado!= null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                boolean update = false;
+                if (id != null) {
+                    if (id > 0) {
+                        update = true;
+                    }
+                }
+
+                PreparedStatement st = null;
+                String query = "";
+                if (update) {
+                    query = "UPDATE pago SET  estado=? WHERE idpago = ?";
+                    st = conexion.prepareStatement(query);
+                    st.setString(1, estado);
+                    st.setInt(2, id);
+
+                }
+
+                if (st != null) {
+                    logger.info(st.toString());
+                    st.execute();
+
+                    int updateCount = st.getUpdateCount();
+                    if (updateCount > 0) {
+                        resultado = true;
+                    }
+                }
+            } else {
+                logger.info("ERROR: empresa nula");
+            }
+        } catch (Exception e) {
+            resultado = false;
+            logger.error(e.toString());
+            logger.debug("Error al guardar empresa", e);
+        }
+        return resultado;
+    }  
 
     
     public boolean guardar(Empresa empresa) {
@@ -1360,5 +1450,7 @@ public boolean guardar(Mantencion mantencion) {
         }
         return resultado;
     }
+
+
 }
 

@@ -2,7 +2,9 @@ package cl.codo.fernando.gui;
 
 
 import cl.codo.fernando.modelo.Empresa;
+import cl.codo.fernando.modelo.Boleta;
 import cl.codo.fernando.servicio.ServicioDB;
+import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -30,8 +32,9 @@ public class Guardado extends javax.swing.JFrame {
     }
     /**
      * Creates new form Guardado
-     */
+     */Integer a=0;
     public Guardado() {
+        
         initComponents();
         Nletras(idboleta);
     }
@@ -268,7 +271,14 @@ public class Guardado extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         JOptionPane.showMessageDialog(rootPane, "Guardado con exitosamente ");
-        Principal form = new Principal();
+        ServicioDB servicio = new ServicioDB();
+            String fech= null;
+            fech = this.fechav_text.getText();
+            String estad=null;
+            estad=this.estado.getSelectedItem().toString();
+            
+            servicio.guardarcambios(a, estad);
+            Principal form = new Principal();
             form.setVisible(true);
             form.setLocationRelativeTo(null);
             this.dispose(); 
@@ -280,12 +290,23 @@ public class Guardado extends javax.swing.JFrame {
         ServicioDB servicio = new ServicioDB();
         String factura = this.idboleta.getText();
         Integer fac= Integer.parseInt(factura);
-        cl.codo.fernando.modelo.Boleta boleta = servicio.getBoletaporid(factura);
+        Boleta boleta=servicio.getBoletaPorIdboleta(fac);
         cl.codo.fernando.modelo.Empresa empresa = servicio.getEmpresaPorId(boleta.getIdempresa());
         cl.codo.fernando.modelo.Pago pago = servicio.getpago(boleta.getIdboleta());
         int factor = pago.getIdfactoring();
         String fatoring = factoring(factor);
         this.fecha_emicion.setText(boleta.getFecha().toString());
+        this.n_factura.setText(boleta.getIdboleta().toString());
+        this.rut_text.setText(empresa.getRut());
+        this.nombre_text.setText(empresa.getNombre());
+        this.direccion_text.setText(empresa.getDireccion());
+        String fact= factoring(pago.getIdfactoring());
+        this.factoring_text.setText(fact);
+        this.contacto_text.setText(empresa.getContacto());
+        this.monto_text.setText(pago.getMonto().toString());
+        this.fechav_text.setText(pago.getFechaVencimiento().toString());
+        this.estado_text.setText(pago.getEstado());
+        a=pago.getIdPago();
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed

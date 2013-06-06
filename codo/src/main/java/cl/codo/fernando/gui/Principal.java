@@ -290,10 +290,18 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu11MouseClicked
 
     private void jMenu12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu12MouseClicked
-        // TODO add your handling code here:
+
+                    Excedente form = new Excedente();
+            form.setVisible(true);
+            form.setLocationRelativeTo(null);
+            this.dispose();         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu12MouseClicked
 
     private void jMenu12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu12ActionPerformed
+        Excedente form  = new Excedente();
+        form.setVisible(true);
+        form.setLocale(null);
+        this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu12ActionPerformed
 
