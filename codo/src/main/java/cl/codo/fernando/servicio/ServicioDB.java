@@ -731,6 +731,47 @@ public Boleta getBoletaporid(int id) {
         }
         return ventas;
     }
+public Venta getventa( Integer id) {
+        Venta venta = null;
+
+        try {
+            if (id!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query ="select * from venta where idboleta = ?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+
+                    st.setInt(1, id);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                       if (rs.next()) {
+                            venta = new Venta();
+                            venta.setCantidad(rs.getString("cantidad"));
+                            venta.setPreciocompra(rs.getFloat("preciocompra"));
+                            venta.setPrecioventa(rs.getFloat("precioventa"));
+                            venta.setProducto(rs.getString("producto"));
+                            venta.setIdboleta(rs.getInt("idboleta"));
+                            venta.setProveedor(rs.getString("proveedor"));
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          venta = null;
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + id, e);
+        }
+        return venta;
+    }
 
   
   
@@ -777,6 +818,51 @@ public Boleta getBoletaporid(int id) {
             logger.debug("Error al obtener mantencion por lugar " + lugar, e);
         }
         return mantenciones;
+    }
+     
+         public Mantencion getmantencion( Integer id ) {
+        Mantencion mantencion = null;
+
+        try {
+            if (id!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query = "SELECT * FROM mantencion WHERE idboleta=?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+
+                    st.setInt(1, id);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                             mantencion =new Mantencion();
+                            mantencion = new Mantencion();
+                            mantencion.setComentario(rs.getString("comentario"));
+                           mantencion.setDetalle(rs.getString("detalle"));
+                           mantencion.setFechafin(rs.getDate("fechafinl"));
+                           mantencion.setFechainicio(rs.getDate("fechainicio"));
+                           mantencion.setLugar(rs.getString("lugarl"));
+                           mantencion.setIdmantencion(rs.getInt("idmantencion"));
+                           mantencion.setIdboleta(rs.getInt("idboleta"));
+                           
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          mantencion = null;
+            logger.error(e.toString());
+            logger.debug("Error al obtener mantencion por lugar " + id, e);
+        }
+        return mantencion;
     }
      
          public List<Pago> getmonto( java.util.Date fecha1, java.util.Date fecha2 ) {
@@ -970,9 +1056,9 @@ public Boleta getBoletaporid(int id) {
         }
         return vistas;
     }   
-                public List<vista> getdatosnopagados(java.util.Date fecha ) {
+                public List<vista> getdatosnopagados() {
         List<vista> vistas = new ArrayList<vista>();
-
+        String fecha="s";
         try {
             if (fecha!=null) {
                 // Conectamos si no está conectado
@@ -981,15 +1067,11 @@ public Boleta getBoletaporid(int id) {
                 }
 
                 PreparedStatement st = null;
-                String query = "SELECT * FROM todo WHERE DATE(fechavencimiento) BETWEEN ? AND ? and estado=?";
+                String query = "SELECT * FROM todo WHERE estado=?";
                 st = conexion.prepareStatement(query);
                 if (st != null) {
-                      java.sql.Date fe = new java.sql.Date(fecha.getTime());
-                      java.util.Date fecha1 = cl.codo.fernando.utils.FechaUtils.sumarDia(fecha, -7);
-                      java.sql.Date fw = new java.sql.Date(fecha1.getTime());
-                      st.setDate(1, fw);
-                      st.setDate(2, fe);
-                      st.setString(3, "0");
+
+                      st.setString(1, "0");
 
                     ResultSet rs = st.executeQuery();
                     if (rs != null) {
@@ -1016,7 +1098,7 @@ public Boleta getBoletaporid(int id) {
         } catch (Exception e) {
          vistas = new ArrayList<vista>();
             logger.error(e.toString());
-            logger.debug("Error al obtener vista con esa fecha " + fecha, e);
+            logger.debug("Error al obtener vista con esa fecha " +  e);
         }
         return vistas;
     }  

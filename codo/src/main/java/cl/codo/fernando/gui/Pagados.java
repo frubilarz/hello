@@ -132,7 +132,7 @@ public class Pagados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla1);
 
-        jLabel1.setText("Pagados");
+        jLabel1.setText("Excedente");
 
         jButton1.setText("ACEPTAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

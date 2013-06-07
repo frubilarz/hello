@@ -40,7 +40,7 @@ public class NoPagados extends javax.swing.JFrame {
         modelo.addColumn("Contacto");
         modelo.addColumn("Factoring");
         Object[] fila = new Object[20];
-        List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatospagados(fecha);
+        List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatosnopagados();
         if(!vistas.isEmpty()){
             for (cl.codo.fernando.modelo.vista visstas: vistas)
             {

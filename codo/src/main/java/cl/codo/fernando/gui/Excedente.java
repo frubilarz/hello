@@ -131,7 +131,7 @@ public class Excedente extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla1);
 
-        jLabel1.setText("Excedente");
+        jLabel1.setText("Pagado");
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

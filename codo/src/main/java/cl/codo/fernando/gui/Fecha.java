@@ -382,18 +382,17 @@ public class Fecha extends javax.swing.JFrame {
                     if(!vistas.isEmpty()){
                         for (cl.codo.fernando.modelo.vista visstas: vistas)
                             {
-                                fila[0]=visstas.getRut();
-                                fila[1]=visstas.getNombre();
-                                cl.codo.fernando.modelo.Empresa empresa = new cl.codo.fernando.modelo.Empresa();
-                                empresa=servicio.getEmpresaPorRut(visstas.getRut().toString());
-                                fila[2]=empresa.getNombre();
-                                fila[3]=visstas.getFechaemicion();
-                                fila[4]=visstas.getMonto();
-                                fila[5]=visstas.getFechavencimiento();
-                                fila[6]=visstas.getNumero();
-                                fila[7]=visstas.getFactoring();
-                                fila[8]=visstas.getEstado();
-                                modelo.addRow(fila);
+                        fila[0]=visstas.getRut();
+                        fila[1]=visstas.getNombre();
+                        Pago pago= servicio.getpago(visstas.getMonto(), visstas.getEstado(),visstas.getFechavencimiento());
+                        fila[2]=pago.getIdboleta();
+                        fila[3]=visstas.getFechaemicion();
+                        fila[4]=visstas.getMonto();
+                        fila[5]=visstas.getFechavencimiento();
+                        fila[6]=visstas.getNumero();
+                        fila[7]=visstas.getFactoring();
+                        fila[8]=visstas.getEstado();
+                        modelo.addRow(fila);
                             }
                         }else{
                             JOptionPane.showMessageDialog(anio_text,"no existen datos entre esas fechas");
@@ -420,20 +419,20 @@ public class Fecha extends javax.swing.JFrame {
                     if(!vistas.isEmpty()){
                         for (cl.codo.fernando.modelo.vista visstas: vistas)
                             {
-                                fila[0]=visstas.getRut();
-                                fila[1]=visstas.getNombre();
-                                cl.codo.fernando.modelo.Empresa empresa = new cl.codo.fernando.modelo.Empresa();
-                                empresa=servicio.getEmpresaPorRut(visstas.getRut().toString());
-                                fila[2]=empresa.getNombre();
-                                fila[3]=visstas.getFechaemicion();
-                                fila[4]=visstas.getMonto();
-                                fila[5]=visstas.getFechavencimiento();
-                                fila[6]=visstas.getNumero();
-                                fila[7]=visstas.getFactoring();
-                                fila[8]=visstas.getEstado();
+                        fila[0]=visstas.getRut();
+                        fila[1]=visstas.getNombre();
+                        Pago pago= servicio.getpago(visstas.getMonto(), visstas.getEstado(),visstas.getFechavencimiento());
+                        fila[2]=pago.getIdboleta();
+                        fila[3]=visstas.getFechaemicion();
+                        fila[4]=visstas.getMonto();
+                        fila[5]=visstas.getFechavencimiento();
+                        fila[6]=visstas.getNumero();
+                        fila[7]=visstas.getFactoring();
+                        fila[8]=visstas.getEstado();
+                        modelo.addRow(fila);
                             }
                         }else{
-                            JOptionPane.showMessageDialog(anio_text,"no existen datos entre esas fechas con el rut "  + rutStr);
+                            JOptionPane.showMessageDialog(anio_text,"no existen datos entre esas fechas con el rut   "  + rutStr);
                     }
             }
         }

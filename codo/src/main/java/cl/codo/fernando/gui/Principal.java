@@ -128,7 +128,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenu9);
 
-        jMenu8.setText("Pagadas");
+        jMenu8.setText("Excedente");
         jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu8MouseClicked(evt);
@@ -136,7 +136,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenu8);
 
-        jMenu12.setText("Excedente");
+        jMenu12.setText("Pagadas");
         jMenu12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu12MouseClicked(evt);

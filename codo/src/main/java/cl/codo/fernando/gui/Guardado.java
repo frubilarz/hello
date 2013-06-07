@@ -8,7 +8,9 @@ import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this template, choose Tools | Templates
@@ -40,11 +42,11 @@ public class Guardado extends javax.swing.JFrame {
     }
     String factoring(int f)
     {
-        if(f==0)
+        if(f==1)
             return "BCI";
-        if (f==1)
+        if (f==2)
             return "Yakora";
-        if(f==2)
+        if(f==3)
             return "LYM";
         return null;
     }
@@ -57,6 +59,8 @@ public class Guardado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -83,6 +87,29 @@ public class Guardado extends javax.swing.JFrame {
         factoring_text = new javax.swing.JLabel();
         estado_text = new javax.swing.JLabel();
         fechav_text = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        detalle_tetx = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla1 = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cantidad", "Producto", "Valor unitario compra", "Valor unitario venta", "Proveedor", "Valor venta", "Valor compra"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +178,29 @@ public class Guardado extends javax.swing.JFrame {
 
         fechav_text.setText(".");
 
+        jLabel10.setText("Detalle");
+
+        detalle_tetx.setText(".");
+
+        tabla1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cantidad", "Producto", "Valor unitario compra", "Valor unitario venta", "Proveedor", "Valor venta", "Valor compra"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,15 +212,11 @@ public class Guardado extends javax.swing.JFrame {
                 .addComponent(idboleta, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 113, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 135, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -182,9 +228,13 @@ public class Guardado extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(detalle_tetx)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(estado, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +248,12 @@ public class Guardado extends javax.swing.JFrame {
                                     .addComponent(fecha_emicion)
                                     .addComponent(factoring_text)
                                     .addComponent(fechav_text))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -251,7 +306,13 @@ public class Guardado extends javax.swing.JFrame {
                     .addComponent(estado_text))
                 .addGap(14, 14, 14)
                 .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(detalle_tetx))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -278,7 +339,10 @@ public class Guardado extends javax.swing.JFrame {
             fech = this.fechav_text.getText();
             String estad=null;
             estad=this.estado.getSelectedItem().toString();
-            
+            if("Cero".equals(estad))
+            {
+                estad="0";
+            }
             servicio.guardarcambios(a, estad);
             Principal form = new Principal();
             form.setVisible(true);
@@ -290,6 +354,7 @@ public class Guardado extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         ServicioDB servicio = new ServicioDB();
+                    DefaultTableModel modelo = new DefaultTableModel();
         String factura = this.idboleta.getText();
         Integer fac= Integer.parseInt(factura);
         Boleta boleta=servicio.getBoletaPorIdboleta(fac);
@@ -309,7 +374,45 @@ public class Guardado extends javax.swing.JFrame {
         this.fechav_text.setText(pago.getFechaVencimiento().toString());
         this.estado_text.setText(pago.getEstado());
         a=pago.getIdPago();
-        
+        cl.codo.fernando.modelo.Venta venta=servicio.getventa(boleta.getIdboleta());
+        cl.codo.fernando.modelo.Mantencion mantencion= servicio.getmantencion(boleta.getIdboleta());
+        if(venta!=null)
+        {
+        this.detalle_tetx.setText("Venta");
+        JTable tabla = new JTable(modelo);
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Valor unitario compra");
+        modelo.addColumn("Valor Unitario venta");
+        modelo.addColumn("Proveedor");
+        Object[] fila = new Object[20];
+        fila[0]=venta.getCantidad();
+        fila[1]=venta.getProducto();
+        fila[2]=venta.getPreciocompra();
+        fila[3]=venta.getPrecioventa();
+        fila[4]=venta.getProveedor();
+        modelo.addRow(fila);
+     
+        }
+        if(mantencion!=null)
+        {
+        this.detalle_tetx.setText("Mantencion");
+        JTable tabla = new JTable(modelo);
+        modelo.addColumn("Fecha inicio");
+        modelo.addColumn("Fecha termino");
+        modelo.addColumn("Lugar");
+        modelo.addColumn("Detalle");
+        modelo.addColumn("Comentario");
+        Object[] fila = new Object[20];
+        fila[0]=mantencion.getFechainicio();
+        fila[1]=mantencion.getFechafin();
+        fila[2]=mantencion.getLugar();
+        fila[3]=mantencion.getDetalle();
+        fila[4]=mantencion.getComentario();
+        modelo.addRow(fila);
+     
+        }
+        tabla1.setModel(modelo);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -349,6 +452,7 @@ public class Guardado extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel contacto_text;
+    private javax.swing.JLabel detalle_tetx;
     private javax.swing.JLabel direccion_text;
     private javax.swing.JComboBox estado;
     private javax.swing.JLabel estado_text;
@@ -360,6 +464,7 @@ public class Guardado extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
@@ -370,9 +475,13 @@ public class Guardado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel monto_text;
     private javax.swing.JLabel n_factura;
     private javax.swing.JLabel nombre_text;
     private javax.swing.JLabel rut_text;
+    private javax.swing.JTable tabla1;
     // End of variables declaration//GEN-END:variables
 }

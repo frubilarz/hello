@@ -86,7 +86,7 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="jMenu8">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Pagadas"/>
+                    <Property name="text" type="java.lang.String" value="Excedente"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu8MouseClicked"/>
@@ -94,7 +94,7 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="jMenu12">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Excedente"/>
+                    <Property name="text" type="java.lang.String" value="Pagadas"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenu12MouseClicked"/>

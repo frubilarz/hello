@@ -130,7 +130,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Excedente"/>
+        <Property name="text" type="java.lang.String" value="Pagado"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
