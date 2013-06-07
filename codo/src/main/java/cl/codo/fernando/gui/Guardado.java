@@ -77,12 +77,12 @@ public class Guardado extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         direccion_text = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        fechav_text = new javax.swing.JTextField();
         idboleta = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         estado = new javax.swing.JComboBox();
         factoring_text = new javax.swing.JLabel();
         estado_text = new javax.swing.JLabel();
+        fechav_text = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,6 +149,8 @@ public class Guardado extends javax.swing.JFrame {
 
         estado_text.setText(".");
 
+        fechav_text.setText(".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,7 +186,6 @@ public class Guardado extends javax.swing.JFrame {
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(estado, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fechav_text)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(estado_text)
@@ -195,7 +196,8 @@ public class Guardado extends javax.swing.JFrame {
                                     .addComponent(rut_text)
                                     .addComponent(n_factura)
                                     .addComponent(fecha_emicion)
-                                    .addComponent(factoring_text))
+                                    .addComponent(factoring_text)
+                                    .addComponent(fechav_text))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -240,10 +242,10 @@ public class Guardado extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(monto_text))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(fechav_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(fechav_text))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(estado_text))
@@ -352,7 +354,7 @@ public class Guardado extends javax.swing.JFrame {
     private javax.swing.JLabel estado_text;
     private javax.swing.JLabel factoring_text;
     private javax.swing.JLabel fecha_emicion;
-    private javax.swing.JTextField fechav_text;
+    private javax.swing.JLabel fechav_text;
     private javax.swing.JTextField idboleta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;

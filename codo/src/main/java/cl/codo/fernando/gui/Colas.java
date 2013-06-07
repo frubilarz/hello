@@ -274,7 +274,7 @@ public class Colas extends javax.swing.JFrame {
 
         jLabel8.setText("Detalles");
 
-        venta_boton.setText("venta");
+        venta_boton.setText("Venta");
         venta_boton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 venta_botonActionPerformed(evt);
@@ -310,14 +310,14 @@ public class Colas extends javax.swing.JFrame {
 
         jLabel14.setText("-");
 
-        factorin_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BCI", "Yakora", "LYM" }));
+        factorin_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yakora", "LYM", "BCI" }));
         factorin_text.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 factorin_textActionPerformed(evt);
             }
         });
 
-        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 

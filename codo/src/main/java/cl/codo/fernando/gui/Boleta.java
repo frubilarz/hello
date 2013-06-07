@@ -84,7 +84,7 @@ public class Boleta extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "rut", "Nombre", "N° fact", "Fecha Emicion", "Monto", "Fecha Vencimiento", "Contacto", "Factoring", "Estado"
+                "RUT", "Nombre", "N° fact", "Fecha Emicion", "Monto", "Fecha Vencimiento", "Contacto", "Factoring", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -182,15 +182,15 @@ public class Boleta extends javax.swing.JFrame {
 
         DefaultTableModel modelo = new DefaultTableModel();
         JTable tabla = new JTable(modelo);
-        modelo.addColumn("rut");
-        modelo.addColumn("nombre");
-        modelo.addColumn("n° factura");
-        modelo.addColumn("fecha emicion");
-        modelo.addColumn("monto");
-        modelo.addColumn("fecha vencimiento");
-        modelo.addColumn("contacto");
-        modelo.addColumn("factoring");
-        modelo.addColumn("estado");
+        modelo.addColumn("RUT");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("N° factura");
+        modelo.addColumn("Fecha emicion");
+        modelo.addColumn("Monto");
+        modelo.addColumn("Fecha vencimiento");
+        modelo.addColumn("Contacto");
+        modelo.addColumn("Factoring");
+        modelo.addColumn("Estado");
 
 
         

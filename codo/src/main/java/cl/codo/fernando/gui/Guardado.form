@@ -57,7 +57,6 @@
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="estado" alignment="1" max="32767" attributes="0"/>
-                          <Component id="fechav_text" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="estado_text" min="-2" max="-2" attributes="0"/>
@@ -69,6 +68,7 @@
                                   <Component id="n_factura" min="-2" max="-2" attributes="0"/>
                                   <Component id="fecha_emicion" min="-2" max="-2" attributes="0"/>
                                   <Component id="factoring_text" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fechav_text" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -129,11 +129,11 @@
                   <Component id="monto_text" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                  <Component id="fechav_text" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fechav_text" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="estado_text" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -257,8 +257,6 @@
         <Property name="text" type="java.lang.String" value="BUSCAR FACTURA"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="fechav_text">
-    </Component>
     <Component class="javax.swing.JTextField" name="idboleta">
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
@@ -286,6 +284,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="estado_text">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="fechav_text">
       <Properties>
         <Property name="text" type="java.lang.String" value="."/>
       </Properties>

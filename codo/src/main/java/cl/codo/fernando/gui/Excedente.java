@@ -4,6 +4,16 @@
  */
 package cl.codo.fernando.gui;
 
+import cl.codo.fernando.modelo.Pago;
+import cl.codo.fernando.servicio.ServicioDB;
+import cl.codo.fernando.utils.FechaUtils;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author fernando
@@ -15,6 +25,39 @@ public class Excedente extends javax.swing.JFrame {
      */
     public Excedente() {
         initComponents();
+        
+        Date fecha1 = new Date ();
+        Calendar cal1 = Calendar.getInstance();   
+        java.util.Date fecha=FechaUtils.getFecha(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE));
+           ServicioDB servicio = new ServicioDB();
+         DefaultTableModel modelo = new DefaultTableModel();
+        JTable tabla = new JTable(modelo);
+        modelo.addColumn("RUT");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("N° Factura");
+        modelo.addColumn("Fecha emicion");
+        modelo.addColumn("Monto");
+        modelo.addColumn("Fecha vencimiento");
+        modelo.addColumn("Contacto");
+        modelo.addColumn("Factoring");
+        Object[] fila = new Object[20];
+        List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatosexcedentes(fecha);
+        if(!vistas.isEmpty()){
+            for (cl.codo.fernando.modelo.vista visstas: vistas)
+            {
+                fila[0]=visstas.getRut();
+                fila[1]=visstas.getNombre();
+                Pago pago= servicio.getpago(visstas.getMonto(), visstas.getEstado(),visstas.getFechavencimiento());
+                fila[2]=pago.getIdboleta();
+                fila[3]=visstas.getFechaemicion();
+                fila[4]=visstas.getMonto();
+                fila[5]=visstas.getFechavencimiento();
+                fila[6]=visstas.getNumero();
+                fila[7]=visstas.getFactoring();
+                modelo.addRow(fila);
+            }
+        }
+        tabla1.setModel(modelo);
     }
 
     /**

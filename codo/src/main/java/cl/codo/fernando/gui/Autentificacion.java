@@ -159,6 +159,7 @@ public class Autentificacion extends javax.swing.JFrame {
                 if (validarUsuario(rut_text.getText(), palabra)) //enviar datos a validar
                 {
                     // Codigo para mostrar la ventana principal
+                    
                     Principal form = new Principal();
                     form.setVisible(true);
                     form.setLocationRelativeTo(null);

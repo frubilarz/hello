@@ -88,7 +88,7 @@ public class Venta extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "cantidad", "producto", "valor unitario compra", "valor unitario venta", "proveedor"
+                "Cantidad", "Producto", "Valor unitario compra", "Valor unitario venta", "Proveedor"
             }
         ));
         jScrollPane1.setViewportView(TABLA);
@@ -231,7 +231,7 @@ void limpiar ()
             vent.setProveedor(prov);
             ServicioDB servicio=new ServicioDB();
             servicio.guardar(vent);
-            Object fila[] = {vent.getCantidad(),vent.getProducto(),vent.getPrecioventa(),vent.getPrecioventa(),vent.getProveedor()};
+            Object fila[] = {vent.getCantidad(),vent.getProducto(),vent.getPreciocompra(),vent.getPrecioventa(),vent.getProveedor()};
             modelo.addRow(fila);
             JOptionPane.showMessageDialog(cantidad_text, "Datos ingresado a la BASE DE DATOS");
             limpiar();

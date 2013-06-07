@@ -26,7 +26,7 @@ public class BusquedaVenta extends javax.swing.JFrame {
      */
     public BusquedaVenta() {
         initComponents();
-        Sletras(producto_text);
+       
         String cabecera[]={"nº de Factura","Cantidad","Producto","Valor Unitario Compra","Valor Unitario venta","Proveedor","Valor compra","Valor venta"};
         String dats[][]={};
         modelo = new DefaultTableModel(dats,cabecera);
@@ -184,7 +184,7 @@ public class BusquedaVenta extends javax.swing.JFrame {
 
         mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
-        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         anio_text.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +193,7 @@ public class BusquedaVenta extends javax.swing.JFrame {
             }
         });
 
-        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         anio_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         anio_text1.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +319,7 @@ public class BusquedaVenta extends javax.swing.JFrame {
                             fila[4]=vent.getPrecioventa();
                             fila[5]=vent.getProveedor();
                             fila[6]=vent.getPrecioventa() * cantidad;
-                            fila[7]=vent.getPrecioventa() * cantidad;
+                            fila[7]=vent.getPreciocompra()* cantidad;
                             modelo.addRow(fila);
                          }
                     }else

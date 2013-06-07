@@ -1,5 +1,8 @@
 package cl.codo.fernando.gui;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -112,7 +115,9 @@ public class GuardadoMantencion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            Guardado form = new Guardado();
+        java.util.Date fecha = new Date();
+        JOptionPane.showMessageDialog(rootPane, (1900+fecha.getYear()));
+        Guardado form = new Guardado();
             form.setVisible(true);
             form.setLocationRelativeTo(null);
             this.dispose();

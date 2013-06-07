@@ -211,15 +211,15 @@ public class Fecha extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla1);
 
-        mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
+        mes_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
-        mes_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
+        mes_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
-        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
-        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         anio_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "*", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
@@ -266,7 +266,7 @@ public class Fecha extends javax.swing.JFrame {
                                 .addComponent(anio_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 123, Short.MAX_VALUE))
+                        .addGap(0, 121, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -328,16 +328,17 @@ public class Fecha extends javax.swing.JFrame {
          ServicioDB servicio = new ServicioDB();
          DefaultTableModel modelo = new DefaultTableModel();
         JTable tabla = new JTable(modelo);
-        modelo.addColumn("rut");
-        modelo.addColumn("nombre");
-        modelo.addColumn("n° factura");
-        modelo.addColumn("fecha emicion");
-        modelo.addColumn("monto");
-        modelo.addColumn("fecha vencimiento");
-        modelo.addColumn("contacto");
-        modelo.addColumn("factoring");
-        modelo.addColumn("estado");
+        modelo.addColumn("RUT");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("N° factura");
+        modelo.addColumn("Fecha emicion");
+        modelo.addColumn("Monto");
+        modelo.addColumn("Fecha vencimiento");
+        modelo.addColumn("Contacto");
+        modelo.addColumn("Factoring");
+        modelo.addColumn("Estado");
         String rutStr = this.rut_text.getText() ;
+        
         if("*".equals(this.anio_text1.getSelectedItem().toString())||"*".equals(this.anio_text.getSelectedItem().toString())||"*".equals(this.mes_text.getSelectedItem().toString())|| "*".equals(this.mes_text1.getSelectedItem().toString())||"*".equals(this.dia_text.getSelectedItem().toString())||"*".equals(this.dia_text1.getSelectedItem().toString())){
 
                     Integer rut= Integer.parseInt(rutStr);
@@ -348,7 +349,8 @@ public class Fecha extends javax.swing.JFrame {
                     {
                         fila[0]=visstas.getRut();
                         fila[1]=visstas.getNombre();
-                        fila[2]=visstas.getRut();
+                        Pago pago= servicio.getpago(visstas.getMonto(), visstas.getEstado(),visstas.getFechavencimiento());
+                        fila[2]=pago.getIdboleta();
                         fila[3]=visstas.getFechaemicion();
                         fila[4]=visstas.getMonto();
                         fila[5]=visstas.getFechavencimiento();
@@ -420,15 +422,15 @@ public class Fecha extends javax.swing.JFrame {
                             {
                                 fila[0]=visstas.getRut();
                                 fila[1]=visstas.getNombre();
-           
-                                fila[2]=visstas.getNombre();
+                                cl.codo.fernando.modelo.Empresa empresa = new cl.codo.fernando.modelo.Empresa();
+                                empresa=servicio.getEmpresaPorRut(visstas.getRut().toString());
+                                fila[2]=empresa.getNombre();
                                 fila[3]=visstas.getFechaemicion();
                                 fila[4]=visstas.getMonto();
                                 fila[5]=visstas.getFechavencimiento();
                                 fila[6]=visstas.getNumero();
                                 fila[7]=visstas.getFactoring();
                                 fila[8]=visstas.getEstado();
-                                modelo.addRow(fila);
                             }
                         }else{
                             JOptionPane.showMessageDialog(anio_text,"no existen datos entre esas fechas con el rut "  + rutStr);

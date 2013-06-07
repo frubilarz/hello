@@ -85,7 +85,7 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="9" rowCount="31">
-                <Column editable="true" title="rut" type="java.lang.String"/>
+                <Column editable="true" title="RUT" type="java.lang.String"/>
                 <Column editable="true" title="Nombre" type="java.lang.String"/>
                 <Column editable="true" title="N&#xb0; fact" type="java.lang.String"/>
                 <Column editable="true" title="Fecha Emicion" type="java.lang.String"/>

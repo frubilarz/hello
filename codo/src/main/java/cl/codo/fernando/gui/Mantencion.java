@@ -28,40 +28,40 @@ public class Mantencion extends javax.swing.JFrame {
 
     }
  String fecha(String mes) {
-        if ("enero".equals(mes)) {
+        if ("Enero".equals(mes)) {
             return "1";
         }
-        if ("febrero".equals(mes)) {
+        if ("Febrero".equals(mes)) {
             return "2";
         }
-        if ("marzo".equals(mes)) {
+        if ("Marzo".equals(mes)) {
             return "3";
         }
-        if ("abril".equals(mes)) {
+        if ("Abril".equals(mes)) {
             return "4";
         }
-        if ("mayo".equals(mes)) {
+        if ("Mayo".equals(mes)) {
             return "5";
         }
-        if ("junio".equals(mes)) {
+        if ("Junio".equals(mes)) {
             return "6";
         }
-        if ("julio".equals(mes)) {
+        if ("Julio".equals(mes)) {
             return "7";
         }
-        if ("agosto".equals(mes)) {
+        if ("Agosto".equals(mes)) {
             return "8";
         }
-        if ("octubre".equals(mes)) {
+        if ("Octubre".equals(mes)) {
             return "10";
         }
-        if ("spetiembre".equals(mes)) {
+        if ("Septiembre".equals(mes)) {
             return "9";
         }
-        if ("noviembre".equals(mes)) {
+        if ("Noviembre".equals(mes)) {
             return "11";
         }
-        if ("diciembre".equals(mes)) {
+        if ("Diciembre".equals(mes)) {
             return "12";
         }
         return "0";
@@ -133,9 +133,9 @@ public class Mantencion extends javax.swing.JFrame {
         comentario.setRows(5);
         jScrollPane1.setViewportView(comentario);
 
-        mes_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
+        mes_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
-        mes_text2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre" }));
+        mes_text2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
 
         jLabel7.setText("-");
 
@@ -147,11 +147,11 @@ public class Mantencion extends javax.swing.JFrame {
 
         jLabel11.setText("Factura");
 
-        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         anio_text.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
-        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dia_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         anio_text1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
         anio_text1.addActionListener(new java.awt.event.ActionListener() {
