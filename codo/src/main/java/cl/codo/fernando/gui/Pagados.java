@@ -26,11 +26,11 @@ public class Pagados extends javax.swing.JFrame {
     public Pagados() {
         initComponents();
         
-                Date fecha1 = new Date ();
+         Date fecha1 = new Date ();
         Calendar cal1 = Calendar.getInstance();   
         java.util.Date fecha=FechaUtils.getFecha(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DATE));
-           ServicioDB servicio = new ServicioDB();
-         DefaultTableModel modelo = new DefaultTableModel();
+        ServicioDB servicio = new ServicioDB();
+        DefaultTableModel modelo = new DefaultTableModel();
         JTable tabla = new JTable(modelo);
         modelo.addColumn("RUT");
         modelo.addColumn("Nombre");
@@ -41,7 +41,7 @@ public class Pagados extends javax.swing.JFrame {
         modelo.addColumn("Contacto");
         modelo.addColumn("Factoring");
         Object[] fila = new Object[20];
-        List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatospagados(fecha);
+        List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatosexcedentes(fecha);
         if(!vistas.isEmpty()){
             for (cl.codo.fernando.modelo.vista visstas: vistas)
             {

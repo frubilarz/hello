@@ -231,14 +231,15 @@ public class Monto extends javax.swing.JFrame {
         Integer dia =01;
         Date fecha1=FechaUtils.getFecha(anio,mes-1,dia);
         Date fecha2=FechaUtils.getFecha(anio,mes,dia-1);
-        double monto1=0,iva,neto;
+        double iva,neto;
+        long monto1=0;
         ServicioDB servicio = new ServicioDB();
         List<cl.codo.fernando.modelo.Pago> pagos = servicio.getmonto(fecha1, fecha2);
         if(!pagos.isEmpty())
         {
             for(cl.codo.fernando.modelo.Pago pago :pagos)
             {
-               monto1 = monto1 + pago.getMonto();
+               monto1 = (long) (monto1 + pago.getMonto());
             }
         }
         String m = ""+ monto1;

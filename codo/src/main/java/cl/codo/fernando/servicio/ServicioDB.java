@@ -1056,9 +1056,8 @@ public Venta getventa( Integer id) {
         }
         return vistas;
     }   
-                public List<vista> getdatosnopagados() {
+public List<vista> getdatosnopagados(java.util.Date fecha) {
         List<vista> vistas = new ArrayList<vista>();
-        String fecha="s";
         try {
             if (fecha!=null) {
                 // Conectamos si no está conectado
@@ -1067,11 +1066,15 @@ public Venta getventa( Integer id) {
                 }
 
                 PreparedStatement st = null;
-                String query = "SELECT * FROM todo WHERE estado=?";
+                String query = "SELECT * FROM todo WHERE DATE(fechavencimiento) BETWEEN ? AND ? and estado=?";
                 st = conexion.prepareStatement(query);
                 if (st != null) {
-
-                      st.setString(1, "0");
+                      java.sql.Date fe = new java.sql.Date(fecha.getTime());
+                      java.util.Date fecha1 = cl.codo.fernando.utils.FechaUtils.sumarDia(fecha, -7);
+                      java.sql.Date fw = new java.sql.Date(fecha1.getTime());
+                      st.setDate(1, fw);
+                      st.setDate(2, fe);
+                      st.setString(3, "0");
 
                     ResultSet rs = st.executeQuery();
                     if (rs != null) {

@@ -41,7 +41,7 @@ public class Excedente extends javax.swing.JFrame {
         modelo.addColumn("Contacto");
         modelo.addColumn("Factoring");
         Object[] fila = new Object[20];
-        List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatosexcedentes(fecha);
+        List<cl.codo.fernando.modelo.vista> vistas = servicio.getdatospagados(fecha);
         if(!vistas.isEmpty()){
             for (cl.codo.fernando.modelo.vista visstas: vistas)
             {
@@ -175,9 +175,9 @@ public class Excedente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Principal form = new Principal();
-        form.setVisible(true);
-        form.setLocale(null);
-        this.dispose();
+            form.setVisible(true);
+            form.setLocationRelativeTo(null);
+            this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

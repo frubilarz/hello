@@ -170,7 +170,7 @@ public class Guardado extends javax.swing.JFrame {
             }
         });
 
-        estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cero", "Pagado", "Excedente" }));
+        estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cero", "Excedente", "Pagado" }));
 
         factoring_text.setText(".");
 
@@ -232,9 +232,7 @@ public class Guardado extends javax.swing.JFrame {
                             .addComponent(jLabel10))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(detalle_tetx)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(detalle_tetx)
                             .addComponent(estado, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

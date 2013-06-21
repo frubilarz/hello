@@ -126,6 +126,16 @@ public class Principal extends javax.swing.JFrame {
                 jMenu9MouseClicked(evt);
             }
         });
+        jMenu9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu9ActionPerformed(evt);
+            }
+        });
+        jMenu9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMenu9KeyPressed(evt);
+            }
+        });
         jMenu2.add(jMenu9);
 
         jMenu8.setText("Excedente");
@@ -326,6 +336,20 @@ public class Principal extends javax.swing.JFrame {
             form.setLocationRelativeTo(null);
             this.dispose(); // TODO add your handling code here:
     }//GEN-LAST:event_jMenu14MouseClicked
+
+    private void jMenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu9ActionPerformed
+        NoPagados form=new NoPagados();
+        form.setVisible(true);
+        form.setLocationRelativeTo(null);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu9ActionPerformed
+
+    private void jMenu9KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenu9KeyPressed
+        NoPagados form=new NoPagados();
+        form.setVisible(true);
+        form.setLocationRelativeTo(null);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu9KeyPressed
 
     /**
      * @param args the command line arguments
