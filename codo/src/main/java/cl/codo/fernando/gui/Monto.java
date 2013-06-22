@@ -207,6 +207,30 @@ public class Monto extends javax.swing.JFrame {
             }
         });
     }
+    String num (String numero)
+    {   
+
+        int  a= 0;
+        String sCadenaInvertida="";
+        String sCadenaInvertidas="";
+        for (int x=numero.length()-1;x>=0;x--){
+            
+            if(a==3)
+            {
+                sCadenaInvertida = sCadenaInvertida +"."+ numero.charAt(x);
+                a=0;
+            }
+            else{
+            sCadenaInvertida = sCadenaInvertida + numero.charAt(x);
+            }
+            a++;  
+        }
+        for (int x=sCadenaInvertida.length()-1;x>=0;x--){
+                    sCadenaInvertidas = sCadenaInvertidas + sCadenaInvertida.charAt(x);
+
+        }
+        return sCadenaInvertidas;
+    }
        public void Nletras(JTextField a){
         a.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
@@ -231,7 +255,7 @@ public class Monto extends javax.swing.JFrame {
         Integer dia =01;
         Date fecha1=FechaUtils.getFecha(anio,mes-1,dia);
         Date fecha2=FechaUtils.getFecha(anio,mes,dia-1);
-        double iva,neto;
+        long iva,neto;
         long monto1=0;
         ServicioDB servicio = new ServicioDB();
         List<cl.codo.fernando.modelo.Pago> pagos = servicio.getmonto(fecha1, fecha2);
@@ -243,16 +267,18 @@ public class Monto extends javax.swing.JFrame {
             }
         }
         String m = ""+ monto1;
-        float netoneto;
-        netoneto = (float) (monto1/1.19);
-        float i_v_a; 
-        i_v_a = (float) (monto1-netoneto);
+        long netoneto;
+        netoneto =  (long) (monto1/1.19);
+        long i_v_a; 
+        i_v_a = (monto1-netoneto);
         String n= ""+netoneto;
         String i=""+i_v_a;
-        this.monto_text.setText(m);
-        this.neto_text.setText(n);
-        this.iva_text.setText(i);
         
+
+        this.monto_text.setText(num(m));
+        this.neto_text.setText(num(n));
+        this.iva_text.setText(num(i));
+            
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

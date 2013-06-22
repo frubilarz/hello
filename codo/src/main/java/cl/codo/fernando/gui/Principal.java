@@ -3,6 +3,7 @@ package cl.codo.fernando.gui;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /*
  * To change this template, choose Tools | Templates
@@ -21,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
     }
-
+  
 
     /**
      * This method is called from within the constructor to initialize the form.

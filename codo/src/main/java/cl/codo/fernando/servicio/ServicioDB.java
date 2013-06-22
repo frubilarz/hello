@@ -697,12 +697,10 @@ public Boleta getBoletaporid(int id) {
                 }
 
                 PreparedStatement st = null;
-                String query ="select * from venta where producto = ?";
+                String query ="SELECT * FROM venta WHERE producto LIKE ?";
                 st = conexion.prepareStatement(query);
                 if (st != null) {
-
-
-
+                    producto= "%"+producto+"%";
                     st.setString(1, producto);
                     ResultSet rs = st.executeQuery();
                     if (rs != null) {
@@ -1070,7 +1068,7 @@ public List<vista> getdatosnopagados(java.util.Date fecha) {
                 st = conexion.prepareStatement(query);
                 if (st != null) {
                       java.sql.Date fe = new java.sql.Date(fecha.getTime());
-                      java.util.Date fecha1 = cl.codo.fernando.utils.FechaUtils.sumarDia(fecha, -7);
+                      java.util.Date fecha1 = cl.codo.fernando.utils.FechaUtils.sumarDia(fecha, -30);
                       java.sql.Date fw = new java.sql.Date(fecha1.getTime());
                       st.setDate(1, fw);
                       st.setDate(2, fe);
