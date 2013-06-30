@@ -729,6 +729,49 @@ public Boleta getBoletaporid(int id) {
         }
         return ventas;
     }
+   public List<Venta> getventas( Integer id) {
+        List<Venta> ventas = new ArrayList<Venta>();
+
+        try {
+            if (id!=null) {
+                // Conectamos si no está conectado
+                if (!isConectado()) {
+                    conectar();
+                }
+
+                PreparedStatement st = null;
+                String query ="select * from venta where idboleta = ?";
+                st = conexion.prepareStatement(query);
+                if (st != null) {
+                
+                    st.setInt(1, id);
+                    ResultSet rs = st.executeQuery();
+                    if (rs != null) {
+                        while (rs.next()) {
+                            
+                            Venta venta = new Venta();
+                            venta.setCantidad(rs.getString("cantidad"));
+                            venta.setPreciocompra(rs.getFloat("preciocompra"));
+                            venta.setPrecioventa(rs.getFloat("precioventa"));
+                            venta.setProducto(rs.getString("producto"));
+                            venta.setIdboleta(rs.getInt("idboleta"));
+                            venta.setProveedor(rs.getString("proveedor"));
+                            ventas.add(venta);
+                        } 
+                        rs.close();
+                    }
+                    st.close();
+                }
+            } else {
+                logger.info("ERROR: ID nulo");
+            }
+        } catch (Exception e) {
+          ventas = new ArrayList<Venta>();
+            logger.error(e.toString());
+            logger.debug("Error al obtener boleta por lugar " + id, e);
+        }
+        return ventas;
+    }
 public Venta getventa( Integer id) {
         Venta venta = null;
 

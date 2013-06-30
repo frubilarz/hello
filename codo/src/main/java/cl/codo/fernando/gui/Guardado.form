@@ -81,10 +81,10 @@
                       </Group>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="detalle_tetx" min="-2" max="-2" attributes="0"/>
                           <Component id="estado" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="detalle_tetx" min="-2" max="-2" attributes="0"/>
                                   <Component id="estado_text" min="-2" max="-2" attributes="0"/>
                                   <Component id="direccion_text" min="-2" max="-2" attributes="0"/>
                                   <Component id="monto_text" min="-2" max="-2" attributes="0"/>

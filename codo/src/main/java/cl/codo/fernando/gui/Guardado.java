@@ -7,6 +7,7 @@ import cl.codo.fernando.servicio.ServicioDB;
 import cl.codo.fernando.utils.FechaUtils;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -372,36 +373,42 @@ public class Guardado extends javax.swing.JFrame {
         this.fechav_text.setText(pago.getFechaVencimiento().toString());
         this.estado_text.setText(pago.getEstado());
         a=pago.getIdPago();
-        cl.codo.fernando.modelo.Venta venta=servicio.getventa(boleta.getIdboleta());
+        
         cl.codo.fernando.modelo.Mantencion mantencion= servicio.getmantencion(boleta.getIdboleta());
-        if(venta!=null)
-        {
-        this.detalle_tetx.setText("Venta");
-        JTable tabla = new JTable(modelo);
-        modelo.addColumn("Cantidad");
-        modelo.addColumn("Producto");
-        modelo.addColumn("Valor unitario compra");
-        modelo.addColumn("Valor Unitario venta");
-        modelo.addColumn("Proveedor");
-        Object[] fila = new Object[20];
-        fila[0]=venta.getCantidad();
-        fila[1]=venta.getProducto();
-        fila[2]=venta.getPreciocompra();
-        fila[3]=venta.getPrecioventa();
-        fila[4]=venta.getProveedor();
-        modelo.addRow(fila);
-     
-        }
+         List<cl.codo.fernando.modelo.Venta> ventas= servicio.getventas(boleta.getIdboleta());
+               
+                  if(!ventas.isEmpty())
+                    {
+                        Object[] fila = new Object[20]; 
+                            this.detalle_tetx.setText("Venta");
+                            JTable tabla = new JTable(modelo);
+                            modelo.addColumn("Cantidad");
+                            modelo.addColumn("Producto");
+                            modelo.addColumn("Valor unitario compra");
+                            modelo.addColumn("Valor Unitario venta");
+                            modelo.addColumn("Proveedor");
+
+                        for(cl.codo.fernando.modelo.Venta vent : ventas)
+                        {
+
+                            fila[0]=vent.getCantidad();
+                            fila[1]=vent.getProducto();
+                            fila[2]=vent.getPreciocompra();
+                            fila[3]=vent.getPrecioventa();
+                            fila[4]=vent.getProveedor();
+                            modelo.addRow(fila);
+                         }
+                    }
         if(mantencion!=null)
         {
         this.detalle_tetx.setText("Mantencion");
         JTable tabla = new JTable(modelo);
+        Object[] fila = new Object[20];
         modelo.addColumn("Fecha inicio");
         modelo.addColumn("Fecha termino");
         modelo.addColumn("Lugar");
         modelo.addColumn("Detalle");
         modelo.addColumn("Comentario");
-        Object[] fila = new Object[20];
         fila[0]=mantencion.getFechainicio();
         fila[1]=mantencion.getFechafin();
         fila[2]=mantencion.getLugar();
